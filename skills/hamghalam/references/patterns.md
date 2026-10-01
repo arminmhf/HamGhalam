@@ -113,6 +113,15 @@ These are two ways to close, not a template. Ending every section or every text 
 | لازم نیست … معذب شوید | no more awkward … | drop the feeling-word ✍️: «لازم نیست خودتان بارها پیگیری کنید.» |
 | اگر باز هم مشکلی بود، ما هستیم. | we're here | fine in friendly and casual tone. In semi-formal and formal: اگر باز هم مشکلی داشتید، می‌توانید با ما در ارتباط باشید. |
 
+**C2b. English product-copy idioms, translated.** ✍️ Marked by the copywriter as giveaways in a blind test (a cordless vacuum description). They come from stock English phrases ("without the hassle of cords", "takes up no floor space", "always within reach", "reach high and low"). Say the plain Persian fact instead. `[calque]`
+
+| Translated | Source |
+|---|---|
+| بدون دردسر سیم | without the hassle of cords |
+| بی‌آنکه جایی از کف را بگیرد | takes up no floor space |
+| همیشه در دسترس می‌ماند (of an object) | always within reach |
+| به گوشه‌های بالا و پایین برسانید | reach high and low |
+
 **C3. Translated marketing imagery.** ✍️ «کرمای طلایی» is never used. This is about specific calqued images from English product copy, not about marketing language in general, which is welcome (section D).
 
 **C4. Calqued boilerplate.** Usually replace these. ✍️ The rows marked "drop it" may be needed, depending on what the sentence means.

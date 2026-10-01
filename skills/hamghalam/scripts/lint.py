@@ -143,6 +143,10 @@ CALQUES = [
     ("یک کلیک و", "«… بلافاصله فعال می‌شود»", "E"),
     ("کرمای طلایی", "translated product imagery; say what it does (patterns C3)", "E"),
     ("تا با هم انتخاب کنیم", "«تا کمکتان کنیم»", "E"),
+    ("بدون دردسر سیم", "translated product idiom (without the hassle of cords); say the fact: «بی‌سیم است»", "E"),
+    ("جایی از کف را", "translated product idiom (takes up no floor space) (patterns C2b)", "W"),
+    ("همیشه در دسترس می‌ماند", "translated product idiom (always within reach) (patterns C2b)", "W"),
+    ("گوشه‌های بالا و پایین", "translated product idiom (reach high and low) (patterns C2b)", "W"),
     ("معذب شوید", "drop the feeling-word: «لازم نیست خودتان بارها پیگیری کنید.»", "E"),
     ("بپرسید تا راهنمایی‌تان کنیم", "copied from the about-page example; offer help in your own words (genres/about.md)", "W"),
 ]
