@@ -73,6 +73,12 @@ MECH = [
      "«شما … خود»؛ ضمیر اضافی (الگوی ۷)."),
     ("bare_cta", "W", re.compile(r"^(?:\s*)(شروع کنید|بیشتر بدانید|اکنون \S+ کنید)(?:\s*)$"),
      "فراخوان امری برهنه؛ دکمهٔ فارسی مصدر/اسم است (الگوی ۱۲)."),
+    ("essay_opener", "E", re.compile(r"(در دنیای امروز|در عصر دیجیتال|در این (?:مقاله|متن|پست) به بررسی)"),
+     "افتتاحیهٔ مقاله‌ای کلیشه‌ای؛ مستقیم از ادعا یا سؤال شروع کن (الگوی ۲۲)."),
+    ("cliche_heading", "W", re.compile(r"^\s*(?:#+\s*)?(چرا باید \S+ را انتخاب کنید|مزایای استفاده از \S+)[؟?]?\s*$"),
+     "تیتر ترجمه‌ای تبلیغاتی/آموزشی (الگوی ۲۳)."),
+    ("formal_future", "W", re.compile(r"\S+ خواهد (?:شد|کرد|گرفت|بود)"),
+     "زمان آیندهٔ رسمی «خواهد …»؛ در لحن غیررسمی فعل حال بنویس (references/tones.md)."),
 ]
 
 # pattern 15 calques
@@ -94,7 +100,43 @@ CALQUES = {
     "به نظر می‌رسد که": "حذف",
     "بدون هیچ‌گونه": "بدون",
     "به سیستم وارد شوید": "وارد شوید",
+    "ما معتقدیم که": "حذف؛ مستقیم ادعا را بگو",
+    "ما باور داریم که": "حذف؛ مستقیم ادعا را بگو",
 }
+
+# document-level heuristics: not line regexes, they look at the whole text
+EMOJI_BULLET = re.compile(r"^\s*[\U0001F300-\U0001FAFF☀-➿]\s*\S", re.MULTILINE)
+BOLD_SPAN = re.compile(r"\*\*[^*\n]+\*\*")
+CLICHE_CLOSING = re.compile(r"^\s*#*\s*(در پایان|جمع‌بندی)[:：]?\s*$", re.MULTILINE)
+
+
+def lint_document_level(text, fname="-"):
+    """Heuristics that only make sense over the whole document, not per line.
+    severity 'D' (document): decorative tells that read as AI-generated at a glance."""
+    hits = []
+    lines = [l for l in text.splitlines() if l.strip()]
+    if not lines:
+        return hits
+
+    emoji_bullets = len(EMOJI_BULLET.findall(text))
+    if emoji_bullets >= 3:
+        hits.append(dict(file=fname, line=0, sev="D", rule="emoji_bullets",
+                         match=f"{emoji_bullets} خط با ایموجی ابتدای بولت",
+                         msg="ایموجی تزئینی قبل از بولت؛ فارسی با «-»/«•» یا بدون نشانه می‌نویسد."))
+
+    bold_spans = len(BOLD_SPAN.findall(text))
+    if bold_spans >= 5 and len(lines) <= 40:
+        hits.append(dict(file=fname, line=0, sev="D", rule="bold_overuse",
+                         match=f"{bold_spans} عبارت بولدشده",
+                         msg="بولدکردن بیش‌ازحد عبارات تصادفی؛ خواننده را از خط جمله پرت می‌کند."))
+
+    closing = CLICHE_CLOSING.search(text)
+    if closing and len(lines) <= 15:
+        hits.append(dict(file=fname, line=0, sev="D", rule="cliche_closing",
+                         match=closing.group(0).strip(),
+                         msg="جمع‌بندی کلیشه‌ای در متن کوتاه؛ احتمالاً لازم نیست."))
+
+    return hits
 
 SKIP_LINE = re.compile(r"^\s*(import |export |//|/\*|\*|<\?|#!)")
 SKILL_ROOT = os.path.abspath(os.path.join(HERE, ".."))
@@ -166,7 +208,9 @@ def main():
             print(f"# {p}: داخل خود اسکیل است؛ مثال‌های ❌ و جدول‌های کالک عمداً ایراد دارند. رد شد.", file=sys.stderr)
             continue
         if p == "-":
-            all_hits += lint_text(sys.stdin.read(), corpus, "-")
+            text = sys.stdin.read()
+            all_hits += lint_text(text, corpus, "-")
+            all_hits += lint_document_level(text, "-")
             continue
         if os.path.isdir(p):
             for root, _, files in os.walk(p):
@@ -174,11 +218,15 @@ def main():
                     if fn.endswith((".md", ".txt", ".tsx", ".jsx", ".ts", ".js", ".html", ".json", ".vue", ".php", ".po", ".yaml", ".yml")):
                         fp = os.path.join(root, fn)
                         try:
-                            all_hits += lint_text(open(fp, encoding="utf-8").read(), corpus, fp)
+                            text = open(fp, encoding="utf-8").read()
+                            all_hits += lint_text(text, corpus, fp)
+                            all_hits += lint_document_level(text, fp)
                         except UnicodeDecodeError:
                             pass
             continue
-        all_hits += lint_text(open(p, encoding="utf-8").read(), corpus, p)
+        text = open(p, encoding="utf-8").read()
+        all_hits += lint_text(text, corpus, p)
+        all_hits += lint_document_level(text, p)
 
     if a.tone == "formal":
         all_hits = [h for h in all_hits if h["rule"] != "semicolon"]
@@ -188,18 +236,20 @@ def main():
     if not all_hits:
         print("hamghalam lint: چیزی پیدا نشد.")
         return
-    order = {"E": 0, "W": 1}
+    order = {"E": 0, "W": 1, "D": 2}
     all_hits.sort(key=lambda h: (order[h["sev"]], h["file"], h["line"]))
-    label = {"E": "❌ تقریباً همیشه ایراد", "W": "⚠️ بررسی کن"}
+    label = {"E": "❌ تقریباً همیشه ایراد", "W": "⚠️ بررسی کن", "D": "📄 نشانهٔ ساختاری سند"}
     cur = None
     for h in all_hits:
         if h["sev"] != cur:
             cur = h["sev"]
             print(f"\n## {label[cur]}\n")
-        print(f"{h['file']}:{h['line']}  [{h['rule']}]  «{h['match']}»\n    {h['msg']}")
+        loc = h["file"] if h["line"] == 0 else f"{h['file']}:{h['line']}"
+        print(f"{loc}  [{h['rule']}]  «{h['match']}»\n    {h['msg']}")
     e = sum(1 for h in all_hits if h["sev"] == "E")
     w = sum(1 for h in all_hits if h["sev"] == "W")
-    print(f"\n— {e} ایراد، {w} مورد بررسی. هیچ‌کدام خودکار اصلاح نمی‌شود.")
+    d = sum(1 for h in all_hits if h["sev"] == "D")
+    print(f"\n— {e} ایراد، {w} مورد بررسی، {d} نشانهٔ ساختاری سند. هیچ‌کدام خودکار اصلاح نمی‌شود.")
 
 
 if __name__ == "__main__":

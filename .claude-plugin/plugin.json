@@ -1,0 +1,13 @@
+{
+  "name": "hamghalam",
+  "version": "3.0.0",
+  "description": "نوشتن و ویرایش فارسی بومی (نه ترجمه‌ای) برای متن سایت، محصول، پیام خطا، ایمیل و تبلیغ",
+  "author": {
+    "name": "هم‌قلم",
+    "url": "https://barchin.net/hamghalam"
+  },
+  "skills": [
+    "./SKILL.md"
+  ],
+  "hooks": "./hooks/hooks.json"
+}
