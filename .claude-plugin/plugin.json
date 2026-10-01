@@ -5,9 +5,5 @@
   "author": {
     "name": "هم‌قلم",
     "url": "https://barchin.net/hamghalam"
-  },
-  "skills": [
-    "./SKILL.md"
-  ],
-  "hooks": "./hooks/hooks.json"
+  }
 }
