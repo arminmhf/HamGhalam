@@ -9,6 +9,11 @@ Usage:
 
 Exit code is always 0; the report is for a human/model to judge, not a gate.
 Checks are heuristics. Every hit needs eyes; nothing here is auto-fixable.
+
+All messages below are in English on purpose (cheaper to keep in a model's
+context than Persian prose is, token for token); the Persian phrases they
+point at — examples, calque pairs, glossary entries — stay Persian, since
+those ARE the content being taught, not instructions about it.
 """
 import argparse
 import json
@@ -17,71 +22,73 @@ import re
 import sys
 
 HERE = os.path.dirname(os.path.abspath(__file__))
-TERMS = os.path.join(HERE, "..", "references", "terms.md")
+TERMS_CORE = os.path.join(HERE, "..", "references", "terms.md")
+TERMS_DIR = os.path.join(HERE, "..", "references", "terms")
 
-PERSIAN = "\u0600-\u06FF\u200c"
+PERSIAN = "؀-ۿ‌"
 PW = f"[{PERSIAN}]"
 
 # ---- mechanical rules -------------------------------------------------------
 # (id, severity, regex, message)   severity: E = almost always wrong, W = check
 MECH = [
-    ("arabic_yeh_kaf", "E", re.compile(r"[\u064a\u0643]"),
-     "حرف عربی «ي/ك»؛ «ی/ک» بنویس."),
+    ("arabic_yeh_kaf", "E", re.compile(r"[يك]"),
+     "Arabic «ي/ك»; use Persian «ی/ک»."),
     ("mi_space", "E", re.compile(rf"(?<![{PERSIAN}])ن?می (?={PW})"),
-     "«می» با فاصلهٔ کامل؛ نیم‌فاصله بگذار (می‌شود)."),
+     "«می» with a full space; use a ZWNJ (می‌شود)."),
     ("mi_joined", "W", re.compile(rf"(?<![{PERSIAN}])ن?می(?:شو|کن|تون|توان|ده|گیر|باش|رو|بین|خوا|یاب|رس|ساز|فرست)"),
-     "«می» چسبیده (میشود)؛ نیم‌فاصله بگذار."),
+     "«می» fused to the verb (میشود); use a ZWNJ."),
     ("ha_space", "W", re.compile(rf"{PW}+ ها(?:ی|یی)?(?![{PERSIAN}])"),
-     "جمع «ها» با فاصلهٔ کامل؛ احتمالاً نیم‌فاصله می‌خواهد (کتاب‌ها)."),
+     "Plural «ها» with a full space; probably needs a ZWNJ (کتاب‌ها)."),
     ("latin_punct", "W", re.compile(rf"{PW}\s*[,;?]"),
-     "نشانه‌گذاری انگلیسی بعد از واژهٔ فارسی؛ «،» «؛» «؟»."),
+     "Latin punctuation after a Persian word; use «،» «؛» «؟»."),
     ("straight_quotes", "W", re.compile(rf"(?<![=:(,\[{{])(?<![=:(,\[{{] )\"{PW}[^\"\n]{{1,80}}\""),
-     "گیومهٔ انگلیسی دور متن فارسی؛ «…» بنویس."),
+     "Straight English quotes around Persian text; use «…»."),
     ("latin_digits", "W", re.compile(rf"(?<![A-Za-z0-9_./:=\"'-])(?<![:=] )[0-9]+(?![A-Za-z0-9_./:-])(?=[^\n]*{PW})"),
-     "عدد لاتین در متن فارسی؛ رقم فارسی بنویس (مگر کد/شناسه)."),
+     "Latin digits in Persian prose; use Persian digits (unless code/ID)."),
     ("tavassot", "E", re.compile(rf"\bتوسط {PW}"),
-     "مجهول با «توسط»؛ جمله را معلوم کن (الگوی ۴)."),
+     "Passive with «توسط»; make the sentence active (pattern 4)."),
     ("nominal", "W", re.compile(r"(اقدام به|انجام (?:دادن|شود|دهید)|مورد \S+ قرار|قابلیت \S+سازی|امکان‌پذیر می‌سازد)"),
-     "اسم‌سازی؛ فعل ساده بنویس (الگوی ۵)."),
+     "Nominalization; use a plain verb (pattern 5)."),
     ("allows_you", "E", re.compile(r"(به شما (?:اجازه|امکان) می‌دهد|می‌تواند به شما کمک کند|کمک می‌کند تا)"),
-     "کالک allows you to / helps you (الگوی ۶)."),
-    ("not_only", "E", re.compile(r"نه[ \u200c]تنها .{2,60}بلکه"),
-     "کالک not only … but also (الگوی ۸)."),
+     "Calque of \"allows you to\" / \"helps you\" (pattern 6)."),
+    ("not_only", "E", re.compile(r"نه[ ‌]تنها .{2,60}بلکه"),
+     "Calque of \"not only … but also\" (pattern 8)."),
     ("intensifier", "W", re.compile(r"(واقعاً|به‌سادگی|به سادگی|به‌راحتی|به راحتی|به‌طور یکپارچه|به طور یکپارچه|به‌طور کامل|به طور کامل|به‌طور مؤثر|بی‌نظیر|در واقع)"),
-     "قید تأکیدی ترجمه‌ای؛ احتمالاً حذف‌شدنی (الگوی ۹)."),
+     "Translated intensifier adverb; probably droppable (pattern 9)."),
     ("comma_before_va", "E", re.compile(r"[،,]\s*(?:و|یا)\s"),
-     "ویرگول پیش از «و»/«یا»؛ کالک Oxford comma. ویرگول را بردار یا جمله را با نقطه ببند (قاعدهٔ ۷)."),
+     "Comma before «و»/«یا»; calque of the Oxford comma. Drop the comma or end the sentence with a period (rule 7)."),
     ("imperative_comma_reason", "W", re.compile(r"(?:کنید|ببینید|بروید|بزنید|بگیرید|کن|ببین|برو|بزن)، \S+"),
-     "دستور + توضیح با ویرگول؛ احتمالاً نتیجه را مستقیم بگو (الگوی ۱۶) یا نقطه بگذار (الگوی ۱۷)."),
+     "Imperative + comma-attached reason; probably state the result directly (pattern 16) or use a period (pattern 17)."),
     ("parenthetical_adverb", "W", re.compile(r"، (?:حتی|مثلاً|البته|گاهی|همیشه|هر روز|هر شب|نصف‌شب|شب و روز|در صورت نیاز|به‌سرعت)[^،|«\n]{0,25}، "),
-     "قید معترضه بین دو ویرگول؛ اول جمله یا کنار فعل بگذار (الگوی ۱۸)."),
+     "Parenthetical adverb between two commas; put it at the start or next to the verb (pattern 18)."),
     ("you_just", "E", re.compile(r"(?:^|[.!؟?>]\s*)شما فقط \S+"),
-     "ضربهٔ پایانی «شما فقط …»؛ کالک You just (الگوی ۲۰)."),
+     "Closing \"you just …\" calque (pattern 20)."),
     ("tricolon", "W", re.compile(r"(?:می‌\S+|\S+د)، [^،.\n]{3,60}(?:می‌\S+|\S+د) و [^.\n]{3,80}(?:می‌\S+|\S+د)\."),
-     "سه بند فعلی موازی؛ اگر فاعل ندارد، سه‌گانهٔ انگلیسی است (الگوی ۱۹)."),
+     "Three parallel verb clauses; if there's no subject, it's an English advertising tricolon (pattern 19)."),
     ("semicolon", "W", re.compile(r"؛"),
-     "نقطه‌ویرگول «؛» فقط در لحن رسمی؛ در بقیه نقطه یا «و» (قاعدهٔ ۶)."),
+     "Semicolon «؛» only belongs in the formal tone; use a period or «و» elsewhere (rule 6)."),
     ("em_dash", "W", re.compile(r"—"),
-     "خط تیرهٔ معترضه؛ با ویرگول یا «که» بگو (الگوی ۱۱)."),
+     "Em dash as a parenthetical; use a comma or «که» instead (pattern 11)."),
     ("colon_list", "W", re.compile(rf":\s*{PW}[^.\n]*،[^.\n]*(?:،| و ){PW}"),
-     "دونقطه + فهرست؛ جملهٔ کامل بنویس (الگوی ۱)."),
+     "Colon + list; write a full sentence instead (pattern 1)."),
     ("dar_hal_hastid", "W", re.compile(r"در حال \S+ هستید"),
-     "«در حال … هستید»؛ جملهٔ ساده (الگوی ۱۴)."),
+     "\"You are currently …ing\" calque; use a plain sentence (pattern 14)."),
     ("rhetorical_q", "W", re.compile(r"(آیا تا به حال|آماده‌اید\?|آماده‌اید؟|تصور کنید)"),
-     "سؤال بلاغی / مقدمه‌چینی (الگوی ۱۳)."),
+     "Rhetorical/throat-clearing question (pattern 13)."),
     ("pronoun_khod", "W", re.compile(r"\bشما می‌توانید .{0,40}خود "),
-     "«شما … خود»؛ ضمیر اضافی (الگوی ۷)."),
+     "«شما … خود»; redundant pronoun (pattern 7)."),
     ("bare_cta", "W", re.compile(r"^(?:\s*)(شروع کنید|بیشتر بدانید|اکنون \S+ کنید)(?:\s*)$"),
-     "فراخوان امری برهنه؛ دکمهٔ فارسی مصدر/اسم است (الگوی ۱۲)."),
+     "Bare imperative CTA; a Persian button uses an infinitive/noun (pattern 12)."),
     ("essay_opener", "E", re.compile(r"(در دنیای امروز|در عصر دیجیتال|در این (?:مقاله|متن|پست) به بررسی)"),
-     "افتتاحیهٔ مقاله‌ای کلیشه‌ای؛ مستقیم از ادعا یا سؤال شروع کن (الگوی ۲۲)."),
+     "Clichéd essay-style opening; start directly with a claim or a question (pattern 22)."),
     ("cliche_heading", "W", re.compile(r"^\s*(?:#+\s*)?(چرا باید \S+ را انتخاب کنید|مزایای استفاده از \S+)[؟?]?\s*$"),
-     "تیتر ترجمه‌ای تبلیغاتی/آموزشی (الگوی ۲۳)."),
+     "Clichéd marketing/how-to heading (pattern 23)."),
     ("formal_future", "W", re.compile(r"\S+ خواهد (?:شد|کرد|گرفت|بود)"),
-     "زمان آیندهٔ رسمی «خواهد …»؛ در لحن غیررسمی فعل حال بنویس (references/tones.md)."),
+     "Formal future tense «خواهد …»; use the present tense outside a formal register (references/tones.md)."),
 ]
 
-# pattern 15 calques
+# pattern 15 calques — keys/values are Persian: the phrase to catch, and the
+# fix to suggest, both as actual Persian text.
 CALQUES = {
     "خوش برگشتید": "خوش آمدید / حذف",
     "چیزی اشتباه پیش رفت": "مشکلی پیش آمد",
@@ -121,20 +128,20 @@ def lint_document_level(text, fname="-"):
     emoji_bullets = len(EMOJI_BULLET.findall(text))
     if emoji_bullets >= 3:
         hits.append(dict(file=fname, line=0, sev="D", rule="emoji_bullets",
-                         match=f"{emoji_bullets} خط با ایموجی ابتدای بولت",
-                         msg="ایموجی تزئینی قبل از بولت؛ فارسی با «-»/«•» یا بدون نشانه می‌نویسد."))
+                         match=f"{emoji_bullets} lines with a leading emoji bullet",
+                         msg="Decorative emoji before each bullet; Persian prose uses «-»/«•» or no marker at all."))
 
     bold_spans = len(BOLD_SPAN.findall(text))
     if bold_spans >= 5 and len(lines) <= 40:
         hits.append(dict(file=fname, line=0, sev="D", rule="bold_overuse",
-                         match=f"{bold_spans} عبارت بولدشده",
-                         msg="بولدکردن بیش‌ازحد عبارات تصادفی؛ خواننده را از خط جمله پرت می‌کند."))
+                         match=f"{bold_spans} bolded spans",
+                         msg="Excessive bolding of random phrases; it pulls the reader off the sentence's line of thought."))
 
     closing = CLICHE_CLOSING.search(text)
     if closing and len(lines) <= 15:
         hits.append(dict(file=fname, line=0, sev="D", rule="cliche_closing",
                          match=closing.group(0).strip(),
-                         msg="جمع‌بندی کلیشه‌ای در متن کوتاه؛ احتمالاً لازم نیست."))
+                         msg="Clichéd closing heading in a short text; probably unnecessary."))
 
     return hits
 
@@ -143,29 +150,38 @@ SKILL_ROOT = os.path.abspath(os.path.join(HERE, ".."))
 
 
 def load_corpus():
-    """Rows of references/terms.md: | literal | write | source |.
-    Rows whose fix says «درست است» are "leave alone" notes and are skipped."""
+    """Rows from references/terms.md and every file under references/terms/:
+    | literal | write | source |. Rows whose fix says "correct, don't change"
+    are leave-alone notes and are skipped."""
     rows = []
-    try:
-        lines = open(TERMS, encoding="utf-8").read().splitlines()
-    except Exception:
-        return rows
-    for line in lines:
-        cells = [c.strip() for c in line.strip().strip("|").split("|")]
-        if len(cells) != 3 or cells[2] not in ("🔵", "🟢") or "درست است" in cells[1]:
+    paths = [TERMS_CORE]
+    if os.path.isdir(TERMS_DIR):
+        paths += sorted(
+            os.path.join(TERMS_DIR, fn)
+            for fn in os.listdir(TERMS_DIR)
+            if fn.endswith(".md")
+        )
+    for path in paths:
+        try:
+            lines = open(path, encoding="utf-8").read().splitlines()
+        except Exception:
             continue
-        for phrase in cells[0].split(" / "):
-            phrase = re.sub(r"\s*\([^)]*\)", "", phrase)
-            phrase = re.sub(r"(?:\s|^)(?:X|…)\.?(?=\s|$)", " ", phrase).strip(" .؟?")
-            # single words (خوراک، اشاره، برچسب، جامعه…) are meaning-dependent: too noisy for a linter
-            if " " in norm(phrase):
-                rows.append(dict(phrase=phrase, equivalent=cells[1],
-                                 source="ویراستاری" if cells[2] == "🔵" else "جامعه"))
+        for line in lines:
+            cells = [c.strip() for c in line.strip().strip("|").split("|")]
+            if len(cells) != 3 or cells[2] not in ("🔵", "🟢") or "correct, don't change" in cells[1]:
+                continue
+            for phrase in cells[0].split(" / "):
+                phrase = re.sub(r"\s*\([^)]*\)", "", phrase)
+                phrase = re.sub(r"(?:\s|^)(?:X|…)\.?(?=\s|$)", " ", phrase).strip(" .؟?")
+                # single words (خوراک، اشاره، برچسب، جامعه…) are meaning-dependent: too noisy for a linter
+                if " " in norm(phrase):
+                    rows.append(dict(phrase=phrase, equivalent=cells[1],
+                                     source="team" if cells[2] == "🔵" else "community"))
     return rows
 
 
 def norm(s):
-    s = s.replace("\u200c", " ").replace("ي", "ی").replace("ك", "ک").replace("ٔ", "")
+    s = s.replace("‌", " ").replace("ي", "ی").replace("ك", "ک").replace("ٔ", "")
     return re.sub(r"\s+", " ", s)
 
 
@@ -184,12 +200,12 @@ def lint_text(text, corpus, fname="-"):
         for calque, fix in CALQUES.items():
             if norm(calque) in nline:
                 hits.append(dict(file=fname, line=ln, sev="E", rule="calque",
-                                 match=calque, msg=f"کالک؛ بنویس: {fix} (الگوی ۱۵)."))
+                                 match=calque, msg=f"Calque; write instead: {fix} (pattern 15)."))
         for e in corpus:
             if norm(e["phrase"]) in nline:
                 hits.append(dict(file=fname, line=ln, sev="W", rule="terms",
                                  match=e["phrase"],
-                                 msg=f"terms.md ({e['source']}): → «{e['equivalent']}». اگر در این جمله معنای دیگری دارد، رد کن."))
+                                 msg=f"terms glossary ({e['source']}): try «{e['equivalent']}». Reject if this word means something else here."))
     return hits
 
 
@@ -199,13 +215,13 @@ def main():
     ap.add_argument("--json", action="store_true")
     ap.add_argument("--no-terms", action="store_true")
     ap.add_argument("--tone", choices=["formal", "semi_formal", "friendly", "casual"], default=None,
-                    help="لحن متن؛ با formal هشدار «؛» خاموش می‌شود")
+                    help="text's tone; with formal, the semicolon warning is silenced")
     a = ap.parse_args()
     corpus = [] if a.no_terms else load_corpus()
     all_hits = []
     for p in a.paths:
         if p != "-" and os.path.abspath(p).startswith(SKILL_ROOT):
-            print(f"# {p}: داخل خود اسکیل است؛ مثال‌های ❌ و جدول‌های کالک عمداً ایراد دارند. رد شد.", file=sys.stderr)
+            print(f"# {p}: inside the skill itself; ❌ examples and calque tables are deliberately wrong. Skipped.", file=sys.stderr)
             continue
         if p == "-":
             text = sys.stdin.read()
@@ -234,11 +250,11 @@ def main():
         print(json.dumps(all_hits, ensure_ascii=False, indent=1))
         return
     if not all_hits:
-        print("hamghalam lint: چیزی پیدا نشد.")
+        print("hamghalam lint: nothing found.")
         return
     order = {"E": 0, "W": 1, "D": 2}
     all_hits.sort(key=lambda h: (order[h["sev"]], h["file"], h["line"]))
-    label = {"E": "❌ تقریباً همیشه ایراد", "W": "⚠️ بررسی کن", "D": "📄 نشانهٔ ساختاری سند"}
+    label = {"E": "❌ almost always wrong", "W": "⚠️ check this", "D": "📄 document-level tell"}
     cur = None
     for h in all_hits:
         if h["sev"] != cur:
@@ -249,7 +265,7 @@ def main():
     e = sum(1 for h in all_hits if h["sev"] == "E")
     w = sum(1 for h in all_hits if h["sev"] == "W")
     d = sum(1 for h in all_hits if h["sev"] == "D")
-    print(f"\n— {e} ایراد، {w} مورد بررسی، {d} نشانهٔ ساختاری سند. هیچ‌کدام خودکار اصلاح نمی‌شود.")
+    print(f"\n— {e} error(s), {w} to check, {d} document-level tell(s). None of this is auto-fixed.")
 
 
 if __name__ == "__main__":

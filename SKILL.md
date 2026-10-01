@@ -3,184 +3,185 @@ name: hamghalam
 description: نوشتن و ویرایش فارسی بومی (نه ترجمه‌ای) برای متن سایت، محصول، پیام خطا، ایمیل و تبلیغ، با لحن انتخابی؛ حتی وقتی این متن فقط یک رشتهٔ کوچک داخل کدی است که برای یک تسک دیگر می‌نویسی (لیبل دکمه، placeholder، پیام خطا در یک کامپوننت). Use whenever writing, rewriting or reviewing Persian (Farsi) copy of any kind — UI strings, landing pages, product descriptions, error messages, emails, marketing, docs — or whenever the user complains that Persian output sounds translated, machine-like, or "English in Persian words". Also applies to incidental Persian strings written inside otherwise non-Persian coding tasks (a button label, a form placeholder, a toast message in a component you're building).
 ---
 
-# هم‌قلم: فارسی‌ای که آدم‌ها واقعاً می‌نویسند
+# Hamghalam: Persian people actually write
 
-مشکل متن فارسی مدل‌ها واژه نیست؛ **معماری جمله** است. واژه‌ها فارسی‌اند و جمله هنوز انگلیسی فکر می‌کند. این اسکیل سه چیز می‌دهد: فهرست الگوهای ترجمه‌زدگی که باید بشناسی، فرایند نوشتن و ویرایش و یک واژه‌نامهٔ کوچک اصطلاحات (`references/terms.md`).
+The problem with the Persian LLMs write usually isn't vocabulary; it's **sentence architecture**. The words are Persian but the sentence is still thinking in English. This skill gives you three things: a list of translation-tell patterns to recognize, a process for writing and editing, and a small term glossary (`references/terms.md` plus domain files under `references/terms/`).
 
-**آزمون اصلی، در همه‌جا:** اگر بشود از روی جملهٔ فارسی، جملهٔ انگلیسیِ پشتش را حدس زد، ترجمه‌ای است.
+**The core test, everywhere:** if you can guess the English sentence behind a Persian sentence, it's translated.
 
-## قدم صفر: لحن و حالت
+## Step zero: tone and mode
 
-- **حالت:** نوشتن (متن تازه) یا ویرایش (متن موجود). هر کدام فرایند جداگانه‌ای دارد (پایین).
-- **لحن:** رسمی | نیمه‌رسمی | دوستانه | محاوره‌ای. اگر از خواستهٔ کاربر یا متن‌های موجود پروژه معلوم نیست، بپرس. اگر پاسخی نگرفتی، «نیمه‌رسمی» بگیر و در خروجی یک خط بگو که این فرض را کرده‌ای. راهنمای لحن‌ها در `references/tones.md`.
-- **حوزه** فقط برای انتخاب اصطلاح مهم است؛ `references/terms.md` را همیشه بخوان.
+- **Mode:** writing (new text) or editing (existing text). Each has its own process below.
+- **Tone:** formal | semi-formal | friendly | casual. If it's not clear from the user's request or the project's existing copy, ask. If you get no answer, default to semi-formal and say in your output that you assumed it. Tone guide in `references/tones.md`.
+- **Domain** matters only for picking terms. Figure it out from the user's request or the project's existing content, then read the matching file(s) under `references/terms/` (`tech.md`, `finance.md`, `retail.md`, …) — if you're unsure which domain fits, or the text spans more than one, read all plausible candidates; each file is small. Always read the core `references/terms.md` regardless. See "Domain-specific lists" in that file for why this is lazy and why it's safe to guess wrong.
 
-## الگوهای ترجمه‌زدگی
+## Translation-tell patterns
 
-هر الگو یک جفت مثال دارد. ❌ را بشناس، ✅ را الگو بگیر. مثال ❌ «نمونهٔ خطا» است، نه متن قابل تقلید.
+Each pattern has a pair of examples. Recognize ❌; model ✅. The ❌ example is a "sample of the mistake," not text to imitate.
 
-**۱. دونقطه و فهرست گروه‌های اسمی.** انگلیسی می‌نویسد «X: a, b, and c». فارسی همان را در جملهٔ کامل می‌گوید.
+**1. Colon + list of noun phrases.** English writes "X: a, b, and c." Persian says the same thing as a full sentence.
 ❌ سه مزیت دارد: سرعت بالا، نصب آسان و پشتیبانی ۲۴ ساعته.
 ✅ سریع است، راحت نصب می‌شود و پشتیبانی‌اش هم شبانه‌روزی است.
 
-**۲. تکه‌جملهٔ بی‌فعل.** گروه اسمی که مثل جمله نقطه خورده. فعلش را بیاور.
+**2. Verbless sentence fragments.** A noun phrase punctuated like a sentence. Give it a verb.
 ❌ سریع. امن. بدون دردسر.
 ✅ هم سریع است، هم امن، دردسر هم ندارد.
-این الگو برای **متن بدنه** است. تیتر، شعار، کپشن تصویر، برچسب جدول و عنوان کارت ویژگی در فارسی هم بی‌فعل نوشته می‌شوند و نباید فعل‌دار شوند: «همیشه رقابتی، هرگز زیر کف»، «سئو، بدون کارشناس سئو»، «هر پاسخ حدود ۸۵۰ توکن، در چند ثانیه» درست‌اند. آزمون: تیتر آگهی روزنامهٔ فارسی این‌طور نوشته می‌شد؟ اگر بله، دست نزن. آن‌چه در تیتر هم ایراد است: چند تکهٔ یک‌کلمه‌ای با نقطه («سریع. امن. ساده.») و کالک شعار انگلیسی («X، بازتعریف شده»).
+This pattern is for **body copy**. Headlines, taglines, image captions, table labels and feature-card titles are verbless in Persian too and shouldn't get a verb forced in: «همیشه رقابتی، هرگز زیر کف»، «سئو، بدون کارشناس سئو»، «هر پاسخ حدود ۸۵۰ توکن، در چند ثانیه» are all fine as is. Test: would a Persian newspaper ad headline be written this way? If yes, leave it. What's still wrong even in a headline: a string of single-word fragments punctuated like sentences («سریع. امن. ساده.») and the "X, reimagined" slogan calque.
 
-**۳. جمله‌های بریدهٔ پیاپی و ریتم سه‌تایی.** سه جملهٔ پنج‌کلمه‌ای پشت هم ریتم انگلیسی وب است. فارسی جمله را می‌کشد و با «و»، «که» و ویرگول به هم می‌دوزد.
+**3. Choppy consecutive sentences and tricolon rhythm.** Three five-word sentences in a row is English web rhythm. Persian stretches the sentence and stitches pieces together with «و», «که» and commas.
 ❌ سریع نصب می‌شود. حجمش کم است. آپدیت خودکار دارد.
 ✅ سریع نصب می‌شود و حجمش هم کم است، آپدیت را هم خودش می‌گیرد.
 
-**۴. مجهول با «توسط».** فاعل معلوم است، پس جمله را معلوم بنویس. مجهولِ بی‌فاعل («لینک ارسال شد») در لحن رسمی و نیمه‌رسمی طبیعی است و ایراد ندارد.
+**4. Passive with «توسط».** The subject is known, so make the sentence active. The subjectless passive («لینک ارسال شد») is natural and fine in formal and semi-formal tone.
 ❌ این گزارش توسط تیم پشتیبانی بررسی می‌شود.
 ✅ تیم پشتیبانی این گزارش را بررسی می‌کند.
 
-**۵. اسم‌سازی (nominalization).** «انجام X»، «اقدام به X»، «مورد X قرار گرفتن»، «قابلیت X‌سازی» به‌جای فعل ساده.
+**5. Nominalization.** «انجام X», «اقدام به X», «مورد X قرار گرفتن», «قابلیت X‌سازی» instead of a plain verb.
 ❌ برای انجام ثبت‌نام، اقدام به وارد کردن شماره تلفن کنید.
 ✅ برای ثبت‌نام، شماره تلفنتان را وارد کنید.
 
-**۶. «به شما اجازه می‌دهد تا» / «می‌تواند به شما کمک کند تا».** کالک allows you to / can help you. فاعل را خودِ کاربر کن یا ابزار را با «با» بیاور.
+**6. "Allows you to" / "can help you."** Calque of allows you to / can help you. Make the user the subject, or bring the tool in with «با».
 ❌ این ابزار به شما اجازه می‌دهد تا گزارش‌ها را دانلود کنید.
 ✅ گزارش‌ها را از همین‌جا دانلود کنید. / با این ابزار گزارش‌ها را دانلود می‌کنید.
 
-**۷. ضمیر اضافی.** «شما»، «ما»، «خود»، «آن» جایی که فارسی ضمیر را می‌اندازد.
+**7. Redundant pronoun.** «شما», «ما», «خود», «آن» where Persian drops the pronoun.
 ❌ شما می‌توانید تنظیمات خود را در پنل کاربری خود تغییر دهید.
 ✅ تنظیمات را از پنل کاربری تغییر دهید.
 
-**۸. «نه تنها … بلکه … نیز».** کالک not only … but also. فارسی «هم … هم» می‌گوید یا اصلاً نمی‌گوید.
+**8. "Not only … but also."** Calque of not only … but also. Persian says «هم … هم» or doesn't say it at all.
 ❌ نه تنها سریع است، بلکه امن نیز هست.
 ✅ هم سریع است، هم امن.
 
-**۹. قیدهای تأکیدی ترجمه‌ای.** واقعاً، به‌سادگی، به‌راحتی، به‌طور یکپارچه، به‌طور کامل، کاملاً، در واقع، به‌طور مؤثر، بی‌نظیر. بیشترشان را حذف کن؛ جمله بدون آن‌ها قوی‌تر است.
+**9. Translated intensifier adverbs.** واقعاً, به‌سادگی, به‌راحتی, به‌طور یکپارچه, به‌طور کامل, کاملاً, در واقع, به‌طور مؤثر, بی‌نظیر. Drop most of them; the sentence is stronger without them.
 ❌ به‌سادگی می‌توانید به‌طور یکپارچه با ابزارهای خود ادغام شوید.
 ✅ به ابزارهایی که دارید وصل می‌شود.
 
-**۱۰. زنجیرهٔ اضافه (هم‌نهاد فشرده).** سه اضافه پشت سر هم به‌جای گزاره یا حرف‌اضافه.
+**10. Ezafe chain (stacked genitives).** Three ezafes in a row instead of a predicate or preposition.
 ❌ عبارت‌های ترجمه‌ای متن‌های هوش مصنوعی را جمع می‌کند.
 ✅ عبارت‌های ترجمه‌ای را از متن‌های هوش مصنوعی جمع می‌کند.
 
-**۱۱. خط تیرهٔ معترضه.** «—» انگلیسی است. با ویرگول، «که» یا جملهٔ جدا بگو.
+**11. Parenthetical em dash.** «—» is English. Use a comma, «که», or a separate sentence instead.
 ❌ رصدبان — ابزار پایش قیمت رقبا — رایگان شد.
 ✅ رصدبان که قیمت رقبا را پایش می‌کند، رایگان شد.
 
-**۱۲. فراخوان امریِ برهنه.** «شروع کنید.» «بیشتر بدانید.» «اکنون ثبت‌نام کنید.» کالک دکمه‌های انگلیسی است. دکمهٔ فارسی مصدر یا اسم است.
+**12. Bare imperative CTA.** «شروع کنید.» «بیشتر بدانید.» «اکنون ثبت‌نام کنید.» This is a calque of English button copy. A Persian button uses an infinitive or a noun.
 ❌ شروع کنید | بیشتر بدانید | اکنون ثبت‌نام کنید
 ✅ شروع | اطلاعات بیشتر | ثبت‌نام / همین حالا ثبت‌نام کنید
 
-**۱۳. سؤال بلاغی و مقدمه‌چینی.** «آیا تا به حال…؟»، «آماده‌اید؟»، «تصور کنید…». حذف کن و از خودِ حرف شروع کن.
+**13. Rhetorical question / throat-clearing.** «آیا تا به حال…؟», «آماده‌اید؟», «تصور کنید…». Drop it and start with the actual point.
 ❌ آیا تا به حال به این فکر کرده‌اید که چطور می‌توانید قیمت رقبا را رصد کنید؟
 ✅ قیمت رقبا را چطور رصد می‌کنید؟
 
-**۱۴. «در حال … هستید» و وضعیت‌های ترجمه‌ای.** «شما در حال مشاهدهٔ X هستید» به‌جای جملهٔ ساده.
+**14. "You are currently …ing" and translated status phrasing.** «شما در حال مشاهدهٔ X هستید» instead of a plain sentence.
 ❌ شما در حال مشاهدهٔ نسخهٔ آزمایشی هستید.
 ✅ این نسخهٔ آزمایشی است.
 
-**۱۵. عبارت‌های قالبی کالک‌شده.** این‌ها را بی‌قید و شرط عوض کن:
+**15. Calqued boilerplate phrases.** Change these unconditionally:
 
-| کالک | بنویس |
+| Calque | Write instead |
 |---|---|
-| خوش برگشتید! | خوش آمدید / (حذف) |
+| خوش برگشتید! | خوش آمدید / (drop it) |
 | چیزی اشتباه پیش رفت | مشکلی پیش آمد |
-| ما اینجا هستیم تا کمک کنیم | اگر مشکلی بود، به ما بگویید / پشتیبانی پاسخگوست («پاسخگو» بی‌نیم‌فاصله) |
-| موفقیت! (تنها) | انجام شد / ذخیره شد («با موفقیت ثبت شد» رایج و درست است) |
+| ما اینجا هستیم تا کمک کنیم | اگر مشکلی بود، به ما بگویید / پشتیبانی پاسخگوست (no ZWNJ in «پاسخگو») |
+| موفقیت! (alone) | انجام شد / ذخیره شد («با موفقیت ثبت شد» is common and fine) |
 | چیزی برای نمایش وجود ندارد | هنوز چیزی ثبت نشده |
 | به جامعهٔ ما بپیوندید | عضو … شوید |
 | در پایان روز | در نهایت / آخرش |
 | قدرت‌گرفته از X | بر پایهٔ X / با فناوری X |
-| سفر شما با X | (حذف؛ مستقیم بگو چه می‌شود) |
-| تجربهٔ کاربری بی‌نظیر | (حذف) |
+| سفر شما با X | (drop it; say directly what happens) |
+| تجربهٔ کاربری بی‌نظیر | (drop it) |
 | هرگونه سؤال | سؤالی |
-| به نظر می‌رسد که | (حذف) |
+| به نظر می‌رسد که | (drop it) |
 | بدون هیچ‌گونه | بدون |
-| ما معتقدیم که / ما باور داریم که | (حذف؛ مستقیم ادعا را بگو) |
+| ما معتقدیم که / ما باور داریم که | (drop it; state the claim directly) |
 
-**۱۶. دستور + توضیح در یک جمله.** انگلیسی می‌گوید «Check your inbox, the link is there»: اول به کاربر کاری می‌دهد، بعد دلیلش را می‌گوید. فارسی نتیجه را می‌گوید و کاربر خودش می‌فهمد چه کند.
+**16. Imperative + reason in one sentence.** English says "Check your inbox, the link is there": it gives the user a task first, then the reason. Persian states the result and lets the reader figure out what to do.
 ❌ ایمیل‌تان را ببینید، لینک تأیید آن‌جاست.
 ✅ لینک تأیید ایمیل شد.
 ❌ به تنظیمات بروید، گزینهٔ خروج آن‌جاست.
 ✅ گزینهٔ خروج در تنظیمات است.
 
-**۱۷. دو جملهٔ کامل با ویرگول (comma splice).** ویرگول دو جملهٔ مستقل را به هم نمی‌چسباند. یا نقطه بگذار، یا با «و»/«که»/«تا» پیوند بده، یا یکی را حذف کن (الگوی ۱۶).
+**17. Comma splice.** A comma doesn't join two independent sentences. Either use a period, connect with «و»/«که»/«تا», or drop one clause (pattern 16).
 ❌ پرداخت انجام نشد، دوباره امتحان کنید.
 ✅ پرداخت انجام نشد. دوباره امتحان کنید.
 
-**۱۸. قید معترضه بین دو ویرگول.** «به سوال مشتری، حتی نصف‌شب، جواب می‌دهد» جمله را وسطش می‌شکافد. فارسی قید را اول جمله یا کنار فعل می‌گذارد.
+**18. Parenthetical adverb between two commas.** «به سوال مشتری، حتی نصف‌شب، جواب می‌دهد» splits the sentence in the middle. Persian puts the adverb at the start of the sentence or next to the verb.
 ❌ به سوال مشتری، حتی نصف‌شب، جواب می‌دهد.
 ✅ حتی نصف‌شب هم جواب مشتری را می‌دهد.
 
-**۱۹. سه‌گانهٔ فعلی بی‌فاعل.** سه بند موازی «… می‌کند، … می‌نویسد و … می‌دهد» بدون فاعل، tricolon تبلیغاتی انگلیسی است. فاعل را بیاور و ریتم را بشکن: دو بند و یک جملهٔ جدا، یا فاعل در اول و «هم» در بند سوم.
+**19. Subjectless verb tricolon.** Three parallel clauses — "…does X, writes Y, and answers Z" — with no subject is an English advertising tricolon. Bring in the subject and break the rhythm: two clauses plus a separate sentence, or the subject up front with «هم» in the third clause.
 ❌ قیمت‌ها را هماهنگ می‌کند، توضیحات را می‌نویسد و به مشتری جواب می‌دهد.
 ✅ آکسون قیمت‌ها را هماهنگ می‌کند و توضیح محصول‌ها را می‌نویسد. جواب مشتری را هم خودش می‌دهد.
 
-**۲۰. ضربهٔ پایانی «شما فقط …».** بعد از فهرست کارها، یک جملهٔ کوتاه دوم‌شخص («شما فقط گزارشش را می‌بینید.») کالک «You just …» است. فارسی نتیجه را برای خواننده می‌گوید، نه خواننده را فاعل یک کار کوچک.
+**20. Closing "you just …" punchline.** After a list of what a product does, a short second-person closer («شما فقط گزارشش را می‌بینید.») is a calque of "You just …". Persian states the outcome for the reader, not the reader as the subject of one small action.
 ❌ شما فقط گزارشش را می‌بینید.
 ✅ کار شما فقط دیدن گزارش است. / برای شما فقط گزارش می‌ماند.
 
-**۲۱. واژهٔ ساخته‌شده به‌جای وام‌واژهٔ جاافتاده.** «برنامهٔ وب»، «خوراک»، «پاورقی سایت»، «تصویر صفحه» جایی که همه «وب‌اپلیکیشن»، «فید»، «فوتر»، «اسکرین‌شات» می‌گویند. فهرست در `references/terms.md`. برعکسش هم ایراد است: «ایمیل» را «رایانامه» نکن.
+**21. Coined word instead of an established loanword.** «برنامهٔ وب», «خوراک», «پاورقی سایت», «تصویر صفحه» where everyone actually says «وب‌اپلیکیشن», «فید», «فوتر», «اسکرین‌شات». List in `references/terms.md` and the domain files under `references/terms/`. The reverse is also wrong: don't turn «ایمیل» into «رایانامه».
 
-**۲۲. افتتاحیهٔ مقاله‌ای کلیشه‌ای.** «در دنیای امروز، X اهمیت زیادی دارد»، «در عصر دیجیتال، X ضروری است»، «در این مقاله/متن به بررسی … می‌پردازیم». این‌ها باز کردن مقالهٔ انگلیسیِ ترجمه‌شده‌اند. فارسی مستقیم با ادعا یا سؤال شروع می‌کند، نه با زمینه‌چینی دربارهٔ «دنیای امروز».
+**22. Clichéd essay-style opening.** «در دنیای امروز، X اهمیت زیادی دارد», «در عصر دیجیتال، X ضروری است», «در این مقاله/متن به بررسی … می‌پردازیم». These are the opening of a translated English essay. Persian starts directly with a claim or a question, not with throat-clearing about "today's world."
 ❌ در دنیای امروز، رقابت در فروشگاه‌های آنلاین بسیار زیاد شده است. در این مقاله به بررسی روش‌های افزایش فروش می‌پردازیم.
 ✅ رقابت در فروشگاه‌های آنلاین هر روز بیشتر می‌شود؛ این چند روش فروش را بالا می‌برد.
 
-**۲۳. تیتر ترجمه‌ای تبلیغاتی یا آموزشی.** «چرا باید X را انتخاب کنید؟»، «مزایای استفاده از X»، «X: راهنمای کامل». این‌ها قالب تیتر لندینگ/مقالهٔ انگلیسی‌اند، نه چیزی که سایت فارسی واقعی تیتر می‌زند. مثل الگوی ۱۲، تیتر و کپشن را طبق قدم ۸ حالت ویرایش جدا و پیش‌فرض ⚠️ گزارش کن، نه ✅ خودکار.
+**23. Translated marketing or how-to heading.** «چرا باید X را انتخاب کنید؟», «مزایای استفاده از X», «X: راهنمای کامل». These are English landing-page/article heading templates, not what a real Persian site titles. Like pattern 12, report heading/caption changes separately under step 8 of editing mode and default to ⚠️, not an automatic ✅.
 ❌ چرا باید رصدبان را انتخاب کنید؟
 ✅ رصدبان چه فرقی با رصد دستی قیمت دارد؟
 
-## قواعد ثابت نگارش
+## Fixed mechanics
 
-1. **نیم‌فاصله:** «می‌شود»، «نمی‌تواند»، «کتاب‌ها»، «به‌روزرسانی». هرگز «می شود» یا «میشود».
-2. **حروف فارسی، نه عربی:** «ی» و «ک»، نه «ي» و «ك».
-3. **اعداد فارسی** در متن (۱۲۳). عدد لاتین فقط داخل کد، شناسه، نسخه و URL. جداکنندهٔ هزارگان برای اعداد پنج‌رقمی و بیشتر «٬» (۱۲٬۵۰۰)؛ اعداد چهاررقمی بدون جداکننده (۱۴۰۵). درصد «٪» چسبیده به عدد. سبک موجود پروژه مقدم است.
-4. **کسرهٔ اضافه بعد از «ه» ناملفوظ:** پیش‌فرض «ٔ» (صفحهٔ اصلی، هزینهٔ پایه). اگر پروژه «صفحه‌ی اصلی» می‌نویسد، همان را نگه دار. در یک پروژه فقط یکی.
-5. **نشانه‌گذاری فارسی:** «،» «؟» و گیومهٔ «…». نه ویرگول و علامت سؤال انگلیسی، نه " ". علامت تعجب فقط در لحن دوستانه و محاوره‌ای، آن هم کم.
-6. **نقطه‌ویرگول «؛» فقط در لحن رسمی.** در نیمه‌رسمی، دوستانه و محاوره‌ای به‌جایش نقطه بگذار و جمله را دو تا کن یا با «و» بدوز. متنی که هر پاراگرافش یک «؛» دارد ماشینی به نظر می‌رسد.
-7. **پیش از «و» و «یا» هرگز ویرگول نمی‌آید.** «الف، ب، و پ» و «… می‌دهد، و هر معادل …» کالک Oxford comma است. یا «الف، ب و پ» یا نقطه و جملهٔ تازه. این قاعده مطلق است.
-8. **لحن در کل متن ثابت** بماند؛ در یک صفحه بین «می‌توانید» و «می‌تونید» رفت‌وآمد نکن.
-9. **فعل جمله را زود بیاور** اگر جمله بلند شد؛ جملهٔ فارسی با فعلی که سی کلمه دورتر است خوانده نمی‌شود.
+1. **ZWNJ (half-space):** «می‌شود», «نمی‌تواند», «کتاب‌ها», «به‌روزرسانی». Never «می شود» or «میشود».
+2. **Persian letterforms, not Arabic:** «ی» and «ک», not «ي» and «ك».
+3. **Persian digits** in running text (۱۲۳). Latin digits only inside code, IDs, version numbers and URLs. Thousands separator «٬» for five-digit numbers and up (۱۲٬۵۰۰); four-digit numbers get no separator (۱۴۰۵). Percent sign «٪» attached to the number. The project's existing style wins if there's a conflict.
+4. **Ezafe mark after a silent «ه»:** default to «ٔ» (صفحهٔ اصلی, هزینهٔ پایه). If the project already writes «صفحه‌ی اصلی», keep that instead. Pick one per project.
+5. **Persian punctuation:** «،» «؟» and «…» quotes. Not English comma/question mark, not " ". Exclamation marks only in friendly and casual tone, and sparingly even there.
+6. **Semicolon «؛» only in formal tone.** In semi-formal, friendly and casual, use a period instead and split the sentence, or stitch it with «و». Text with a semicolon in every paragraph reads as machine-written.
+7. **Never a comma before «و» or «یا».** «الف، ب، و پ» and «… می‌دهد، و هر معادل …» are calques of the Oxford comma. Either «الف، ب و پ» or a period and a new sentence. This rule is absolute.
+8. **Keep tone consistent across the whole text;** don't drift between «می‌توانید» and «می‌تونید» on the same page.
+9. **Bring the verb forward** if the sentence runs long; a Persian sentence with its verb thirty words away doesn't read.
 
-## حالت نوشتن
+## Writing mode
 
-1. لحن را روشن کن.
-2. پیش از نوشتن، **پیام هر بند را در یک خط گفتاری بگو** (در ذهن، نه در خروجی): «می‌خواهم بگویم این ابزار قیمت رقبا را هر روز چک می‌کند و اگر کسی ارزان‌تر شد خبر می‌دهد.» بعد همان را با لحن انتخابی بنویس. از انگلیسیِ ذهنی ترجمه نکن.
-3. `references/terms.md` را برای اصطلاحات ببین.
-4. پیش‌نویس را جمله‌به‌جمله از الگوهای ۱ تا ۲۱ رد کن. هر جمله‌ای که به یکی می‌خورد بازنویسی شود و جملهٔ بازنویسی‌شده دوباره از همان فهرست رد شود.
-5. آزمون نهایی: متن را بلند بخوان؛ می‌شود انگلیسی‌اش را حدس زد؟ اگر بله، دوباره. اگر متن بلندتر از چند جمله است، از «نشانه‌های ساختاری تولید ماشینی» هم رد کن (ایموجی تزئینی، بولد زیاد، تیترسازی مصنوعی، جمع‌بندی کلیشه‌ای).
+1. Settle the tone.
+2. Before writing, **say the point of each paragraph as one spoken line** (in your head, not in the output): "I want to say this tool checks competitor prices every day and tells you if someone gets cheaper." Then write that same thought in the chosen tone. Don't translate from the English in your head.
+3. Check `references/terms.md` and the relevant domain file(s) under `references/terms/` for terminology.
+4. Pass the draft sentence by sentence through patterns 1–23. Rewrite any sentence that matches one, then pass the rewrite through the same list again.
+5. Final test: read the text aloud; can you guess the English behind it? If yes, redo it. If the text is longer than a few sentences, also check it against "Structural tells of machine generation" below (decorative emoji, overused bold, artificial headings, clichéd closing).
+6. Before presenting the final draft, pipe it through `python3 scripts/lint.py -` (stdin). Do this even when the text is only going into the chat, not a file — the `PostToolUse` hook only fires on `Write`/`Edit`, so plain chat output needs this manual pass to get the same mechanical check. Look at every hit; the report is a prompt to judge, not a verdict.
 
-## حالت ویرایش
+## Editing mode
 
-0. اول بگو با کدام نسخهٔ اسکیل کار می‌کنی (شمارهٔ `version` در `.claude-plugin/plugin.json`، یا اگر این فایل نبود نسخهٔ عنوان‌شدهٔ بالای `README.md`) تا کاربر بداند قواعد کدام نسخه اعمال شده.
+0. First state which version of the skill you're working from (the `version` field in `.claude-plugin/plugin.json`, or if that file is missing, the version named at the top of `README.md`) so the user knows which rules applied.
 
-1. **دامنه را روشن کن:** متن تیم (هدینگ، دکمه، پیام، متا، aria-label، توضیحات) در دامنه است؛ محتوای ثبت‌شدهٔ کاربران، داده، نقل‌قول و نام برند خارج از دامنه است مگر کاربر بگوید. متن‌های مشترک کل سایت (هدر، فوتر) را جداگانه فهرست کن و بپرس.
-2. هر جمله را از الگوهای ۱ تا ۲۳ و قواعد ثابت رد کن، و اگر متن از چند پاراگراف بیشتر است کل سند را هم از «نشانه‌های ساختاری تولید ماشینی» رد کن. **هر بازنویسی را هم دوباره از همان فهرست رد کن**؛ حذف یک الگو نباید الگوی دیگری بیاورد (مثلاً برداشتن «توسط» و ساختن زنجیرهٔ اضافه). اگر جملهٔ جدید از اولی بهتر نیست، دست نزن و به ⚠️ ببر. **متن را قضاوت کن، نه نویسنده‌اش:** این‌که متن قبلاً بازبینی شده، روی سایت است یا حتی داخل همین اسکیل مثال ✅ بوده، دلیل درست بودنش نیست.
-3. خروجی همیشه سه‌سطحی است:
-   - ✅ **قطعی، اعمال شد:** جدول قبل ← بعد ← کدام الگو.
-   - ⚠️ **احتمالی، اعمال نشد:** جدول متن ← کجا ← تردید ← پیشنهاد. هر جا شک داشتی این‌جا می‌آید، نه در سکوت. «در شک، گزارش بده»، نه «در شک، دست نزن».
-   - ⏭ **خارج از دامنه، بررسی نشد:** فهرست کوتاه (داده‌های کاربران، هدر/فوتر، …) تا کاربر بداند چه چیزی دیده نشده.
-4. مجهول بی‌فاعل در لحن رسمی، وام‌واژهٔ جاافتاده و مثال‌های عمداً ترجمه‌ای (مثل ستون ❌ یک صفحهٔ مقایسه) ایراد نیستند؛ اگر در نگاه اول شبیه خطا هستند در ⚠️ بیاور و بگو چرا رد شده.
-5. `scripts/lint.py` را روی فایل‌های متن اجرا کن (`python3 scripts/lint.py path…`). خروجی‌اش نشانه‌های مکانیکی (نیم‌فاصله، حروف عربی، عدد لاتین، توسط، کالک‌ها) و انطباق با واژه‌نامهٔ کامل است. هر مورد را با چشم بسنج؛ گزارش لینت خودش تصمیم نیست.
-6. چیزی commit نکن مگر کاربر بخواهد.
-7. **تغییر لحن، بازنویسی سراسری نیست.** وقتی کاربر لحن تازه می‌خواهد، فقط جمله‌هایی را عوض کن که با لحن مقصد نمی‌خوانند و در ستون «الگو» بنویس دقیقاً چه چیزی از لحن عوض شد (فعل، فاصله، خطاب). «لحن» به‌تنهایی برچسب کافی نیست. ضمیر اضافه‌کردن تغییر لحن نیست (`references/tones.md`، بخش نیمه‌رسمی → دوستانه).
-8. **تیتر و کپشن را جدا گزارش کن.** تغییر در تیتر، شعار، کپشن و برچسب پیش‌فرض ⚠️ است نه ✅، مگر کالک آشکار باشد (الگوی ۱۲ و ۱۵). این‌ها متن تبلیغاتی‌اند و کوتاهی‌شان عمدی است.
-9. **حداکثر دو پاس.** پاس اول متن اصلی، پاس دوم فقط جمله‌هایی که خودت نوشتی. اگر پاس دوم باز هم چیزی در بازنویسی‌های خودت پیدا کرد، آن‌ها را اعمال کن و تمام. پاس سوم فقط ⚠️ تولید می‌کند، نه ✅. ویرایشِ بی‌پایان متن را بهتر نمی‌کند، فقط عوضش می‌کند.
-10. **گزارش خودت را هم با همین قواعد بنویس.** بدون «—»، بدون «؛» (گزارش نیمه‌رسمی است)، بدون ویرگول پیش از «و». گزارشی که خودش ترجمه‌زده باشد اعتبار ندارد.
+1. **Clarify scope:** the team's own copy (headings, buttons, messages, meta, aria-labels, descriptions) is in scope; user-submitted content, data, quotes and brand names are out of scope unless the user says otherwise. List site-wide shared copy (header, footer) separately and ask about it.
+2. Pass every sentence through patterns 1–23 and the fixed-mechanics rules, and if the text is more than a couple of paragraphs, also pass the whole document through "Structural tells of machine generation." **Pass every rewrite through the same list again too**; removing one pattern shouldn't introduce another (e.g. dropping «توسط» and ending up with an ezafe chain). If the new sentence isn't better than the original, leave it and move it to ⚠️. **Judge the text, not its author:** that a sentence was already reviewed, is live on the site, or is even one of this skill's own ✅ examples is not proof it's correct.
+3. Output is always three-tier:
+   - ✅ **Definite, applied:** table of before → after → which pattern.
+   - ⚠️ **Possible, not applied:** table of text → location → the doubt → a suggestion. Anything you're unsure about goes here, not into silence. "When in doubt, report it," not "when in doubt, leave it."
+   - ⏭ **Out of scope, not reviewed:** a short list (user data, header/footer, …) so the user knows what wasn't looked at.
+4. A subjectless passive in formal tone, an established loanword, and deliberately translated examples (like the ❌ column of a comparison page) are not errors; if they look like a mistake at first glance, put them in ⚠️ and say why they were rejected.
+5. Run `scripts/lint.py` on the text files (`python3 scripts/lint.py path…`). Its output is mechanical signals (ZWNJ, Arabic letters, Latin digits, «توسط», calques) plus matches against the full term glossary. Weigh every hit by eye; the lint report itself isn't the decision.
+6. Don't commit anything unless the user asks.
+7. **A tone change isn't a full rewrite.** When the user wants a new tone, only change sentences that don't fit the target tone, and write exactly what changed about the tone (verb form, spacing, address) in the "pattern" column. "Tone" alone isn't a sufficient label. Adding a pronoun is not a tone change (`references/tones.md`, "semi-formal → friendly" section).
+8. **Report headings and captions separately.** A change to a heading, tagline, caption or label defaults to ⚠️, not ✅, unless it's an obvious calque (patterns 12 and 15). These are advertising copy and their terseness is deliberate.
+9. **Two passes, maximum.** First pass: the original text. Second pass: only the sentences you yourself wrote. If the second pass still finds something in your own rewrites, apply it and stop. A third pass only produces ⚠️, never ✅. Endless editing doesn't improve text, it just keeps changing it.
+10. **Write your own report under the same rules.** No «—», no «؛» (the report is semi-formal), no comma before «و». A report that's itself translated-sounding has no credibility.
 
-## نشانه‌های ساختاری تولید ماشینی (سطح سند)
+## Structural tells of machine generation (document level)
 
-الگوهای ۱ تا ۲۳ همه سطح **جمله**‌اند. چهار نشانهٔ زیر سطح **سند** هستند و زودتر از خود جمله لو می‌دهند که متن را هوش مصنوعی نوشته، مخصوصاً در متن‌های بلندتر (لندینگ کامل، صفحهٔ «دربارهٔ ما»، پست وبلاگ). این‌ها را هم در حالت نوشتن (قدم ۵) و هم در حالت ویرایش چک کن، جدا از رد‌کردن از فهرست جمله‌ای:
+Patterns 1–23 are all **sentence**-level. The four tells below are **document**-level, and they give away that a text is AI-written faster than the sentences themselves do, especially in longer text (a full landing page, an "about us" page, a blog post). Check for these in both writing mode (step 5) and editing mode, separately from running the sentence-level list:
 
-- **ایموجی تزئینی قبل از هر بولت** (🚀 سریع، ✅ امن، 💡 هوشمند). بولت فارسی یا بدون نشانه است یا با «-»/«•»؛ ایموجی قبل از هر خط ریتم پست لینکدین انگلیسی است، نه نثر فارسی. (نشانه‌های قراردادی ✅/❌/⚠️/⏭ خودِ همین اسکیل برای گزارش، نه برای متن نهایی، استثنا هستند.)
-- **بولدکردن بیش‌ازحد عبارات تصادفی** در یک پاراگراف (هر جمله یک تکه بولد دارد). این خواننده را از خط اصلی جمله پرت می‌کند و در نوشتار فارسی معمول نیست.
-- **تیترسازی مصنوعی برای متن کوتاه** (سه خط را سه هدینگ جدا کردن). اگر متن یک پاراگراف کوتاه است، یک پاراگراف بماند.
-- **جمع‌بندی کلیشه‌ای «در پایان»/«جمع‌بندی»** در متنی که اصلاً به جمع‌بندی نیاز ندارد (کوتاه است یا قبلاً نتیجه را گفته).
+- **Decorative emoji before every bullet** (🚀 fast, ✅ secure, 💡 smart). A Persian bullet either has no marker or uses «-»/«•»; an emoji before every line is English LinkedIn-post rhythm, not Persian prose. (This skill's own ✅/❌/⚠️/⏭ markers are an exception — they're for its own reports, not for final copy.)
+- **Excessive bolding of random phrases** in a paragraph (every sentence has a bolded chunk). This pulls the reader off the sentence's line of thought and isn't common in Persian writing.
+- **Artificial heading structure for short text** (splitting three lines into three separate headings). If the text is one short paragraph, leave it as one paragraph.
+- **Clichéd closing "در پایان"/"جمع‌بندی"** in a text that doesn't need a summary at all (it's short, or it already stated the conclusion).
 
-آزمون: اگر این تزئینات را برداری، متن چیزی را از دست می‌دهد؟ اگر نه، تزئین زائد بوده و باید برداشته شود.
+Test: if you removed the decoration, would the text lose anything? If not, it was excess decoration and should come out.
 
-## چه چیزی را عوض نکن
+## What not to change
 
-- نام برند و محصول، اصطلاح حقوقی و فنی تثبیت‌شده، متنی که کاربر خودش نوشته، محتوای ثبت‌شدهٔ کاربران.
-- واژه‌ای که در جملهٔ تو معنای دیگری دارد، فقط چون در `terms.md` آمده. هر سطر واژه‌نامه گزارش یک بافت است، نه قانون سراسری. هیچ‌وقت جست‌وجو و جایگزینی سراسری نکن.
+- Brand and product names, established legal and technical terminology, text the user wrote themselves, user-submitted content.
+- A word that means something else in your sentence, just because it's in `terms.md` or a domain file. Every glossary row reports one context, not a universal rule. Never do a blind global find-and-replace.
 
-## به هم‌قلم کمک کن
+## Help improve Hamghalam
 
-اگر الگوی ترجمه‌زدگی تازه‌ای دیدی که در فهرست بالا نیست یا اصطلاحی که مدل‌ها مدام غلط برمی‌گردانند، به کاربر پیشنهاد بده در https://barchin.net/hamghalam ثبت کند. گزارش «این جمله ترجمه‌ای است چون …» بیشتر از یک جفت‌عبارت ارزش دارد.
+If you spot a new translation-tell pattern that isn't in the list above, or a term models keep getting wrong, suggest the user register it at https://barchin.net/hamghalam. A report like "this sentence is translated because …" is worth more than a bare pair of phrases.

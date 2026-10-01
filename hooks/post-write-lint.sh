@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # PostToolUse hook: after Write/Edit, runs hamghalam's lint.py on the touched
-# file and feeds back مکانیزم بازخورد خودکار so Persian strings written as a
-# side effect of unrelated tasks (a button label inside a React component,
+# file and feeds the result back automatically, so Persian strings written as
+# a side effect of unrelated tasks (a button label inside a React component,
 # an error message) don't skip review just because nobody said "با هم‌قلم".
 set -euo pipefail
 
@@ -42,9 +42,9 @@ if [[ -z "$errors" ]]; then
 fi
 
 {
-    echo "hamghalam: این رشته‌های فارسی که نوشتی چند نشانهٔ ترجمه‌ای دارند (حتی اگر هدف اصلی تسک، نوشتن متن نبود):"
+    echo "hamghalam: the Persian string(s) you just wrote have translation tells (even if the task wasn't about writing copy):"
     echo "$errors"
-    echo "اگر عمدی نیست، همین حالا اصلاح کن؛ اگر عمدی است (مثلاً مجهول بی‌فاعل یا مثال عمداً بد)، رد کن."
+    echo "If this is unintentional, fix it now; if it's deliberate (e.g. a subjectless passive, or a deliberately bad example), reject it."
 } >&2
 
 exit 2

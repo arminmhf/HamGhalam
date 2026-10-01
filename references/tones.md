@@ -1,61 +1,61 @@
-# راهنمای لحن
+# Tone guide
 
-لحن را یک بار انتخاب کن و تا آخر متن نگه دار. تفاوت لحن‌ها در سه چیز است: شکل فعل (کامل یا شکسته)، فاصله با مخاطب (جمع یا مفرد) و مجاز بودن شوخی و تعجب.
+Pick a tone once and hold it for the whole text. Tones differ in three things: verb form (full or colloquial), distance from the reader (formal plural or informal singular), and whether jokes and exclamation marks are allowed.
 
-| | رسمی | نیمه‌رسمی | دوستانه | محاوره‌ای |
+| | Formal | Semi-formal | Friendly | Casual |
 |---|---|---|---|---|
-| کجا | بانک، بیمه، سازمان، متن حقوقی، اطلاعیه | بیشتر سایت‌ها و اپ‌ها، مستندات | استارتاپ، آموزش، محصول مصرفی | شبکهٔ اجتماعی، پیام کوتاه، برند جوان |
-| فعل | کامل، جمع (فرمایید، بفرمایید مجاز) | کامل، جمع | کامل، جمع، گاهی «تو» | شکسته («می‌تونید»، «بزن بریم») |
-| مخاطب | «شما»، «کاربر گرامی» | «شما» | «شما» یا «تو» با احتیاط | «تو»، ضمیر متصل («حسابت») |
-| علامت تعجب | نه | نه | کم | آزاد |
-| نقطه‌ویرگول «؛» | مجاز، کم | نه | نه | نه |
-| مجهول بی‌فاعل | طبیعی («ثبت گردید» نه؛ «ثبت شد» بله) | طبیعی | کم | نه |
-| شوخی | نه | نه | ملایم | آزاد |
+| Where | bank, insurance, government, legal text, official notice | most sites and apps, documentation | startup, education, consumer product | social media, SMS, youth brand |
+| Verb | full, plural (فرمایید، بفرمایید allowed) | full, plural | full, plural, sometimes «تو» | colloquial («می‌تونید», «بزن بریم») |
+| Address | «شما», «کاربر گرامی» | «شما» | «شما» or «تو», carefully | «تو», attached pronoun («حسابت») |
+| Exclamation mark | no | no | a little | free |
+| Semicolon «؛» | allowed, sparingly | no | no | no |
+| Subjectless passive | natural («ثبت گردید» no; «ثبت شد» yes) | natural | rare | no |
+| Jokes | no | no | mild | free |
 
-## یک پیام، چهار لحن
+## One message, four tones
 
-پیام: لینک تأیید به ایمیل رفته و باید روی آن کلیک کنند.
+Message: a confirmation link was emailed and they need to click it.
 
-- **رسمی:** لینک تأیید به نشانی ایمیل شما ارسال شد. برای فعال‌سازی حساب، روی آن کلیک کنید.
-- **نیمه‌رسمی:** لینک تأیید را به ایمیلتان فرستادیم. روی آن کلیک کنید تا حسابتان فعال شود.
-- **دوستانه:** لینک تأیید ایمیل شد. یک کلیک و حسابتان فعال می‌شود.
-- **محاوره‌ای:** لینک تأیید رو فرستادیم به ایمیلت. روش بزن تا حسابت فعال شه.
+- **Formal:** لینک تأیید به نشانی ایمیل شما ارسال شد. برای فعال‌سازی حساب، روی آن کلیک کنید.
+- **Semi-formal:** لینک تأیید را به ایمیلتان فرستادیم. روی آن کلیک کنید تا حسابتان فعال شود.
+- **Friendly:** لینک تأیید ایمیل شد. یک کلیک و حسابتان فعال می‌شود.
+- **Casual:** لینک تأیید رو فرستادیم به ایمیلت. روش بزن تا حسابت فعال شه.
 
-پیام: خطا در پرداخت، دوباره تلاش کنند.
+Message: payment failed, ask them to try again.
 
-- **رسمی:** پرداخت انجام نشد. لطفاً دوباره تلاش کنید یا با پشتیبانی تماس بگیرید.
-- **نیمه‌رسمی:** پرداخت انجام نشد. دوباره امتحان کنید و اگر باز هم نشد، به پشتیبانی بگویید.
-- **دوستانه:** پرداخت انجام نشد. یک بار دیگر امتحان کنید و اگر باز گیر کرد ما هستیم.
-- **محاوره‌ای:** پرداخت نشد. یه بار دیگه بزن، نشد به ما بگو.
+- **Formal:** پرداخت انجام نشد. لطفاً دوباره تلاش کنید یا با پشتیبانی تماس بگیرید.
+- **Semi-formal:** پرداخت انجام نشد. دوباره امتحان کنید و اگر باز هم نشد، به پشتیبانی بگویید.
+- **Friendly:** پرداخت انجام نشد. یک بار دیگر امتحان کنید و اگر باز گیر کرد ما هستیم.
+- **Casual:** پرداخت نشد. یه بار دیگه بزن، نشد به ما بگو.
 
-## نیمه‌رسمی → دوستانه: چه چیزی واقعاً عوض می‌شود
+## Semi-formal → friendly: what actually changes
 
-دوستانه یعنی فاصلهٔ کمتر با خواننده، نه ضمیر بیشتر. این‌ها لحن را دوستانه می‌کنند:
+Friendly means less distance from the reader, not more pronouns. These make a tone friendly:
 
-- جملهٔ کوتاه‌تر و فعل ملموس («می‌گیرید» به‌جای «دریافت می‌کنید»، «بگویید» به‌جای «اطلاع دهید»).
-- خطاب مستقیم در فعل، نه با ضمیر: «ثبت کنید» دوستانه است، «شما می‌توانید ثبت کنید» نیست.
-- «هم» و «خودتان» برای گرمی: «یک معادل هم پیشنهاد بدهید»، «خودتان اولین نفر باشید».
-- گاهی یک «!» یا یک جملهٔ پرسشی کوتاه، نه در هر بند.
-- گفتن نتیجه برای خواننده: «۵ کردیت می‌گیرید» به‌جای «هر رأی ۵ کردیت دارد».
+- Shorter sentences and a concrete verb («می‌گیرید» instead of «دریافت می‌کنید», «بگویید» instead of «اطلاع دهید»).
+- Direct address in the verb, not via a pronoun: «ثبت کنید» is friendly, «شما می‌توانید ثبت کنید» isn't.
+- «هم» and «خودتان» for warmth: «یک معادل هم پیشنهاد بدهید», «خودتان اولین نفر باشید».
+- Occasionally a «!» or a short question, not in every paragraph.
+- Stating the outcome for the reader: «۵ کردیت می‌گیرید» instead of «هر رأی ۵ کردیت دارد».
 
-این‌ها لحن را دوستانه نمی‌کنند و ایراد هم هستند:
+These do NOT make a tone friendly, and are mistakes:
 
-- افزودن «شما»، «برایتان»، «خودتان» به هر جمله (الگوی ۷). دوستانه‌شدن با ضمیرپاشی، ترجمه‌زدگی تازه است.
-- «ما اینجا…» در ابتدای جمله (کالک «Here at X, we…»).
-- بازنویسی جمله‌ای که همین حالا هم دوستانه است. اگر جمله با لحن مقصد می‌خواند، دست نزن و در گزارش بگو چند جمله بی‌تغییر ماند.
+- Adding «شما», «برایتان», «خودتان» to every sentence (pattern 7). Getting friendly by pronoun-spraying is a fresh translation tell.
+- «ما اینجا…» at the start of a sentence (calque of "Here at X, we…").
+- Rewriting a sentence that's already friendly. If a sentence already reads in the target tone, leave it, and say in the report how many sentences stayed unchanged.
 
-| نیمه‌رسمی | دوستانه |
+| Semi-formal | Friendly |
 |---|---|
 | عبارت مصنوعی را با جمله‌ای که در آن دیده‌اید ثبت کنید و یک معادل بومی پیشنهاد بدهید. | عبارتی که مصنوعی به نظرتان آمده، با همان جمله‌اش ثبت کنید و یک معادل بومی هم پیشنهاد بدهید. |
 | هر رأی ۵ کردیت دارد. | برای هر رأی ۵ کردیت می‌گیرید. |
 | در صورت بروز مشکل با پشتیبانی تماس بگیرید. | مشکلی پیش آمد؟ به ما بگویید. |
 
-## خطاهای رایج لحن
+## Common tone mistakes
 
-- زمان آیندهٔ رسمی «خواهد شد / خواهد کرد» در لحن نیمه‌رسمی، دوستانه یا محاوره‌ای. این صیغه فقط در متن رسمی/حقوقی/اطلاعیه طبیعی است. در بقیهٔ لحن‌ها فعل حال یا آیندهٔ ساده بنویس: «خواهد شد» → «می‌شود»، «ارسال خواهد شد» → «فرستاده می‌شود» یا «می‌فرستیم».
-- «ثبت گردید»، «مبادرت ورزید»، «حاصل می‌گردد»: اداری‌نویسی، نه رسمی‌نویسی. حتی در لحن رسمی «ثبت شد» بنویس.
-- رسمی ≠ طولانی. لحن رسمی جملهٔ کوتاه دارد، فقط شوخی و شکستگی ندارد.
-- محاوره‌ای ≠ شلخته. نیم‌فاصله و نشانه‌گذاری در محاوره‌ای هم رعایت می‌شود («می‌تونید»، نه «میتونید»).
-- در یک صفحه از رسمی به دوستانه نپر، حتی بین دکمه و پیام خطا.
-- پیش از «و» ویرگول نمی‌آید، در هیچ لحنی.
-- «؛» فقط در لحن رسمی. در بقیهٔ لحن‌ها جمله را با نقطه تمام کن یا با «و» ادامه بده.
+- Formal future tense «خواهد شد / خواهد کرد» in semi-formal, friendly or casual tone. This conjugation is only natural in formal/legal/official text. In every other tone, write the present or simple future instead: «خواهد شد» → «می‌شود», «ارسال خواهد شد» → «فرستاده می‌شود» or «می‌فرستیم».
+- «ثبت گردید», «مبادرت ورزید», «حاصل می‌گردد»: bureaucratic writing, not formal writing. Write «ثبت شد» even in formal tone.
+- Formal ≠ long. Formal tone has short sentences; it just skips jokes and colloquial contractions.
+- Casual ≠ sloppy. ZWNJ and punctuation still apply in casual tone («می‌تونید», not «میتونید»).
+- Don't jump from formal to friendly on the same page, not even between a button and an error message.
+- No comma before «و», in any tone.
+- «؛» only in formal tone. In every other tone, end the sentence with a period or continue with «و».
