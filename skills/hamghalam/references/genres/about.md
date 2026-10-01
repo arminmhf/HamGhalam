@@ -1,20 +1,20 @@
-# ژانر: دربارهٔ ما (about)
+# Genre: about page
 
-## خوانندهٔ فارسی‌زبان چه می‌خواهد
+## What the Persian reader wants
 
-- بداند پشت این کسب‌وکار چه کسانی‌اند، کجا هستند و چه کاری را چطور انجام می‌دهند.
+- Who is behind the business, where they are, and what they do and how.
 
-## ساختار
+## Structure
 
-- با خود کار، جا یا داستان شروع کن، نه با «ما یک … هستیم» (`patterns.md` الف۵).
-- «مأموریت ما»، «ما معتقدیم» و «ارزش‌های ما» قاب انگلیسی‌اند. اگر بریف چنین چیزی دارد، آن را در قالب کاری که می‌کنید بگو.
-- سال تأسیس، شهرها، تعداد مشتری و جزئیات فرایند را فقط از روی بریف بیاور. اگر نیست، جای خالی بگذار.
+- Start with the work, the place or the story, not with «ما یک … هستیم» (`patterns.md` A5).
+- «مأموریت ما»، «ما معتقدیم» and «ارزش‌های ما» are English frames. If the brief has that content, say it as what you do.
+- Founding year, cities, customer counts and process details come from the brief only. Leave placeholders otherwise.
 
-## خطاهایی که در خروجی مدل دیده شده
+## Mistakes seen in model output
 
 - «ما یک برشته‌کاری کوچک در شیراز هستیم.»
-- جزئیات ساختگی: نام شهرهایی که مشتری در آن‌ها هست، «تاریخ برشته‌کاری را روی بسته می‌نویسیم» بدون این‌که در بریف باشد.
+- Invented details: cities where customers live, «تاریخ برشته‌کاری را روی بسته می‌نویسیم», when the brief said neither.
 
-## نمونه‌های کپی‌رایتر ✍️
+## Copywriter examples ✍️
 
-(در انتظار)
+(pending)

@@ -1,16 +1,16 @@
-# ژانر: ایمیل (email)
+# Genre: email
 
-## ساختار
+## Structure
 
-- **موضوع:** کوتاه و مشخص. بگوید ایمیل دربارهٔ چیست.
-- **شروع:** «سلام» یا «سلام [نام]»، بسته به لحن.
-- **بدنه:** اول اطلاعاتی که خواننده برایش ایمیل را باز کرده (حسابش ساخته شد، سفارشش ثبت شد)، بعد قدم بعدی.
-- **پایان:** نام تیم. «ما هستیم» و «ما اینجا هستیم تا کمک کنیم» کالک‌اند (`patterns.md` پ۲ و پ۴). راه تماس مشخص را بگو.
+- **Subject:** short and specific; it says what the email is about.
+- **Opening:** «سلام» or «سلام [نام]», depending on tone.
+- **Body:** first the information the reader opened it for (account created, order placed), then the next step.
+- **Closing:** the team's name. «ما هستیم» and «ما اینجا هستیم تا کمک کنیم» are calques (`patterns.md` C2, C4). Give a concrete way to get in touch.
 
-## خطاهایی که در خروجی مدل دیده شده
+## Mistakes seen in model output
 
 - «اگر جایی گیر کردید، ما هستیم.»
 
-## نمونه‌های کپی‌رایتر ✍️
+## Copywriter examples ✍️
 
-(در انتظار)
+(pending)

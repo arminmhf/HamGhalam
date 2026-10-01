@@ -1,15 +1,15 @@
-# ژانر: رابط کاربری (ui)
+# Genre: user interface
 
-دکمه، برچسب، placeholder، حالت خالی، toast، پیام خطا و پیام تأیید.
+Buttons, labels, placeholders, empty states, toasts, error and confirmation messages.
 
-## قاعده‌ها
+## Rules
 
-- قاب‌ها در بخش «رابط کاربری» `frames.md` هستند.
-- لحن را از بقیهٔ رشته‌های فارسی پروژه بگیر. در یک صفحه بین «شما» و «تو» یا بین فعل کامل و شکسته رفت‌وآمد نکن.
-- **پیام خطا:** بگوید چه شد و حالا چه باید کرد. «مشکلی پیش آمد» به‌تنهایی کافی نیست، اگر علت معلوم است.
-- **پیام تأیید:** کوتاه و با فعل گذشته («ذخیره شد»، «سفارشتان ثبت شد»).
-- **دکمه:** مصدر یا اسم («ثبت‌نام»، «ورود»). جملهٔ امری کامل فقط وقتی دکمه بیش از یک کار را می‌رساند.
+- Frames are in the UI section of `frames.md`.
+- Take the tone from the project's other Persian strings. Don't mix «شما» and «تو», or full and colloquial verbs, on one screen.
+- **Error message:** what happened and what to do now. «مشکلی پیش آمد» alone isn't enough when the cause is known.
+- **Confirmation:** short, past tense («ذخیره شد»، «سفارشتان ثبت شد»).
+- **Button:** an infinitive or a noun («ثبت‌نام»، «ورود»). A full imperative only when the button carries more than one action.
 
-## نمونه‌های کپی‌رایتر ✍️
+## Copywriter examples ✍️
 
-(در انتظار)
+(pending)

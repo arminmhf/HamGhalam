@@ -9,6 +9,7 @@ Usage:
     python3 scripts/lint.py --tone formal FILE   # tone-dependent rules adjust
 
 Exit code is always 0; the report is for a human/model to judge, not a gate.
+Messages are in English; the Persian phrases they point at stay Persian.
 Checks are heuristics. Every hit needs eyes; nothing here is auto-fixable.
 
 Severity:
@@ -26,7 +27,9 @@ import re
 import sys
 
 HERE = os.path.dirname(os.path.abspath(__file__))
-TERMS = os.path.join(HERE, "..", "references", "terms.md")
+TERMS_CORE = os.path.join(HERE, "..", "references", "terms.md")
+TERMS_DIR = os.path.join(HERE, "..", "references", "terms")
+SOURCES = {"🔵": "team-edited", "🟢": "community", "✍️": "copywriter"}
 
 PERSIAN = "؀-ۿ‌"
 PW = f"[{PERSIAN}]"
@@ -38,88 +41,88 @@ SENT = r"(?:^|[.!؟?»:]\s*|\n)"  # sentence start
 MECH = [
     # ---- mechanical ----
     ("arabic_yeh_kaf", "E", True, re.compile(r"[يك]"),
-     "حرف عربی «ي/ك»؛ «ی/ک» بنویس."),
+     "Arabic «ي/ك»; use Persian «ی/ک»."),
     ("mi_space", "E", True, re.compile(rf"{NB}ن?می (?={PW})"),
-     "«می» با فاصلهٔ کامل؛ نیم‌فاصله بگذار (می‌شود)."),
+     "«می» with a full space; use a ZWNJ (می‌شود)."),
     ("mi_joined", "W", True, re.compile(rf"{NB}ن?می(?:شو|کن|تون|توان|ده|گیر|باش|رو|بین|خوا|یاب|رس|ساز|فرست)"),
-     "«می» چسبیده (میشود)؛ نیم‌فاصله بگذار."),
+     "«می» fused to the verb (میشود); use a ZWNJ."),
     ("ha_space", "W", False, re.compile(rf"{PW}+ ها(?:ی|یی)?{NA}"),
-     "جمع «ها» با فاصلهٔ کامل؛ احتمالاً نیم‌فاصله می‌خواهد (کتاب‌ها)."),
+     "Plural «ها» with a full space; probably needs a ZWNJ (کتاب‌ها)."),
     ("latin_punct", "W", False, re.compile(rf"{PW}\s*[,;?]"),
-     "نشانه‌گذاری انگلیسی بعد از واژهٔ فارسی؛ «،» «؛» «؟»."),
+     "Latin punctuation after a Persian word; use «،» «؛» «؟»."),
     ("straight_quotes", "W", False, re.compile(rf"(?<![=:(,\[{{])(?<![=:(,\[{{] )\"{PW}[^\"\n]{{1,80}}\""),
-     "گیومهٔ انگلیسی دور متن فارسی؛ «…» بنویس."),
+     "Straight English quotes around Persian text; use «…»."),
     ("latin_digits", "W", False, re.compile(rf"(?<![A-Za-z0-9_./:=\"'-])(?<![:=] )[0-9]+(?![A-Za-z0-9_./:-])(?=[^\n]*{PW})"),
-     "عدد لاتین در متن فارسی؛ رقم فارسی بنویس (مگر کد/شناسه)."),
+     "Latin digits in Persian prose; use Persian digits (unless code/ID)."),
     ("slash_247", "E", True, re.compile(r"(?:۲۴|24)\s*/\s*(?:۷|7)"),
-     "«۲۴/۷» کالک است؛ «شبانه‌روزی» بنویس."),
+     "«۲۴/۷» is a calque of 24/7; write «شبانه‌روزی» (patterns C2)."),
 
     # ---- sentence architecture ----
     ("tavassot", "E", True, re.compile(rf"{NB}توسط {PW}"),
-     "مجهول با «توسط»؛ جمله را معلوم کن."),
+     "Passive with «توسط»; make the sentence active (patterns B5)."),
     ("nominal", "W", True, re.compile(r"(اقدام به|انجام (?:دادن|شود|دهید)|مورد \S+ قرار|قابلیت \S+سازی|امکان‌پذیر می‌سازد)"),
-     "اسم‌سازی؛ فعل ساده بنویس."),
+     "Nominalization; use a plain verb (patterns B6)."),
     ("allows_you", "E", True, re.compile(r"(به شما (?:اجازه|امکان) می‌دهد|می‌تواند به شما کمک کند|کمک می‌کند تا)"),
-     "کالک allows you to / helps you."),
+     "Calque of \"allows you to\" / \"helps you\" (patterns B7)."),
     ("not_only", "E", True, re.compile(r"نه[ ‌]تنها .{2,60}بلکه"),
-     "کالک not only … but also."),
+     "Calque of \"not only … but also\" (patterns B9)."),
     ("not_just", "E", True, re.compile(r"فقط یک [^.،؛\n]{1,40} نیست"),
-     "کالک «It's not just X, it's Y»؛ مستقیم بگو چیست."),
+     "Calque of \"it's not just X, it's Y\"; say what it is (patterns B9)."),
     ("lets", "E", True, re.compile(rf"{NB}بیایید{NA}"),
-     "«بیایید…» کالک Let's است."),
+     "«بیایید…» is a calque of \"Let's\" (patterns C2)."),
     ("cleft", "W", True, re.compile(r"این (?:شما|ما|او|آن‌ها|شمایید) (?:هستید|هستیم|است|هستند) که"),
-     "جملهٔ برجسته‌ساز «این … است که» (It's you who …)؛ ساده بگو."),
+     "Cleft «این … است که» (\"It's you who …\"); say it plainly (patterns B10)."),
     ("this_is_where", "E", True, re.compile(r"(?:اینجا|این‌جا)ست که"),
-     "«اینجاست که … » کالک This is where … comes in."),
+     "Calque of \"This is where … comes in\" (patterns B12)."),
     ("this_means", "W", True, re.compile(rf"{SENT}این یعنی"),
-     "شروع جمله با «این یعنی» (This means)؛ نتیجه را در خود جمله بگو."),
+     "Sentence opening with «این یعنی» (\"This means\"); put the result in the sentence itself (patterns B12)."),
     ("indef_yek", "W", True, re.compile(rf"{NB}یک {PW}+(?: {PW}+)? (?:است|هستیم|هستید|هستند){NA}"),
-     "«یک» نکرهٔ انگلیسی‌وار (a/an)؛ معمولاً «…ی است» طبیعی‌تر است (دستیار هوشمندی است)."),
+     "English-style indefinite «یک» (a/an); «…ی است» is usually more natural (دستیار هوشمندی است) (patterns B4)."),
     ("we_are_a", "W", True, re.compile(rf"{SENT}ما یک [^.\n]{{1,50}} هستیم"),
-     "«ما یک … هستیم» (We are a …)؛ معرفی را با خود کار شروع کن."),
+     "«ما یک … هستیم» (\"We are a …\"); open with the work itself (patterns A5)."),
     ("with_using", "W", True, re.compile(rf"{SENT}با استفاده از"),
-     "شروع جمله با «با استفاده از» (Using …)؛ معمولاً «با X» کافی است."),
+     "Sentence opening with «با استفاده از» (\"Using …\"); «با X» is usually enough (patterns B13)."),
     ("discourse_marker", "W", True, re.compile(rf"{SENT}(همچنین|علاوه بر این|به عبارت دیگر|در نتیجه|در واقع)،"),
-     "قید ربطی انگلیسی‌وار در ابتدای جمله (Moreover/Additionally)؛ جمله را به قبلی بدوز یا قید را بردار."),
+     "English-style discourse marker opening the sentence (Moreover/Additionally); join it to the previous sentence or drop the marker (patterns B11)."),
     ("intensifier", "W", False, re.compile(r"(واقعاً|به‌سادگی|به سادگی|به‌راحتی|به راحتی|به‌طور یکپارچه|به طور یکپارچه|به‌طور کامل|به طور کامل|به‌طور مؤثر|بی‌نظیر|در واقع)"),
-     "قید تأکیدی ترجمه‌ای؛ احتمالاً حذف‌شدنی."),
+     "Translated intensifier; probably droppable (patterns C1)."),
     ("comma_before_va", "W", True, re.compile(r"[،,]\s*(?:و|یا)\s"),
-     "ویرگول پیش از «و»/«یا»؛ در فهرست کالک Oxford comma است."),
+     "Comma before «و»/«یا»; in a list it's the Oxford comma calque (mechanics 7)."),
     ("imperative_comma_reason", "W", False, re.compile(rf"{NB}(?:کنید|ببینید|بروید|بزنید|بگیرید|کن|ببین|برو|بزن)، \S+"),
-     "دستور + توضیح با ویرگول؛ شاید نتیجه را مستقیم گفتن طبیعی‌تر باشد."),
+     "Imperative + comma-attached reason; stating the result directly may read more naturally."),
     ("parenthetical_adverb", "W", True, re.compile(r"، (?:حتی|مثلاً|البته|گاهی|همیشه|هر روز|هر شب|نصف‌شب|نیمه‌شب|شب و روز|در صورت نیاز|به‌سرعت)[^،|«\n]{0,25}، "),
-     "قید معترضه بین دو ویرگول؛ اول جمله یا کنار فعل بگذار."),
+     "Adverb wedged between two commas; put it at the start or next to the verb (patterns B16)."),
     ("you_just", "E", True, re.compile(r"(?:^|[.!؟?>]\s*|\sو\s)شما فقط \S+"),
-     "ضربهٔ پایانی «شما فقط …» (You just …)."),
+     "Closing \"you just …\" punchline (patterns A2)."),
     ("punchline_only", "W", True, re.compile(r"(?:سهم|کار) شما فقط"),
-     "ضربهٔ پایانی با واژه‌های دیگر؛ خودِ ترفند انگلیسی است، نه واژه‌اش."),
+     "The same closing punchline in other words; the device itself is English, not the wording (patterns A2)."),
     ("tricolon", "W", True, re.compile(r"(?:می‌\S+|\S+د)، [^،.\n]{3,60}(?:می‌\S+|\S+د) و [^.\n]{3,80}(?:می‌\S+|\S+د)\."),
-     "سه بند فعلی موازی بی‌فاعل؛ ریتم سه‌تایی تبلیغات انگلیسی."),
+     "Three parallel subjectless verb clauses; English ad-copy tricolon (patterns A3)."),
     ("semicolon", "W", False, re.compile(r"؛"),
-     "«؛» در متن وب کم‌کاربرد است؛ اگر هر پاراگراف یکی دارد، ماشینی به نظر می‌رسد."),
+     "«؛» is rare in web copy; one in every paragraph reads as machine-written (mechanics 6)."),
     ("em_dash", "W", True, re.compile(r"—"),
-     "خط تیرهٔ معترضه؛ با ویرگول یا «که» بگو."),
+     "Em dash as a parenthetical; use a comma or «که» (patterns B15)."),
     ("colon_list", "W", True, re.compile(rf":\s*{PW}[^.\n]*،[^.\n]*(?:،| و ){PW}"),
-     "دونقطه + فهرست؛ جملهٔ کامل بنویس."),
+     "Colon + list; write a full sentence (patterns B3)."),
     ("dar_hal_hastid", "W", True, re.compile(r"در حال \S+ هستید"),
-     "«در حال … هستید»؛ جملهٔ ساده بنویس."),
+     "\"You are currently …ing\" calque; use a plain sentence (patterns B17)."),
     ("rhetorical_q", "W", True, re.compile(r"(آیا تا به حال|آماده‌اید\?|آماده‌اید؟|تصور کنید)"),
-     "سؤال بلاغی / مقدمه‌چینی."),
+     "Rhetorical or throat-clearing question (patterns A6)."),
     ("pronoun_khod", "W", True, re.compile(r"\bشما می‌توانید .{0,40}خود "),
-     "«شما … خود»؛ ضمیر اضافی."),
+     "«شما … خود»; redundant pronoun (patterns B8)."),
     ("bare_cta", "W", False, re.compile(r"^(?:\s*)(شروع کنید|بیشتر بدانید|اکنون \S+ کنید)(?:\s*)$"),
-     "فراخوان امری کالک دکمهٔ انگلیسی."),
+     "Imperative CTA copied from an English button; check frames.md."),
     ("essay_opener", "E", True, re.compile(r"(در دنیای امروز|در عصر دیجیتال|در این (?:مقاله|متن|پست) به بررسی)"),
-     "افتتاحیهٔ مقاله‌ای کلیشه‌ای؛ مستقیم از ادعا شروع کن."),
+     "Clichéd essay-style opening; start with the claim (patterns A4)."),
     ("cliche_heading", "W", True, re.compile(r"^\s*(?:#+\s*)?(چرا باید \S+ را انتخاب کنید|مزایای استفاده از \S+)[؟?]?\s*$"),
-     "تیتر ترجمه‌ای تبلیغاتی/آموزشی."),
+     "Translated marketing/how-to heading; check frames.md (patterns A1)."),
     ("formal_future", "W", False, re.compile(r"\S+ خواهد (?:شد|کرد|گرفت|بود)"),
-     "زمان آیندهٔ «خواهد …»؛ در لحن غیررسمی فعل حال بنویس."),
+     "Formal future «خواهد …»; outside formal tone use the present (tones.md)."),
 ]
 
 # fixed calques: (phrase, fix, severity)
 CALQUES = [
-    ("خوش برگشتید", "خوش آمدید / حذف", "E"),
+    ("خوش برگشتید", "خوش آمدید / drop it", "E"),
     ("چیزی اشتباه پیش رفت", "مشکلی پیش آمد", "E"),
     ("ما اینجا هستیم تا کمک کنیم", "اگر مشکلی بود، به ما بگویید", "E"),
     ("موفقیت!", "انجام شد", "E"),
@@ -127,31 +130,31 @@ CALQUES = [
     ("به جامعهٔ ما بپیوندید", "عضو … شوید", "E"),
     ("در پایان روز", "در نهایت / آخرش", "E"),
     ("قدرت‌گرفته از", "بر پایهٔ / با فناوری", "E"),
-    ("سفر شما", "حذف؛ مستقیم بگو", "E"),
-    ("تجربهٔ کاربری بی‌نظیر", "حذف", "E"),
+    ("سفر شما", "drop it; say it directly", "E"),
+    ("تجربهٔ کاربری بی‌نظیر", "drop it", "E"),
     ("هرگونه سؤال", "سؤالی", "E"),
-    ("به نظر می‌رسد که", "حذف", "E"),
+    ("به نظر می‌رسد که", "drop it", "E"),
     ("بدون هیچ‌گونه", "بدون", "E"),
     ("به سیستم وارد شوید", "وارد شوید", "E"),
-    ("ما معتقدیم که", "حذف؛ مستقیم ادعا را بگو", "E"),
-    ("ما باور داریم که", "حذف؛ مستقیم ادعا را بگو", "E"),
+    ("ما معتقدیم که", "drop it; state the claim", "E"),
+    ("ما باور داریم که", "drop it; state the claim", "E"),
     # collocation calques
     ("معنی می‌دهد", "منطقی است / به کار می‌آید", "E"),
     ("معنا می‌دهد", "منطقی است / به کار می‌آید", "E"),
-    ("تفاوت ایجاد کنید", "(کالک make a difference) نتیجهٔ مشخص را بگو", "E"),
-    ("زمانتان را ذخیره", "(کالک save time) وقتتان کمتر هدر می‌رود", "E"),
-    ("زمان شما را ذخیره", "(کالک save time) وقتتان کمتر هدر می‌رود", "E"),
-    ("به سطح بعدی", "(کالک next level) نتیجهٔ مشخص را بگو", "E"),
-    ("در قلب", "(کالک at the heart of) اگر معنای استعاری دارد، حذف کن", "W"),
+    ("تفاوت ایجاد کنید", "say the concrete result (make a difference)", "E"),
+    ("زمانتان را ذخیره", "وقتتان کمتر هدر می‌رود (save time)", "E"),
+    ("زمان شما را ذخیره", "وقتتان کمتر هدر می‌رود (save time)", "E"),
+    ("به سطح بعدی", "say the concrete result (next level)", "E"),
+    ("در قلب", "drop it if figurative (at the heart of)", "W"),
     ("ذهنی آسوده", "با خیال راحت", "E"),
     ("ذهن آسوده", "با خیال راحت", "E"),
     ("مطمئن شوید که", "حتماً … / دقت کنید که", "W"),
-    ("هیجان‌زده‌ایم", "خوشحالیم / مستقیم خبر را بده", "E"),
-    ("یک کلیک و", "(کالک One click and) با یک کلیک …", "E"),
-    ("ما هستیم.", "(کالک we're here) به پشتیبانی بگویید", "W"),
-    ("راه‌حل‌های", "(کالک solutions) بگو دقیقاً چه کاری می‌کند", "W"),
-    ("قدرتمند", "(کالک powerful) بگو دقیقاً چه کاری می‌کند", "W"),
-    ("را تجربه کنید", "(کالک experience X) فعل مشخص بیاور", "W"),
+    ("هیجان‌زده‌ایم", "خوشحالیم / just give the news", "E"),
+    ("یک کلیک و", "با یک کلیک … (one click and)", "E"),
+    ("ما هستیم.", "به پشتیبانی بگویید (we're here)", "W"),
+    ("راه‌حل‌های", "say exactly what it does (solutions)", "W"),
+    ("قدرتمند", "say exactly what it does (powerful)", "W"),
+    ("را تجربه کنید", "use a concrete verb (experience X)", "W"),
 ]
 
 # document-level heuristics: they look at the whole text, not per line
@@ -171,20 +174,20 @@ def lint_document_level(text, fname="-"):
     emoji_bullets = len(EMOJI_BULLET.findall(text))
     if emoji_bullets >= 3:
         hits.append(dict(file=fname, line=0, sev="D", rule="emoji_bullets", hook=True,
-                         match=f"{emoji_bullets} خط با ایموجی ابتدای بولت",
-                         msg="ایموجی تزئینی قبل از بولت؛ فارسی با «-»/«•» یا بدون نشانه می‌نویسد."))
+                         match=f"{emoji_bullets} lines with a leading emoji bullet",
+                         msg="Decorative emoji before each bullet; Persian uses «-»/«•» or no marker (patterns A9)."))
 
     bold_spans = len(BOLD_SPAN.findall(text))
     if bold_spans >= 5 and len(lines) <= 40:
         hits.append(dict(file=fname, line=0, sev="D", rule="bold_overuse", hook=True,
-                         match=f"{bold_spans} عبارت بولدشده",
-                         msg="بولدکردن بیش‌ازحد عبارات؛ خواننده را از خط جمله پرت می‌کند."))
+                         match=f"{bold_spans} bolded spans",
+                         msg="Too much bold; it pulls the reader off the sentence (patterns A9)."))
 
     closing = CLICHE_CLOSING.search(text)
     if closing and len(lines) <= 15:
         hits.append(dict(file=fname, line=0, sev="D", rule="cliche_closing", hook=True,
                          match=closing.group(0).strip(),
-                         msg="جمع‌بندی کلیشه‌ای در متن کوتاه؛ احتمالاً لازم نیست."))
+                         msg="Clichéd closing heading on a short text; probably unnecessary (patterns A9)."))
 
     # staccato: a paragraph of 3+ short sentences in a row (the user's main complaint)
     for ln, para in enumerate(text.split("\n\n")):
@@ -198,7 +201,7 @@ def lint_document_level(text, fname="-"):
             if run >= 3:
                 hits.append(dict(file=fname, line=0, sev="D", rule="staccato", hook=True,
                                  match=para.strip()[:80] + "…",
-                                 msg="سه جملهٔ کوتاه پشت هم؛ ریتم بریدهٔ انگلیسی. جمله‌ها را به هم بدوز و توضیح بده."))
+                                 msg="Three short sentences in a row: clipped English rhythm. Stitch them together and explain (patterns B1)."))
                 break
     return hits
 
@@ -208,24 +211,32 @@ SKILL_ROOT = os.path.abspath(os.path.join(HERE, ".."))
 
 
 def load_corpus():
-    """Rows of references/terms.md: | literal | write | source |.
-    Rows whose fix says «درست است» are "leave alone" notes and are skipped."""
+    """Rows from references/terms.md and every file under references/terms/:
+    | literal | write | source |. Rows whose fix says "correct, don't change"
+    (or the older «درست است») are leave-alone notes and are skipped.
+    The linter always reads every domain file, at no token cost, so a wrong
+    domain guess while writing still gets caught here."""
     rows = []
-    try:
-        lines = open(TERMS, encoding="utf-8").read().splitlines()
-    except Exception:
-        return rows
-    for line in lines:
-        cells = [c.strip() for c in line.strip().strip("|").split("|")]
-        if len(cells) != 3 or cells[2] not in ("🔵", "🟢", "✍️") or "درست است" in cells[1]:
+    paths = [TERMS_CORE]
+    if os.path.isdir(TERMS_DIR):
+        paths += sorted(os.path.join(TERMS_DIR, fn) for fn in os.listdir(TERMS_DIR) if fn.endswith(".md"))
+    for path in paths:
+        try:
+            lines = open(path, encoding="utf-8").read().splitlines()
+        except Exception:
             continue
-        for phrase in cells[0].split(" / "):
-            phrase = re.sub(r"\s*\([^)]*\)", "", phrase)
-            phrase = re.sub(r"(?:\s|^)(?:X|…)\.?(?=\s|$)", " ", phrase).strip(" .؟?")
-            # single words are meaning-dependent: too noisy for a linter
-            if " " in norm(phrase):
-                rows.append(dict(phrase=phrase, equivalent=cells[1],
-                                 source={"🔵": "ویراستاری", "🟢": "جامعه", "✍️": "کپی‌رایتر"}[cells[2]]))
+        for line in lines:
+            cells = [c.strip() for c in line.strip().strip("|").split("|")]
+            if len(cells) != 3 or cells[2] not in SOURCES:
+                continue
+            if "correct, don't change" in cells[1] or "درست است" in cells[1]:
+                continue
+            for phrase in cells[0].split(" / "):
+                phrase = re.sub(r"\s*\([^)]*\)", "", phrase)
+                phrase = re.sub(r"(?:\s|^)(?:X|…)\.?(?=\s|$)", " ", phrase).strip(" .؟?")
+                # single words (خوراک، اشاره، برچسب…) depend on meaning: too noisy for a linter
+                if " " in norm(phrase):
+                    rows.append(dict(phrase=phrase, equivalent=cells[1], source=SOURCES[cells[2]]))
     return rows
 
 
@@ -249,12 +260,12 @@ def lint_text(text, corpus, fname="-", line_offset=0):
         for calque, fix, sev in CALQUES:
             if norm(calque) in nline:
                 hits.append(dict(file=fname, line=ln, sev=sev, rule="calque", hook=True,
-                                 match=calque, msg=f"کالک؛ بنویس: {fix}."))
+                                 match=calque, msg=f"Calque; write: {fix} (patterns C2/C4)."))
         for e in corpus:
             if norm(e["phrase"]) in nline:
                 hits.append(dict(file=fname, line=ln, sev="W", rule="terms", hook=False,
                                  match=e["phrase"],
-                                 msg=f"terms.md ({e['source']}): → «{e['equivalent']}». اگر در این جمله معنای دیگری دارد، رد کن."))
+                                 msg=f"glossary ({e['source']}): → «{e['equivalent']}». If it means something else in this sentence, ignore it."))
     return hits
 
 
@@ -272,7 +283,7 @@ def main():
     ap.add_argument("--json", action="store_true")
     ap.add_argument("--no-terms", action="store_true")
     ap.add_argument("--tone", choices=["formal", "semi_formal", "friendly", "casual"], default=None,
-                    help="لحن متن؛ با formal هشدار «؛» و «خواهد» خاموش می‌شود")
+                    help="tone of the text; formal silences the «؛» and «خواهد» warnings")
     a = ap.parse_args()
     corpus = [] if a.no_terms else load_corpus()
     all_hits = []
@@ -282,7 +293,7 @@ def main():
 
     for p in a.paths:
         if p != "-" and os.path.abspath(p).startswith(SKILL_ROOT):
-            print(f"# {p}: داخل خود اسکیل است؛ مثال‌های ❌ و جدول‌های کالک عمداً ایراد دارند. رد شد.", file=sys.stderr)
+            print(f"# {p}: inside the skill itself; its ❌ examples and calque tables are deliberately wrong. Skipped.", file=sys.stderr)
             continue
         if p == "-":
             all_hits += run(sys.stdin.read(), "-")
@@ -306,11 +317,11 @@ def main():
         print(json.dumps(all_hits, ensure_ascii=False, indent=1))
         return
     if not all_hits:
-        print("hamghalam lint: چیزی پیدا نشد.")
+        print("hamghalam lint: nothing found.")
         return
     order = {"E": 0, "W": 1, "D": 2}
     all_hits.sort(key=lambda h: (order[h["sev"]], h["file"], h["line"]))
-    label = {"E": "❌ تقریباً همیشه ایراد", "W": "⚠️ بررسی کن", "D": "📄 نشانهٔ ساختاری سند"}
+    label = {"E": "❌ almost always wrong", "W": "⚠️ check it", "D": "📄 document-level tell"}
     cur = None
     for h in all_hits:
         if h["sev"] != cur:
@@ -321,7 +332,7 @@ def main():
     e = sum(1 for h in all_hits if h["sev"] == "E")
     w = sum(1 for h in all_hits if h["sev"] == "W")
     d = sum(1 for h in all_hits if h["sev"] == "D")
-    print(f"\n— {e} ایراد، {w} مورد بررسی، {d} نشانهٔ ساختاری سند. هیچ‌کدام خودکار اصلاح نمی‌شود.")
+    print(f"\n— {e} errors, {w} to check, {d} document-level. Nothing is auto-fixed.")
 
 
 if __name__ == "__main__":

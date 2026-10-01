@@ -95,13 +95,13 @@ def main():
         for h in hits[:MAX_HITS]:
             loc = path if h["line"] == 0 else f"{path}:{h['line']}"
             rows.append(f"- {loc} [{h['rule']}] «{h['match']}»: {h['msg']}")
-        more = f"\n(و {len(hits) - MAX_HITS} مورد دیگر؛ لینتر را روی فایل اجرا کن.)" if len(hits) > MAX_HITS else ""
-        parts.append("hamghalam: در متن فارسی‌ای که همین حالا نوشتی این نشانه‌ها پیدا شد:\n"
+        more = f"\n(and {len(hits) - MAX_HITS} more; run lint.py on the file.)" if len(hits) > MAX_HITS else ""
+        parts.append("hamghalam: the Persian text you just wrote has these translation tells:\n"
                      + "\n".join(rows) + more
-                     + "\nهر مورد را بسنج. اگر عمدی است (مثال عمداً نادرست، نقل‌قول، متن کاربر) رد شو، وگرنه همین حالا اصلاحش کن.")
+                     + "\nJudge each one. If it's deliberate (an intentionally wrong example, a quote, user-written text), leave it; otherwise fix it now.")
     if words >= REMIND_AT_WORDS and not skill_loaded(data.get("transcript_path", "")) and remind_once(data.get("session_id")):
-        parts.append("hamghalam: این تسک متن فارسی تولید می‌کند ولی اسکیل هم‌قلم در این جلسه بارگذاری نشده است. "
-                     "پیش از نوشتن یا اصلاح متن فارسی بیشتر، اسکیل hamghalam را با ابزار Skill فراخوانی کن و طبق آن بنویس.")
+        parts.append("hamghalam: this task is producing Persian copy, but the hamghalam skill hasn't been loaded in this session. "
+                     "Before writing or fixing more Persian text, invoke the hamghalam skill with the Skill tool and follow it.")
     if not parts:
         return
     print(json.dumps({"hookSpecificOutput": {"hookEventName": "PostToolUse",

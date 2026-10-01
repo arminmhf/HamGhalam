@@ -1,26 +1,26 @@
-# ژانر: صفحهٔ فرود (landing)
+# Genre: landing page
 
-صفحهٔ اول محصول یا سرویس، شامل تیتر و زیرتیتر و بخش‌های معرفی، و همچنین پرسش‌های متداول.
+The product or service front page: headline, subheadline, the sections that introduce it, and its FAQ.
 
-## خوانندهٔ فارسی‌زبان چه می‌خواهد
+## What the Persian reader wants
 
-- **از زیرتیتر:** بفهمد محصول چیست و به چه کاری می‌آید. زیرتیتر یک جملهٔ کامل است، نه شعار دوم.
-- **از هر بخش:** بفهمد هر کار چطور انجام می‌شود و چه فایده‌ای برایش دارد. ویژگی را توصیف کن، فهرستش نکن.
-- **نشانهٔ اعتماد:** اگر در بریف هست، بیاورش (پشتیبانی، ضمانت، سابقه، تعداد مشتری). اگر نیست، نساز.
+- **From the subheadline:** what the product is and what it's for. The subheadline is one complete sentence, not a second slogan.
+- **From each section:** how each thing works and what it does for them. Describe features; don't list them.
+- **Trust signals:** if the brief has them (support, guarantee, track record, customer count), use them. If not, don't invent any.
 
-## ساختار
+## Structure
 
-- **تیتر:** کوتاه، و می‌تواند بی‌فعل باشد. شعار ترجمه‌ای ننویس (`patterns.md` ب۲).
-- **تیتر بخش‌ها:** از `frames.md`.
-- **بدنه:** جمله‌های کامل و به هم دوخته. هر ویژگی را در جملهٔ خودش با فایده‌اش بگو. بخش با اطلاعات یا قدم بعدی تمام می‌شود، نه با ضربهٔ پایانی.
-- **پرسش متداول:** پاسخ با جواب مستقیم شروع می‌شود («نه.»، «بله،») و بعد توضیح می‌دهد.
+- **Headline:** short, may be verbless. No translated slogan (`patterns.md` B2).
+- **Section headings:** from `frames.md`.
+- **Body:** complete, connected sentences. Each feature in its own sentence, with its benefit. A section ends on information or the reader's next step, not on a punchline.
+- **FAQ answer:** opens with the direct answer («نه.»، «بله،») and then explains.
 
-## خطاهایی که در خروجی مدل دیده شده
+## Mistakes seen in model output
 
-- «شما فقط گزارشش را می‌بینید.» و نسخهٔ عوض‌شده‌اش «سهم شما فقط مرور یک گزارش است.» (`patterns.md` الف۲)
-- «آکسون این کارها را از دوشتان برمی‌دارد: … می‌کند؛ … می‌نویسد؛ و …» (دونقطه و فهرست با «؛»)
-- تیتر بخش پرسشی که قاب انگلیسی را با اصطلاح فارسی می‌پوشاند: «آکسون چه باری از دوشتان برمی‌دارد؟»
+- «شما فقط گزارشش را می‌بینید.» and its reworded version «سهم شما فقط مرور یک گزارش است.» (`patterns.md` A2)
+- «آکسون این کارها را از دوشتان برمی‌دارد: … می‌کند؛ … می‌نویسد؛ و …» (colon + list held together with «؛»)
+- A question heading that dresses the English frame in a Persian idiom: «آکسون چه باری از دوشتان برمی‌دارد؟»
 
-## نمونه‌های کپی‌رایتر ✍️
+## Copywriter examples ✍️
 
-(در انتظار)
+(pending)

@@ -1,15 +1,15 @@
-# قاب‌ها: تیتر بخش‌ها، دکمه‌ها و پیام‌های ثابت
+# Frames: section headings, buttons and fixed messages
 
-سایت‌های انگلیسی بخش‌ها و دکمه‌های ثابتی دارند و مدل همان‌ها را کلمه‌به‌کلمه ترجمه می‌کند. این فایل برای هر قاب انگلیسی معادلی را می‌دهد که در سایت فارسی طبیعی است.
+English sites have a fixed set of sections and buttons, and models translate them word for word. For each English frame, this file gives what a Persian site would naturally write.
 
-- ستون «طبیعی» گزینه‌هایی است که کپی‌رایتر تأیید کرده (✍️). هر کدام را که با لحن و محصول جور است بردار.
-- ستون «ترجمه‌ای» قاب‌هایی است که نباید بنویسی.
-- نام محصول را جای «X» بگذار.
-- ⏳ یعنی سطر هنوز تأیید کپی‌رایتر را ندارد.
+- The «طبیعی» column holds options a copywriter approved (✍️). Pick whichever fits the tone and the product.
+- The «ترجمه‌ای» column holds frames you must not write.
+- Put the product name where «X» is.
+- ⏳ means the row hasn't been approved by the copywriter yet.
 
-## صفحهٔ فرود
+## Landing page
 
-| قاب انگلیسی | طبیعی | ترجمه‌ای |
+| English frame | طبیعی | ترجمه‌ای |
 |---|---|---|
 | What it does for you | ⏳ X چطور به شما کمک می‌کند؟ / امکانات X | X چه کاری برایتان انجام می‌دهد؟ |
 | How it works | ⏳ X چطور کار می‌کند؟ / روش کار | — |
@@ -21,29 +21,29 @@
 | Ready to get started? | ⏳ همین امروز X را امتحان کنید | آماده‌اید شروع کنید؟ |
 | Trusted by 1,000+ businesses | ⏳ بیش از ۱۰۰۰ فروشگاه با X کار می‌کنند | بیش از ۱۰۰۰ کسب‌وکار به ما اعتماد کرده‌اند |
 
-## دربارهٔ ما و تماس
+## About and contact
 
-| قاب انگلیسی | طبیعی | ترجمه‌ای |
+| English frame | طبیعی | ترجمه‌ای |
 |---|---|---|
 | Our story / Our mission | ⏳ داستان ما / چرا X را ساختیم | — |
-| We are a … | (با خود کار شروع کن) | ما یک … هستیم |
+| We are a … | (start with the work itself) | ما یک … هستیم |
 | Contact us / Get in touch | ⏳ تماس با ما / ارتباط با ما | — |
 | Subscribe to our newsletter | ⏳ عضویت در خبرنامه | — |
 
-## رابط کاربری
+## User interface
 
-| قاب انگلیسی | طبیعی | ترجمه‌ای |
+| English frame | طبیعی | ترجمه‌ای |
 |---|---|---|
-| Get started (دکمهٔ اصلی) | ⏳ شروع / ثبت‌نام رایگان | — |
+| Get started (main button) | ⏳ شروع / ثبت‌نام رایگان | — |
 | Learn more | ⏳ اطلاعات بیشتر / بیشتر بخوانید | — |
 | Sign up / Log in / Log out | ثبت‌نام / ورود / خروج | ورود به سیستم / خروج از سیستم |
-| Submit (فرم) | ثبت / تأیید / ارسال (فقط برای پیام) | — |
+| Submit (form) | ثبت / تأیید / ارسال (only for messages) | — |
 | Your cart is empty | سبد خرید خالی است | سبد خرید شما خالی است |
 | No orders yet | ⏳ هنوز سفارشی ثبت نکرده‌اید. | چیزی برای نمایش وجود ندارد |
 | Something went wrong | مشکلی پیش آمد | چیزی اشتباه پیش رفت |
 | Page not found (404) | ⏳ صفحه پیدا نشد | — |
 | Saved / Success | ذخیره شد / انجام شد / با موفقیت ثبت شد | موفقیت! |
-| Welcome back! | خوش آمدید / (حذف) | خوش برگشتید! |
+| Welcome back! | خوش آمدید / (drop it) | خوش برگشتید! |
 | Loading… | در حال بارگذاری… | — |
 | This field is required | این فیلد را پر کنید / الزامی | فیلد اجباری است |
 | Check your inbox, the link is there | ⏳ لینک تأیید به ایمیلتان فرستاده شد. | — |

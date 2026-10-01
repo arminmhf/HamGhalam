@@ -1,14 +1,14 @@
-# ژانر: شبکهٔ اجتماعی (social)
+# Genre: social media
 
-کپشن اینستاگرام، پست کوتاه و استوری.
+Instagram captions, short posts, stories.
 
-## قاعده‌ها
+## Rules
 
-- لحن معمولاً محاوره‌ای است. شکسته‌نویسی هم نیم‌فاصله و نشانه‌گذاری درست دارد («می‌خونم»).
-- خبر اصلی (تخفیف، مهلت، کار تازه) در خط اول بیاید.
-- هشتگ‌ها در انتها و کم باشند.
-- ایموجی کم و به‌جا، نه یکی قبل از هر خط (`patterns.md` الف۹).
+- Usually casual tone. Colloquial spelling still keeps ZWNJ and punctuation («می‌خونم»).
+- The main news (discount, deadline, new feature) goes in the first line.
+- Hashtags at the end, and few of them.
+- Emoji sparingly and where they mean something, not one per line (`patterns.md` A9).
 
-## نمونه‌های کپی‌رایتر ✍️
+## Copywriter examples ✍️
 
-(در انتظار)
+(pending)

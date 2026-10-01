@@ -3,84 +3,84 @@ name: hamghalam
 description: نوشتن و ویرایش فارسی بومی (نه ترجمه‌ای) برای متن سایت، محصول، پیام خطا، ایمیل و تبلیغ، با لحن انتخابی؛ حتی وقتی این متن فقط یک رشتهٔ کوچک داخل کدی است که برای یک تسک دیگر می‌نویسی (لیبل دکمه، placeholder، پیام خطا در یک کامپوننت). Use whenever writing, rewriting, translating or reviewing Persian (Farsi) copy of any kind — UI strings, landing pages, product descriptions, about pages, error messages, emails, social captions, blog posts, docs — or whenever the user complains that Persian output sounds translated, machine-like, or "English in Persian words". Also applies to incidental Persian strings written inside otherwise non-Persian coding tasks (a button label, a form placeholder, a toast message in a component you're building), and to English briefs that ask for Persian output.
 ---
 
-# هم‌قلم: فارسی‌ای که کپی‌رایتر فارسی‌زبان می‌نویسد
+# Hamghalam: Persian a Persian copywriter would write
 
-متن فارسی مدل‌ها در سه لایه لو می‌دهد که ماشین آن را نوشته است. هر سه لایه از یک جا می‌آیند: مدل اول متن انگلیسی را در ذهن می‌چیند و بعد آن را با واژه‌های فارسی پر می‌کند.
+Persian written by a model gives itself away on three layers. All three come from the same habit: the model lays the text out in English in its head, then fills it with Persian words.
 
-1. **قاب:** بخش‌ها و تیترهای صفحهٔ فرود انگلیسی («چه کاری برایتان انجام می‌دهد»، «چرا باید ما را انتخاب کنید») و ترفندهای تبلیغ انگلیسی، مثل ضربهٔ پایانی، سه‌گانهٔ فعلی و سؤال بلاغی.
-2. **معماری جمله:** جمله‌های کوتاه و بریده پشت هم، تکه‌جملهٔ بی‌فعل، دونقطه و فهرست، «یک» نکره و ضمیرهای اضافه.
-3. **واژه و هم‌آیی:** «به سطح بعدی ببرید»، «معنی می‌دهد»، «بیایید…»، «۲۴/۷».
+1. **Frame.** The section skeleton and headings of an English landing page («چه کاری برایتان انجام می‌دهد»، «چرا باید ما را انتخاب کنید») and English ad-copy devices: the closing punchline, the subjectless tricolon, the rhetorical question.
+2. **Sentence architecture.** Runs of short clipped sentences, verbless fragments in body copy, colon + list, the English indefinite «یک», redundant pronouns.
+3. **Words and collocations.** «به سطح بعدی ببرید»، «معنی می‌دهد»، «بیایید…»، «۲۴/۷».
 
-**آزمون اصلی:** اگر بشود از روی جملهٔ فارسی، جملهٔ انگلیسیِ پشتش را حدس زد، ترجمه‌ای است. اگر بشود از روی چیدمان صفحه، قالب انگلیسی‌اش را حدس زد، آن هم ترجمه‌ای است.
+**The core test:** if you can guess the English sentence behind a Persian sentence, it's translated. If you can guess the English page template behind the layout, that's translated too.
 
-## نثر فارسی چه می‌کند
+## What Persian prose does
 
-این‌ها جهت درست را نشان می‌دهند. فهرست کامل نشانه‌های نادرست در `references/patterns.md` است.
+This is the direction to write toward. The full list of tells is in `references/patterns.md`.
 
-- **توصیف کامل، نه فهرست کوتاه.** فارسی ویژگی را با «چطور» و «به چه دردی می‌خورد» می‌گوید و جمله‌های مرتبط را با «و»، «که»، «تا»، «چون» و «اگر» به هم می‌دوزد. سه جملهٔ پنج‌کلمه‌ای پشت هم ریتم وب انگلیسی است.
-- **جزئیات مشخص، نه ادعای کلی.** «قیمت را هر روز با ترب مقایسه می‌کند» به‌جای «قیمت‌گذاری هوشمند». ولی فقط جزئیاتی که واقعاً داری (قدم ۰).
-- **قاب فارسی برای بخش‌ها و دکمه‌ها.** تیتر بخش، دکمه، حالت خالی و پیام خطا را از `references/frames.md` بردار، نه از ترجمهٔ قالب انگلیسی.
-- **پایان طبیعی.** بخش با آخرین اطلاعات لازم یا قدم بعدی خواننده تمام می‌شود، نه با یک جملهٔ کوتاه ضربه‌ای خطاب به او.
-- **لحن ثابت.** فعل، خطاب و سطح واژه‌ها در کل صفحه یکی می‌ماند (`references/tones.md`).
+- **Full description, not a short list.** Persian says *how* a feature works and *what it's good for*, and stitches related sentences together with «و»، «که»، «تا»، «چون»، «اگر». Three five-word sentences in a row is English web rhythm. Never "fix" a long sentence by chopping it into short ones.
+- **Specific details, not generic claims.** «قیمت را هر روز با ترب مقایسه می‌کند», not «قیمت‌گذاری هوشمند». But only details you actually have (step 0).
+- **Persian frames for sections and buttons.** Take section headings, buttons, empty states and error messages from `references/frames.md`, never from a translated English template.
+- **A natural ending.** A section ends with the last piece of information the reader needs, or their next step. It doesn't end with a short punchy sentence aimed at them.
+- **One tone throughout.** Verb form, address and register stay the same across the page (`references/tones.md`).
 
-## قدم ۰ در هر دو حالت: واقعیت‌ها
+## Step 0, both modes: facts
 
-پیش از نوشتن، واقعیت‌هایی را که در بریف، کد یا متن‌های موجود پروژه هست فهرست کن. **چیزی نساز**: عدد، سال، شهر، ضمانت، تعداد مشتری، نام آدم، جایزه. اگر متن بدون جزئیات مشخص توخالی می‌شود، یا از کاربر بپرس یا جای خالی بگذار (`{{تعداد فروشگاه‌ها}}`) و در گزارش بگو کدام جزئیات لازم است.
+Before writing, list the facts you have from the brief, the code, or the project's existing copy. **Don't invent any:** numbers, years, cities, guarantees, customer counts, people's names, awards. If the text goes hollow without specifics, either ask the user or leave a placeholder (`{{تعداد فروشگاه‌ها}}`), and say in your report which details are needed.
 
-## حالت نوشتن
+## Writing mode
 
-1. **ژانر و لحن.** ژانر یکی از این‌هاست: `landing`، `product`، `about`، `ui`، `email`، `social`، `article`. لحن یکی از رسمی، نیمه‌رسمی، دوستانه و محاوره‌ای است. اگر لحن از خواستهٔ کاربر یا متن‌های موجود پروژه معلوم نیست، بپرس. اگر پاسخی نگرفتی، «نیمه‌رسمی» بگیر و در گزارش بگو.
-2. **خواندن.** این فایل‌ها را بخوان: `references/patterns.md`، `references/frames.md`، `references/genres/<ژانر>.md`، `references/tones.md` و `references/terms.md`. نمونه‌های ✍️ را کپی‌رایتر نوشته و مرجع اصلی‌اند. ریتم، طول جمله و شکل پیوند جمله‌هایشان را الگو بگیر، نه فقط واژه‌هایشان را.
-3. **چیدمان به فارسی.** اگر بریف انگلیسی است، آن را ترجمه نکن. بخش‌ها و تیترها را از روی فایل ژانر و `frames.md` بچین. برای هر بخش در یک خط گفتاری فارسی بگو خواننده باید چه چیزی از آن بفهمد (در ذهن، نه در خروجی). بعد همان را بنویس.
-4. **پیش‌نویس.** جمله‌ها کامل و به هم دوخته باشند. هر ویژگی را با فایده‌اش برای خواننده بگو. طول جمله‌ها یکنواخت نباشد و بخش با ضربهٔ پایانی تمام نشود.
-5. **لینتر.** `python3 ${CLAUDE_SKILL_DIR}/scripts/lint.py <فایل>` را اجرا کن. هر مورد را بسنج، چون گزارش لینتر خودش تصمیم نیست.
-6. **ویراستار مستقل.** اگر متن از دو جمله بلندتر است، آن را به subagent `hamghalam:persian-editor` بده. فقط این‌ها را بفرست: متن فارسی، ژانر، لحن و مسیر پوشهٔ همین اسکیل (`${CLAUDE_SKILL_DIR}`). بریف انگلیسی، فهرست واقعیت‌ها و استدلال خودت را نفرست. ویراستار باید متن را مثل خواننده ببیند، نه مثل نویسنده.
-7. **بازنویسی.** موارد «قطعی» ویراستار را اعمال کن و دربارهٔ موارد «احتمالی» خودت تصمیم بگیر. هر جملهٔ بازنویسی‌شده را دوباره از `patterns.md` رد کن. حداکثر دو دور.
-8. **گزارش کوتاه.** لحن، جزئیاتی که جای خالی گذاشتی و هر فرضی که کردی.
+1. **Genre and tone.** Genre is one of `landing`, `product`, `about`, `ui`, `email`, `social`, `article`. Tone is one of formal, semi-formal, friendly, casual. If the tone isn't clear from the request or the project's existing copy, ask. With no answer, use semi-formal and say so in your report.
+2. **Read.** Read `references/patterns.md`, `references/frames.md`, `references/genres/<genre>.md`, `references/tones.md` and the core `references/terms.md`. Also read the domain glossary under `references/terms/` (`tech.md`, `finance.md`, `retail.md`) that matches the project; if unsure, read every plausible one, since each is small. Examples marked ✍️ were written or approved by a Persian copywriter and are your primary reference. Copy their rhythm, sentence length and how they join clauses, not just their words.
+3. **Lay it out in Persian.** If the brief is in English, don't translate it. Pick sections and headings from the genre file and `frames.md`. For each section, say to yourself in one spoken Persian line what the reader should come away with. Then write that.
+4. **Draft.** Use complete, connected sentences. Give every feature with its benefit to the reader. Vary sentence length, and don't end a section on a punchline.
+5. **Lint.** Run `python3 ${CLAUDE_SKILL_DIR}/scripts/lint.py <file>`. If the text is only going into the chat, pipe it to `python3 ${CLAUDE_SKILL_DIR}/scripts/lint.py -` instead, because the plugin's hook only fires on `Write`/`Edit`. Judge every hit yourself; the report is a prompt, not a verdict.
+6. **Independent editor.** If the text is longer than two sentences, hand it to the subagent `hamghalam:persian-editor`. Send only the Persian text, the genre, the tone, and this skill's directory (`${CLAUDE_SKILL_DIR}`). Do **not** send the English brief, your fact list or your reasoning. The editor has to read the text the way a reader does, not the way its author does.
+7. **Revise.** Apply the editor's «قطعی» items and decide on its «احتمالی» items yourself. Check every rewritten sentence against `patterns.md` again. Two rounds at most.
+8. **Short report.** State the tone, any placeholders you left, and any assumption you made.
 
-## رشته‌های کوچک داخل کد
+## Small strings inside code
 
-وقتی وسط یک تسک کدنویسی لیبل دکمه، placeholder، toast یا پیام خطای فارسی می‌نویسی:
-- قاب را از بخش «رابط کاربری» در `references/frames.md` بردار.
-- لحن را از رشته‌های فارسی موجود همان پروژه بگیر. اگر رشتهٔ دیگری نیست، نیمه‌رسمی بنویس.
-- قواعد ثابت نگارش (پایین) را رعایت کن. hook پلاگین بعد از هر Write/Edit متن تازه را بررسی می‌کند و اگر چیزی پیدا کند، به تو برمی‌گرداند.
-- ویراستار مستقل برای رشته‌های یک‌خطی لازم نیست.
+When you write a Persian button label, placeholder, toast or error message in the middle of a coding task:
+- Take the frame from the UI section of `references/frames.md`.
+- Take the tone from the project's existing Persian strings. If there are none, use semi-formal.
+- Follow the fixed mechanics below. The plugin's hook checks new text after every `Write`/`Edit` and tells you if it finds something.
+- One-line strings don't need the independent editor.
 
-## حالت ویرایش
+## Editing mode
 
-0. اول بگو با کدام نسخهٔ اسکیل کار می‌کنی: `version` در `${CLAUDE_PLUGIN_ROOT}/.claude-plugin/plugin.json`، یا اگر نبود، عنوان `README.md`.
-1. **دامنه را روشن کن.** متن تیم در دامنه است: هدینگ، دکمه، پیام، متا، aria-label و توضیحات. محتوای ثبت‌شدهٔ کاربران، داده، نقل‌قول و نام برند خارج از دامنه است، مگر کاربر چیز دیگری بگوید. متن‌های مشترک کل سایت (هدر، فوتر) را جدا فهرست کن و بپرس.
-2. **سه لایه را جدا ببین.** اول قاب صفحه (تیتر بخش‌ها، ترتیب، ضربه‌های پایانی)، بعد معماری جمله‌ها و بعد واژه‌ها. هر بازنویسی را دوباره از `patterns.md` رد کن. اگر جملهٔ تازه از اولی بهتر نیست، به آن دست نزن و در ⚠️ گزارشش کن. **متن را قضاوت کن، نه نویسنده‌اش:** این‌که متن روی سایت است یا قبلاً بازبینی شده، دلیل درست بودنش نیست.
-3. برای متن‌های بلندتر از دو جمله، نسخهٔ ویرایش‌شده را مثل قدم ۶ حالت نوشتن به `hamghalam:persian-editor` بده.
-4. **خروجی همیشه سه‌سطحی است:**
-   - ✅ **قطعی، اعمال شد:** جدول قبل ← بعد ← کدام الگو.
-   - ⚠️ **احتمالی، اعمال نشد:** جدول متن ← کجا ← تردید ← پیشنهاد. هر جا شک داشتی، این‌جا بیاور. قاعده «در شک، گزارش بده» است، نه «در شک، دست نزن».
-   - ⏭ **خارج از دامنه، بررسی نشد:** فهرست کوتاه، تا کاربر بداند چه چیزی دیده نشده.
-5. مجهول بی‌فاعل در لحن رسمی، وام‌واژهٔ جاافتاده و مثال‌هایی که عمداً ترجمه‌ای‌اند (مثل ستون نادرستِ یک صفحهٔ مقایسه) ایراد نیستند. اگر در نگاه اول شبیه خطا هستند، در ⚠️ بیاور و بگو چرا رد شدند.
-6. **تیتر و کپشن را جدا گزارش کن.** تغییر در تیتر، شعار، کپشن و برچسب پیش‌فرض ⚠️ است، مگر قاب ترجمه‌ای آشکار باشد (`frames.md`). این متن‌ها تبلیغاتی‌اند و کوتاهی‌شان عمدی است.
-7. **تغییر لحن، بازنویسی سراسری نیست.** فقط جمله‌هایی را عوض کن که با لحن مقصد نمی‌خوانند و بنویس دقیقاً چه چیزی عوض شد (فعل، فاصله، خطاب).
-8. **حداکثر دو پاس.** پاس اول روی متن اصلی است و پاس دوم فقط روی جمله‌هایی که خودت نوشتی. پاس سوم فقط ⚠️ تولید می‌کند.
-9. `${CLAUDE_SKILL_DIR}/scripts/lint.py` را روی فایل‌ها اجرا کن. چیزی را commit نکن، مگر کاربر بخواهد.
-10. **گزارش خودت را هم با همین قواعد بنویس.** گزارشی که خودش ترجمه‌زده باشد اعتبار ندارد.
+0. First state which version of the skill you're using: `version` in `${CLAUDE_PLUGIN_ROOT}/.claude-plugin/plugin.json`, or the version in the title of `README.md` if that file isn't there.
+1. **Scope.** The team's own copy is in scope: headings, buttons, messages, meta, aria-labels, descriptions. User-submitted content, data, quotes and brand names are out of scope unless the user says otherwise. List site-wide shared copy (header, footer) separately and ask about it.
+2. **Check the three layers separately.** First the page frame (section headings, order, punchlines), then sentence architecture, then words. Check every rewrite against `patterns.md` again. If the new sentence isn't better than the original, leave the original and report it under ⚠️. **Judge the text, not its author.** Being live on the site, or having been reviewed before, doesn't make a sentence right.
+3. For text longer than two sentences, send the edited version to `hamghalam:persian-editor` as in writing step 6.
+4. **The output is always three-tier:**
+   - ✅ **Definite, applied:** table of before → after → which pattern.
+   - ⚠️ **Possible, not applied:** table of text → location → the doubt → a suggestion. Anything you're unsure about goes here, not into silence. The rule is "when in doubt, report it", not "when in doubt, leave it".
+   - ⏭ **Out of scope, not reviewed:** a short list, so the user knows what wasn't looked at.
+5. These are not errors: a subjectless passive in formal tone, an established loanword, and deliberately translated examples (like the "wrong" column of a comparison page). If one looks like a mistake at first glance, put it under ⚠️ and say why you left it.
+6. **Report headings and captions separately.** A change to a heading, tagline, caption or label defaults to ⚠️, unless it's an obvious translated frame (`frames.md`). These are ad copy, and their shortness is deliberate.
+7. **A tone change is not a full rewrite.** Change only the sentences that don't fit the target tone, and say exactly what changed (verb form, distance, address).
+8. **Two passes at most.** The first pass covers the original text. The second covers only sentences you wrote yourself. A third pass may only produce ⚠️.
+9. Run `${CLAUDE_SKILL_DIR}/scripts/lint.py` on the files. Don't commit anything unless the user asks.
+10. **Your own report follows the same rules.** A report that is itself translated-sounding has no credibility.
 
-## قواعد ثابت نگارش
+## Fixed mechanics
 
-1. **نیم‌فاصله:** «می‌شود»، «نمی‌تواند»، «کتاب‌ها»، «به‌روزرسانی». هرگز «می شود» یا «میشود».
-2. **حروف فارسی، نه عربی:** «ی» و «ک»، نه «ي» و «ك».
-3. **اعداد فارسی** در متن (۱۲۳). عدد لاتین فقط داخل کد، شناسه، نسخه و URL. جداکنندهٔ هزارگان برای اعداد پنج‌رقمی و بیشتر «٬» است (۱۲٬۵۰۰) و اعداد چهاررقمی جداکننده ندارند (۱۴۰۵). «٪» به عدد می‌چسبد. اگر پروژه سبک دیگری دارد، همان مقدم است.
-4. **کسرهٔ اضافه بعد از «ه» ناملفوظ:** پیش‌فرض «ٔ» است (صفحهٔ اصلی). اگر پروژه «صفحه‌ی» می‌نویسد، همان را نگه دار. در یک پروژه فقط یکی.
-5. **نشانه‌گذاری فارسی:** «،»، «؟» و گیومهٔ «…»، نه ویرگول و علامت سؤال انگلیسی یا " ". علامت تعجب فقط در لحن دوستانه و محاوره‌ای و آن هم کم.
-6. **نقطه‌ویرگول «؛»** در متن وب کم‌کاربرد است. اگر تقریباً هر پاراگراف یکی دارد، متن ماشینی به نظر می‌رسد. جای آن را با «و» یا «که» بدوز، نه با شکستن به جمله‌های کوتاه.
-7. **ویرگول پیش از «و» در فهرست** («الف، ب، و پ») کالک Oxford comma است. «الف، ب و پ» بنویس.
-8. **ویرگول بین دو جملهٔ مرتبط** در فارسی رایج و درست است («هوا سرد بود، زود برگشتیم»). این را با comma splice انگلیسی اشتباه نگیر و فقط به این دلیل جمله را دو تا نکن.
-9. **لحن در کل متن ثابت بماند.** در یک صفحه بین «می‌توانید» و «می‌تونید» یا بین «جهت» و «بزنید» رفت‌وآمد نکن.
-10. **فعل را زود بیاور** اگر جمله بلند شد. جملهٔ فارسی با فعلی که سی کلمه دورتر است خوانده نمی‌شود. راه‌حلش شکستن جمله به تکه‌های پنج‌کلمه‌ای نیست، جابه‌جا کردن قیدها و بندهای وابسته است.
+1. **ZWNJ (half-space):** «می‌شود»، «نمی‌تواند»، «کتاب‌ها»، «به‌روزرسانی». Never «می شود» or «میشود».
+2. **Persian letterforms, not Arabic:** «ی» and «ک», not «ي» and «ك».
+3. **Persian digits** in running text (۱۲۳). Latin digits only inside code, IDs, version numbers and URLs. Use «٬» as the thousands separator from five digits up (۱۲٬۵۰۰); four-digit numbers get none (۱۴۰۵). «٪» is attached to the number. The project's existing style wins.
+4. **Ezafe after a silent «ه»:** default to «ٔ» (صفحهٔ اصلی). If the project writes «صفحه‌ی», keep that. One style per project.
+5. **Persian punctuation:** «،»، «؟» and «…» quotes, not the English comma, question mark or " ". Exclamation marks only in friendly and casual tone, and sparingly.
+6. **Semicolon «؛»** is rare in web copy. If nearly every paragraph has one, the text reads as machine-written. Replace it by joining with «و» or «که», not by splitting into short sentences.
+7. **No comma before «و» in a list** («الف، ب، و پ»). That's the Oxford comma calque. Write «الف، ب و پ».
+8. **A comma between two related clauses** is common and correct in Persian («هوا سرد بود، زود برگشتیم»). Don't mistake it for the English comma splice, and don't split a sentence in two only because of it.
+9. **Keep the register consistent.** Don't drift between «می‌توانید» and «می‌تونید», or between «جهت» and «بزنید», on the same page.
+10. **Bring the verb forward** when a sentence runs long. A Persian sentence whose verb is thirty words away doesn't read. The fix is moving adverbs and dependent clauses around, not chopping the sentence into five-word pieces.
 
-## چه چیزی را عوض نکن
+## What not to change
 
-- نام برند و محصول، اصطلاح حقوقی و فنی تثبیت‌شده، متنی که کاربر خودش نوشته و محتوای ثبت‌شدهٔ کاربران.
-- واژه‌ای را که در جملهٔ تو معنای دیگری دارد، فقط چون در `terms.md` آمده عوض نکن. هر سطر واژه‌نامه گزارش یک بافت است، نه قانون سراسری. هرگز جست‌وجو و جایگزینی سراسری نکن.
+- Brand and product names, established legal and technical terms, text the user wrote themselves, and user-submitted content.
+- A word that means something else in your sentence, just because it appears in a glossary file. Every glossary row reports one context, not a universal rule. Never do a global find-and-replace.
 
-## به هم‌قلم کمک کن
+## Help improve Hamghalam
 
-اگر الگوی ترجمه‌زدگی تازه‌ای دیدی که در `patterns.md` نیست، یا اصطلاحی که مدل‌ها مدام غلط برمی‌گردانند، به کاربر پیشنهاد بده در https://barchin.net/hamghalam ثبتش کند. گزارش «این جمله ترجمه‌ای است چون …» از یک جفت‌عبارت ارزش بیشتری دارد.
+If you spot a translation tell that isn't in `patterns.md`, or a term models keep getting wrong, suggest the user report it at https://barchin.net/hamghalam. A report like "this sentence is translated because …" is worth more than a bare pair of phrases.

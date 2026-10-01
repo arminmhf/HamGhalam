@@ -1,79 +1,24 @@
-# واژه‌نامهٔ اصطلاحات هم‌قلم
+# Term glossary — core
 
-این فایل کوتاه است و همیشه خوانده می‌شود. فقط اصطلاح‌هایی این‌جا هستند که (الف) مدل‌ها مدام ترجمهٔ لفظی می‌کنند و (ب) سایت‌های فارسی به‌شکل دیگری می‌نویسند. هر سطر گزارش یک قرارداد رایج است، نه قانون؛ اگر در جملهٔ تو معنای دیگری دارد، رد کن.
+This file is short and is **always read**. It holds only the one rule that applies to every domain: which English loanwords are already naturalized in Persian and which aren't. Domain-specific word lists (tech, finance, retail, …) live in `references/terms/` and are loaded **only when the domain is known** — see "Domain-specific lists" below.
 
-ستون «منبع»: 🔵 ویراستاری (تیم) · 🟢 پیشنهاد جامعهٔ هم‌قلم. `scripts/lint.py` همین جدول‌ها را می‌خواند. سطری که ستون دومش «درست است» دارد یادداشت «دست نزن» است و لینت آن را نمی‌گیرد.
+Each row reports a common convention, not a law. If a word means something else in your sentence, reject it.
 
-## قاعدهٔ کلی وام‌واژه
+## General loanword rule
 
-وام‌واژه‌های جاافتاده را فارسی‌سازی نکن؛ واژه‌های جانیفتاده را برگردان.
+Don't Persianize established loanwords; do translate words that haven't caught on.
 
-| جاافتاده، همین را بنویس | جانیفتاده، برگردان |
+| Established — write it as is | Not established — translate it |
 |---|---|
-| ایمیل، لینک، اپلیکیشن، اپ، دانلود، آپدیت، پروفایل، داشبورد، پنل، تیکت، پلن، فیلتر، دامنه، هاست، لاگ، کش، بک‌آپ، فید، فوتر، هدر، استیکر، منشن، اسکرین‌شات، اکانت، تم، پلاگین، ویجت، API، URL | feature → قابلیت · seamless → (حذف) · leverage → استفاده از · insight → دید / تحلیل · empower → (حذف) · robust → پایدار · streamline → ساده‌کردن · onboarding → شروع کار / راه‌اندازی · engagement → تعامل · journey → (حذف) |
+| ایمیل، لینک، اپلیکیشن، اپ، دانلود، آپدیت، پروفایل، داشبورد، پنل، تیکت، پلن، فیلتر، دامنه، هاست، لاگ، کش، بک‌آپ، فید، فوتر، هدر، استیکر، منشن، اسکرین‌شات، اکانت، تم، پلاگین، ویجت، API، URL | feature → قابلیت · seamless → (drop it) · leverage → استفاده از · insight → دید / تحلیل · empower → (drop it) · robust → پایدار · streamline → ساده‌کردن · onboarding → شروع کار / راه‌اندازی · engagement → تعامل · journey → (drop it) |
 
-## فناوری و نرم‌افزار
+## Domain-specific lists
 
-| ترجمهٔ لفظی | بنویس | منبع |
-|---|---|---|
-| برنامهٔ وب | وب‌اپلیکیشن | 🟢 |
-| برنامه‌های کوچک (mini apps) | برنامک | 🟢 |
-| مرکز راهنما | مرکز پشتیبانی | 🟢 |
-| گفت‌وگوی پشتیبانی | چت پشتیبانی | 🟢 |
-| خوراک (feed) | فید | 🟢 |
-| پاورقی سایت | فوتر | 🟢 |
-| تصویر صفحه | اسکرین‌شات | 🟢 |
-| اشاره (mention) | منشن | 🟢 |
-| برچسب (sticker) | استیکر | 🟢 |
-| بازدید طبیعی / ترافیک طبیعی | ترافیک ارگانیک | 🟢 |
-| مقاله‌های حمایت‌شده (sponsored) | رپورتاژ آگهی | 🟢 |
-| گاوصندوق عکس (vault) | مخفی‌ساز عکس | 🟢 |
-| معماری پاک | معماری تمیز | 🟢 |
-| جامعه (community، در فضای فنی) | کامیونیتی / انجمن | 🟢 |
-| نرخ مشاهده‌ای | نرخ دیده‌شدن | 🟢 |
-| ویدئوهای واکنش | ری‌اکشن | 🟢 |
-| پیشخوان (dashboard، خارج از وردپرس) | داشبورد | 🔵 |
-| ورود به سیستم / خروج از سیستم | ورود / خروج | 🔵 |
-| ثبت‌نام کنید (دکمه) | ثبت‌نام | 🔵 |
-| بیشتر بدانید (دکمه) | اطلاعات بیشتر / بیشتر بخوانید | 🔵 |
-| ارسال (دکمهٔ فرم، submit) | ثبت / تأیید / ارسال (فقط برای پیام) | 🔵 |
-| بارگذاری مجدد | دوباره بارگذاری کنید / رفرش | 🔵 |
-| در حال بارگذاری… | در حال بارگذاری… (درست است، دست نزن) | 🔵 |
-| با موفقیت ذخیره شد | با موفقیت ذخیره شد / ذخیره شد (هر دو درست است) | 🔵 |
-| فیلد اجباری است | این فیلد را پر کنید / الزامی | 🔵 |
-| پسندیدم / نپسندیدم (like) | دوست داشتم / دوست نداشتم — یا لایک | 🟢 |
-| تماشای بعداً (watch later) | بعداً می‌بینم | 🟢 |
+Tell C5 in `patterns.md` (coined word instead of an established loanword) needs a domain lookup to catch the long tail. Don't load all of them by default — that reintroduces the exact context bloat v2 of this skill removed (see `CHANGELOG.md`, v2.0.0). Instead:
 
-## مالی و رمزارز
+1. Figure out the domain from the user's request or the project's existing content (e-commerce store, crypto exchange, SaaS dashboard, …) — this is the same judgment call step 0 already makes for tone, not a separate classifier.
+2. Read the matching file(s) under `references/terms/` (currently `tech.md`, `finance.md`, `retail.md`).
+3. If the domain is ambiguous or the text spans more than one (e.g. a fintech app touches both `tech.md` and `finance.md`), read all plausible candidates — each file is small, so reading two or three costs far less than the old single giant glossary ever did.
+4. If nothing fits, skip this step; the general rule above plus `patterns.md` still cover most of the real violations.
 
-| ترجمهٔ لفظی | بنویس | منبع |
-|---|---|---|
-| مرورگر بلاک‌چین | کاوشگر بلاکچین / اکسپلورر | 🟢 |
-| فورک سخت | هاردفورک | 🟢 |
-| قیمت به ریال ایران | قیمت ریالی | 🟢 |
-| نرخ ارز دلار | نرخ دلار | 🟢 |
-| پرداخت بدون حضور فیزیکی | پرداخت غیرحضوری | 🟢 |
-| کیف پول سخت‌افزاری | کیف پول سخت‌افزاری (درست است) / والت سخت‌افزاری | 🔵 |
-| کارمزد شبکه | کارمزد شبکه (درست است) | 🔵 |
-| برداشت / واریز | برداشت / واریز (درست است؛ نه «خروج وجه») | 🔵 |
-
-## فروشگاهی و عمومی
-
-| ترجمهٔ لفظی | بنویس | منبع |
-|---|---|---|
-| فروش پیش‌فروش | پیش‌فروش | 🟢 |
-| دستگاه اسپرسو | اسپرسوساز | 🟢 |
-| کافهٔ اینترنت | کافی‌نت | 🟢 |
-| شیشهٔ امنیتی | سکوریت | 🟢 |
-| سرویس رفت‌وآمد خصوصی بین‌شهری | دربستی بین‌شهری | 🟢 |
-| جریمه‌های خودرو | خلافی خودرو | 🟢 |
-| کارگران عمومی | کارگر ساده | 🟢 |
-| زودترین نوبت موجود | اولین نوبت آزاد | 🟢 |
-| موارد اورژانسی پزشکی | فوریت‌های پزشکی | 🟢 |
-| سرطان‌شناسی | آنکولوژی | 🟢 |
-| سلام و بهترین آرزوها (ایمیل) | با سلام و احترام | 🟢 |
-| تمام حقوق محفوظ است. X. | کلیهٔ حقوق برای X محفوظ است. | 🟢 |
-| سبد خرید شما خالی است | سبد خرید خالی است | 🔵 |
-| افزودن به سبد | افزودن به سبد (درست است) | 🔵 |
-| موجود در انبار / ناموجود | موجود / ناموجود | 🔵 |
-| ارسال رایگان | ارسال رایگان (درست است) | 🔵 |
+None of this limits `scripts/lint.py`: the linter always reads every file under `references/terms/` plus this core file from disk, at zero token cost, regardless of which ones you loaded into context. So even a wrong or skipped domain guess during writing gets caught by the automatic lint pass after the file is saved (see `hooks/post_write_lint.py` at the plugin root).

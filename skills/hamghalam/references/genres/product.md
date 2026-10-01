@@ -1,15 +1,15 @@
-# ژانر: توضیح محصول (product)
+# Genre: product description
 
-## خوانندهٔ فارسی‌زبان چه می‌خواهد
+## What the Persian reader wants
 
-- مشخصات فنی را بداند و بفهمد هر کدام در استفادهٔ روزانه یعنی چه.
-- عدد و واحد دقیق ببیند، با رقم فارسی (۱۵ بار، ۱٫۵ لیتر).
+- The technical specs, and what each one means in everyday use.
+- Exact numbers and units, in Persian digits (۱۵ بار، ۱٫۵ لیتر).
 
-## ساختار
+## Structure
 
-- هر مشخصه داخل جمله می‌آید، همراه با این‌که به چه کار خریدار می‌آید. فهرست گلوله‌ای فقط وقتی جدول مشخصات جداگانه‌ای در صفحه هست.
-- مشخصه‌ای را که در بریف نیست اضافه نکن (وزن، گارانتی، رنگ).
+- Each spec sits inside a sentence, together with what it does for the buyer. A bullet list only when the page also has a separate spec table.
+- Don't add specs that aren't in the brief (weight, warranty, colours).
 
-## نمونه‌های کپی‌رایتر ✍️
+## Copywriter examples ✍️
 
-(در انتظار)
+(pending)

@@ -1,11 +1,11 @@
-# ژانر: مقاله و پست وبلاگ (article)
+# Genre: article and blog post
 
-## ساختار
+## Structure
 
-- با مسئلهٔ خواننده یا خود ادعا شروع کن، نه با «در دنیای امروز» یا «در این مقاله به بررسی … می‌پردازیم» (`patterns.md` الف۴).
-- تیترهای داخلی بگویند آن بخش چه می‌گوید، نه این‌که قالب «X: راهنمای کامل» یا «مزایای استفاده از X» را تکرار کنند.
-- پاراگراف‌ها هم‌طول نباشند (`patterns.md` الف۸). جمع‌بندی فقط وقتی لازم است که متن بلند است و نتیجه را هنوز نگفته‌ای.
+- Open with the reader's problem or the claim itself, not «در دنیای امروز» or «در این مقاله به بررسی … می‌پردازیم» (`patterns.md` A4).
+- Subheadings say what the section says. Don't repeat the "X: the complete guide" or "Benefits of using X" templates.
+- Paragraphs shouldn't all be the same length (`patterns.md` A8). Add a conclusion only when the text is long and hasn't stated its point yet.
 
-## نمونه‌های کپی‌رایتر ✍️
+## Copywriter examples ✍️
 
-(در انتظار)
+(pending)
