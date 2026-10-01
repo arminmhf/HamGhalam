@@ -26,7 +26,7 @@ Read section D as carefully as the rest. Over-correcting, i.e. rewriting normal 
 ✅ ✍️ برای تمام این موارد، سهم شما فقط مرور یک گزارش است.
 These are two ways to close, not a template. Ending every section or every text with «در نهایت، …» is a formula of its own; most sections just end on their last piece of information. `[closing_formula]`
 
-**A4. Generic claims, or invented details.** «کسب‌وکارتان را متحول می‌کند» with no number, time, place or guarantee is hollow. Invented details are worse. Use only details from the brief or the project, and leave placeholders for the rest.
+**A4. Invented hard facts.** Numbers, years, cities, guarantees, customer counts, names and awards come from the brief or the project, or stay as placeholders. This rule is about facts only. ✍️ Persuasive framing, feeling and atmosphere are not "generic claims" to strip out (section D).
 
 **A5. Uniform symmetry and repeated joins.** Every card or paragraph the same length and shape, or a «برای همین …» / «پس …» clause hung on sentence after sentence. Vary the joins, and let some features stand without a stated benefit. `[connector_repeat]`
 ❌ پمپ ۱۵ باری دارد و فشارش کافی است. حدود ۴۰ ثانیه گرم می‌شود، برای همین لازم نیست منتظر بمانید. مخزنش جدا می‌شود، پس لازم نیست دستگاه را جابه‌جا کنید.
@@ -110,9 +110,10 @@ These are two ways to close, not a template. Ending every section or every text 
 | هیجان‌زده‌ایم که … | we're excited to | مفتخریم که … |
 | ۲۴/۷ | 24/7 | ۲۴ ساعته / شبانه‌روزی |
 | یک کلیک و حسابتان فعال می‌شود | one click and … | حسابتان بلافاصله فعال می‌شود. (only when the reader might expect a wait) |
+| لازم نیست … معذب شوید | no more awkward … | drop the feeling-word ✍️: «لازم نیست خودتان بارها پیگیری کنید.» |
 | اگر باز هم مشکلی بود، ما هستیم. | we're here | fine in friendly and casual tone. In semi-formal and formal: اگر باز هم مشکلی داشتید، می‌توانید با ما در ارتباط باشید. |
 
-**C3. Translated marketing imagery.** ✍️ «کرمای طلایی» is never used. Avoid English product-copy imagery («فوم مخملی»، «طعمی فراموش‌نشدنی») and say what the product does.
+**C3. Translated marketing imagery.** ✍️ «کرمای طلایی» is never used. This is about specific calqued images from English product copy, not about marketing language in general, which is welcome (section D).
 
 **C4. Calqued boilerplate.** Usually replace these. ✍️ The rows marked "drop it" may be needed, depending on what the sentence means.
 
@@ -156,3 +157,5 @@ These are two ways to close, not a template. Ending every section or every text 
 - «سهم شما فقط مرور یک گزارش است» after a full lead-in (A3 ✅).
 - «چرا باید X را انتخاب کنید؟» and «مشتریان دربارهٔ ما چه می‌گویند» as headings.
 - Taglines such as «فروش آنلاین، بدون شب‌بیداری» or «سئو، بدون کارشناس سئو». (But «همیشه رقابتی، هرگز زیر کف» ✍️ reads as translated.)
+- **Marketing.** ✍️ «پلاگین نباید جلوی موارد مارکتینگی را بگیرد.» Benefit framing («ایرفرایر AF-5 انتخابی هوشمندانه برای کسانی است که می‌خواهند …»), feeling and warmth, a short story on an about page, persuasive adjectives. The copywriter preferred these over a dry spec list in every blind pair where the skill had removed them.
+- **Warm friendly email.** ✍️ «سلام دوست عزیز،»، «خبر خوب!»، «با مهر،», and one emoji in the subject line.

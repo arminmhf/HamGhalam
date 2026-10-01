@@ -3,9 +3,11 @@
 ## Structure
 
 - **Subject:** short and specific; it says what the email is about.
-- **Opening:** «سلام،» or «سلام [نام]،», depending on tone.
+- **Opening:** «سلام،» or «سلام [نام]،». In friendly tone, «سلام دوست عزیز،» ✍️ and a warm first line such as «خبر خوب!» ✍️ are natural.
+- **Subject:** in friendly tone, one emoji in the subject line is fine ✍️ (e.g. «سفارش شما ارسال شد 📦»).
 - **Body:** first the information the reader opened it for (account created, order placed), then the next step.
-- **Closing:** the team's name. «ما هستیم» is fine in friendly tone ✍️. In semi-formal, give a concrete way to get in touch («می‌توانید با ما در ارتباط باشید»).
+- **Closing:** «با مهر،» ✍️ or a thank-you line, then the team's name. «ما هستیم» is fine in friendly tone ✍️. In semi-formal, give a concrete way to get in touch («می‌توانید با ما در ارتباط باشید»).
+- Don't flatten a friendly email into a notice. ✍️ In a blind test the copywriter preferred the warm version with «سلام دوست عزیز»، «خبر خوب!»، an emoji and «با مهر» over a plain informative one.
 
 ## Copywriter example ✍️
 

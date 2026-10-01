@@ -5,10 +5,11 @@ description: نوشتن و ویرایش فارسی بومی (نه ترجمه‌�
 
 # Hamghalam: Persian a Persian copywriter would write
 
-Model-written Persian gives itself away in a few specific ways, and a Persian copywriter reviewed every rule in this skill (✍️ in the reference files). Two things came out of that review:
+Model-written Persian gives itself away in a few specific ways, and a Persian copywriter reviewed every rule in this skill (✍️ in the reference files). Three things came out of that review:
 
 1. **The real tells are narrower than they look.** They are short clipped sentences, implied nouns and vague verbs, translated section frames and buttons, a handful of collocations («به سطح بعدی ببرید»، «هیجان‌زده‌ایم»), and spoken idioms in semi-formal copy.
 2. **Over-correcting is a tell too.** Many constructions that resemble English are ordinary Persian: «توسط», rhetorical questions, colon lists, «نه تنها … بلکه», verbless fragments. Rewriting them, or making semi-formal copy chatty to sound "less translated", produced text the copywriter rejected. `references/patterns.md` section D lists what not to touch.
+3. **This skill removes translation tells, never the marketing.** ✍️ «پلاگین نباید جلوی موارد مارکتینگی را بگیرد.» In blind tests the copywriter preferred plain model output for product descriptions, about pages and emails whenever this skill had made them dry. Persian copy sells, has feeling, tells a small story and greets warmly.
 
 **The core test:** would a Persian copywriter have written this sentence, with these words, on this kind of page? If you can guess the English sentence or the English page template behind it, they wouldn't.
 
@@ -17,13 +18,13 @@ Model-written Persian gives itself away in a few specific ways, and a Persian co
 - **It says everything in full.** It names the noun instead of leaving it implied («مشخصات محصول», not «مشخصات»; «با همین موارد», not «با همین»). It uses the precise verb («استخراج می‌کند و در وب‌سایت شما اعمال می‌کند», not «از کاتالوگ می‌نویسد»). Sentences run longer than English ones: «در فارسی ما بیشتر توضیح می‌دهیم» ✍️.
 - **Semi-formal means written Persian.** Use «اطلاع می‌دهیم»، «ارسال می‌شود»، «مراقب … است»، «شما را در جریان امور قرار می‌دهد». Don't use spoken idioms («خبرتان می‌کنیم»، «جلویتان می‌گذارد»، «حواسش هست»، «درست‌وحسابی»), which belong to friendly and casual tone. This was the copywriter's main complaint.
 - **Short forms are Persian forms.** A verbless feature line («نصب سریع، حجم کم همراه با آپدیت خودکار.» ✍️), a verbless status («پرداخت ناموفق.» ✍️), a short question in product copy («عجله دارید؟ معطلتان نمی‌کند.» ✍️) are all fine. Several short *complete verb sentences* stacked as body description are not.
-- **No translated imagery.** «کرمای طلایی» is never used ✍️. Say what the product does.
+- **It sells, warmly.** ✍️ Benefit framing («انتخابی هوشمندانه برای کسانی است که …»), feeling, a short story on an about page, and warm openings and sign-offs in friendly email («سلام دوست عزیز،»، «خبر خوب!»، «با مهر،») are all Persian copy. Don't trade them for a dry list of specs. The only imagery to avoid is the translated kind («کرمای طلایی» ✍️).
 - **Persian frames.** Section headings, buttons and fixed messages come from `references/frames.md`.
-- **A full closing line.** End a section with «در نهایت …» and a complete sentence, not a terse «شما فقط … می‌بینید».
+- **A full closing line.** Don't end on a terse «شما فقط … می‌بینید».
 
 ## Step 0, both modes: facts
 
-Before writing, list the facts you have from the brief, the code, or the project's existing copy. **Don't invent any:** numbers, years, cities, guarantees, customer counts, people's names, awards. If the text goes hollow without specifics, either ask the user or leave a placeholder (`{{تعداد فروشگاه‌ها}}`), and say in your report which details are needed.
+Before writing, list the facts you have from the brief, the code, or the project's existing copy. **Don't invent hard facts:** numbers, years, cities, guarantees, customer counts, people's names, awards. Feeling, benefit framing and atmosphere are not facts; write them freely. If the text goes hollow without specifics, either ask the user or leave a placeholder (`{{تعداد فروشگاه‌ها}}`), and say in your report which details are needed.
 
 ## Writing mode
 

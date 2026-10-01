@@ -7,7 +7,7 @@ Pick a tone once and hold it for the whole text. Tones differ in three things: v
 | Where | bank, insurance, government, legal text, official notice | most sites and apps, documentation | startup, education, consumer product | social media, SMS, youth brand |
 | Verb | full, plural (فرمایید، بفرمایید allowed) | full, plural, **written** verbs («اطلاع می‌دهیم»، «ارسال می‌شود») ✍️ | full, plural, sometimes «تو»; spoken idioms allowed | colloquial («می‌تونید», «بزن بریم») |
 | Address | «شما», «کاربر گرامی» | «شما» | «شما» or «تو», carefully | «تو», attached pronoun («حسابت») |
-| Exclamation mark | no | no | in one or two messages, not all ✍️ | free |
+| Exclamation mark | no | no | in one or two messages, not all ✍️; «خبر خوب!» at the top of a friendly email is fine ✍️ | free |
 | Semicolon «؛» | allowed, sparingly | allowed, sparingly ✍️ | no | no |
 | Subjectless passive | natural («ثبت گردید» no; «ثبت شد» yes) | natural | rare | no |
 | Jokes | no | no | mild | free |

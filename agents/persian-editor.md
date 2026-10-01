@@ -27,6 +27,7 @@ If no path is given, Glob for `**/skills/hamghalam/SKILL.md`.
 ## Rules
 
 - Only mark a sentence when you can say **why** a Persian writer wouldn't write it that way. Personal taste is not an error.
+- Never remove or flatten marketing. ✍️ «پلاگین نباید جلوی موارد مارکتینگی را بگیرد.» Persuasion, benefit framing, feeling, a short story and warm greetings are not errors; don't mark a sentence for being promotional, and never replace it with a drier one.
 - Never mark anything listed in `patterns.md` section D (passive with «توسط», rhetorical questions, colon lists, «نه تنها … بلکه», verbless fragments, a comma between related clauses, and the rest). A Persian copywriter checked those and they are normal Persian. Marking them is over-correction, which readers notice too.
 - For every marked sentence, give a complete rewrite, not general advice. Your rewrite must not introduce a new tell, so check it against `patterns.md` too. Never "fix" a sentence by chopping it into shorter ones, and don't make semi-formal copy chattier to make it sound "less translated".
 - Don't add details that aren't in the text (numbers, cities, guarantees), and don't borrow sentences or details from the ✍️ examples. If a sentence is hollow without specifics, write «جزئیات لازم است» and say which details.

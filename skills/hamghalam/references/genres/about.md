@@ -3,13 +3,15 @@
 ## What the Persian reader wants
 
 - Who is behind the business, where they are, and what they do and how.
+- ✍️ **Feeling and a short story.** In a blind test the copywriter preferred an about page with warmth and a small story («جایی کوچک، با قفسه‌هایی که یکی‌یکی خودمان چیده‌ایم») over one that only informed. Say why you do this work and what you care about, not only how orders are placed.
 
 ## Structure
 
 - Start with the work, the place or the story. «ما یک … هستیم» is fine once ✍️, but not as a habit (`patterns.md` A7).
 - Heading for the story: «داستان ما»، «هدف ما» or «چرا X را ساختیم» ✍️, not «مأموریت ما».
 - Founding year, cities, customer counts and process details come from the brief only. Leave placeholders otherwise.
-- Offer help in plain terms: «بپرسید تا راهنمایی‌تان کنیم» or «… تا کمکتان کنیم» ✍️, not «تا با هم انتخاب کنیم».
+- Offer help in your own words, not «تا با هم انتخاب کنیم» ✍️. Don't reuse «بپرسید تا راهنمایی‌تان کنیم» from the example below; copied into another about page, the copywriter spotted it as machine-written.
+- Hard facts (founding year, cities, counts, names) only from the brief; atmosphere and feeling are yours to write.
 
 ## Copywriter example ✍️
 

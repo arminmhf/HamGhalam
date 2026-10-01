@@ -143,6 +143,8 @@ CALQUES = [
     ("یک کلیک و", "«… بلافاصله فعال می‌شود»", "E"),
     ("کرمای طلایی", "translated product imagery; say what it does (patterns C3)", "E"),
     ("تا با هم انتخاب کنیم", "«تا کمکتان کنیم»", "E"),
+    ("معذب شوید", "drop the feeling-word: «لازم نیست خودتان بارها پیگیری کنید.»", "E"),
+    ("بپرسید تا راهنمایی‌تان کنیم", "copied from the about-page example; offer help in your own words (genres/about.md)", "W"),
 ]
 # «ما هستیم» is fine in friendly/casual only; checked separately so --tone can silence it
 WE_ARE_HERE = re.compile(r"(?:،|\s)ما هستیم[.!]")

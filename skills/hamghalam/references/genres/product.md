@@ -4,13 +4,14 @@
 
 - The technical specs, and what each one means in everyday use.
 - Exact numbers and units, in Persian digits (۱۵ بار، ۱٫۵ لیتر).
-- Plain, concrete wording. Translated product imagery («کرمای طلایی»، «فوم مخملی») is never used ✍️ (`patterns.md` C3).
+- To be persuaded. ✍️ The copywriter preferred «ایرفرایر AF-5 انتخابی هوشمندانه برای کسانی است که می‌خواهند غذایی سالم و خوشمزه را بدون دردسر و با روغن بسیار کم تهیه کنند» over a dry opening that listed the basket size. Open with who it's for and why it's a good choice, then give the specs with what each one means. Only translated imagery («کرمای طلایی») is out (`patterns.md` C3).
 
 ## Structure
 
 - A verbless opening line naming the product is fine, and so is a short question that sets up a benefit («عجله دارید؟ معطلتان نمی‌کند.») ✍️.
 - Each spec sits inside a sentence. Not every spec needs a «برای همین …» benefit clause (`patterns.md` A5).
-- Formal written verbs are normal here («تضمین شده است»، «دارای نازل بخار است») ✍️.
+- Formal written verbs are normal here («تضمین شده است»، «دارای نازل بخار است») ✍️, but a description that is only «دارای … است» sentences reads as a spec sheet, not as copy.
+- Use the name people search for: «ایرفرایر» is more common than «سرخ‌کن بدون روغن».
 - Don't add specs that aren't in the brief (weight, warranty, colours).
 
 ## Copywriter example ✍️
