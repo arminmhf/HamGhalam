@@ -1,154 +1,157 @@
 # Translation tells
 
-Each tell has a pair of examples. ❌ is a sample of the mistake, not text to imitate. ✅ shows the direction.
-✍️ marks an example written or approved by a Persian copywriter. Unmarked examples were written by a model and only show the direction.
-`[rule]` is the matching rule id in `scripts/lint.py`.
+✍️ marks a verdict or example from a Persian copywriter (the 2026-10-01 review). Unmarked items come from model output observed in evals and only show the direction.
+❌ is a sample of the mistake, not text to imitate. `[rule]` is the matching rule id in `scripts/lint.py`.
 
-## A. Frame and document
+Read section D as carefully as the rest. Over-correcting, i.e. rewriting normal Persian because it resembles English, produced odd "de-translated" Persian in earlier versions of this skill, and readers noticed that too.
 
-These give the text away before any single sentence does, because the reader sees the shape of the page before reading it.
+## A. Frame and register
 
-**A1. Translated section heading.** «چه کاری برایتان انجام می‌دهد»، «چرا باید X را انتخاب کنید؟»، «آماده‌اید شروع کنید؟»، «مشتریان دربارهٔ ما چه می‌گویند». Persian equivalents are in `frames.md`. `[cliche_heading]`
+**A1. Spoken words in semi-formal copy.** ✍️ This was the copywriter's main reason for preferring plain model output over this skill's earlier output. Semi-formal web Persian is *written* Persian. Spoken idioms belong in friendly and casual tone only. `[spoken_register]`
 
-**A2. Closing punchline.** After a list of what the product does, a short second-person line that delivers the payoff like a slogan ("You just …"). Changing the words («سهم شما فقط…»، «کار شما فقط…») keeps the device. End on the last piece of information the reader needs, or fold the payoff into the previous sentence. `[you_just]` `[punchline_only]`
-❌ قیمت‌ها را هماهنگ می‌کند، توضیح محصول می‌نویسد و به مشتری جواب می‌دهد. شما فقط گزارشش را می‌بینید.
-✅ (waiting for the copywriter's example)
+| Spoken (too casual for semi-formal) | Written ✍️ |
+|---|---|
+| با پیامک خبرتان می‌کنیم | با پیامک اطلاع می‌دهیم |
+| گزارش را جلویتان می‌گذارد | شما را در جریان امور قرار می‌دهد |
+| حواسش به فروشگاهتان است | مراقب کارهای فروشگاهتان است |
+| بسته‌ها به همهٔ شهرها می‌رود | بسته‌ها به همهٔ شهرها ارسال می‌شوند |
+| این اطلاعات مستقیم به بانک می‌رسد | این اطلاعات مستقیم به بانک ارسال می‌شود |
+| اسپرسوی درست‌وحسابی | اسپرسوی عالی |
 
-**A3. Subjectless verb tricolon.** Three parallel clauses «… می‌کند، … می‌نویسد و … می‌دهد» is English ad rhythm. Give each feature its own sentence with its benefit. Reordering the clauses, or splitting them into shorter sentences, doesn't fix it. `[tricolon]`
+**A2. Translated section heading or button.** ✍️ «X چه کاری برایتان انجام می‌دهد؟»، «X چه باری از دوشتان برمی‌دارد؟»، «آماده‌اید شروع کنید؟»، «مأموریت ما»، button «شروع کنید» or «بیشتر بدانید». The approved replacements are in `frames.md`. `[bad_frame]` `[bare_cta]`
 
-**A4. Essay-style opening.** «در دنیای امروز…»، «در عصر دیجیتال…»، «در این مقاله به بررسی … می‌پردازیم». Start directly with the claim or the reader's problem. `[essay_opener]`
-❌ در دنیای امروز، رقابت در فروشگاه‌های آنلاین بسیار زیاد شده است. در این مقاله به بررسی روش‌های افزایش فروش می‌پردازیم.
-✅ رقابت بین فروشگاه‌های آنلاین هر روز سخت‌تر می‌شود. در ادامه چند راه ساده را مرور می‌کنیم که به فروش بیشتر کمک می‌کند.
+**A3. Short closing line with the reader as subject.** ✍️ After a list of what the product does, a terse «شما فقط گزارشش را می‌بینید.» is a calque of "You just …". `[you_just]`
+❌ قیمت‌ها را هماهنگ می‌کند، توضیحات را می‌نویسد و به مشتری جواب می‌دهد. شما فقط گزارشش را می‌بینید.
+✅ ✍️ در نهایت برای تمام کارهای انجام‌شده، گزارشی را به شما ارائه می‌دهد.
+✅ ✍️ برای تمام این موارد، سهم شما فقط مرور یک گزارش است.
 
-**A5. About page opening with «ما یک … هستیم».** Calque of "We are a …". Start with the work, the place or the story. `[we_are_a]`
-❌ ما یک برشته‌کاری کوچک در شیراز هستیم.
+**A4. Generic claims, or invented details.** «کسب‌وکارتان را متحول می‌کند» with no number, time, place or guarantee is hollow. Invented details are worse. Use only details from the brief or the project, and leave placeholders for the rest.
 
-**A6. Rhetorical question or throat-clearing.** «آیا تا به حال…؟»، «آماده‌اید؟»، «تصور کنید…». Start with the point itself. `[rhetorical_q]`
-❌ آیا تا به حال به این فکر کرده‌اید که چطور می‌توانید قیمت رقبا را رصد کنید؟
-✅ رصد دستی قیمت رقبا وقت زیادی می‌گیرد و همیشه هم دقیق نیست.
+**A5. Uniform symmetry and repeated joins.** Every card or paragraph the same length and shape, or a «برای همین …» / «پس …» clause hung on sentence after sentence. Vary the joins, and let some features stand without a stated benefit. `[connector_repeat]`
+❌ پمپ ۱۵ باری دارد و فشارش کافی است. حدود ۴۰ ثانیه گرم می‌شود، برای همین لازم نیست منتظر بمانید. مخزنش جدا می‌شود، پس لازم نیست دستگاه را جابه‌جا کنید.
 
-**A7. Generic claims, or invented details.** «کسب‌وکارتان را متحول می‌کند» with no number, time, place or guarantee is hollow. Invented details are worse. Use only details from the brief or the project, and leave placeholders for the rest.
-
-**A8. Uniform symmetry.** Every card or paragraph has the same length and shape (a two-word heading and two equal sentences). Human prose runs longer where there's more to say. The same goes for joining: hanging a «برای همین …» or «پس …» benefit clause on sentence after sentence is a formula of its own. Vary how clauses join, and let some features stand without a stated benefit. `[connector_repeat]`
-❌ پمپ ۱۵ باری دارد و فشارش کافی است. حدود ۴۰ ثانیه گرم می‌شود، برای همین لازم نیست منتظر بمانید. مخزنش جدا می‌شود، پس لازم نیست دستگاه را جابه‌جا کنید. نازل بخار هم دارد، برای همین لاته هم درست می‌کنید.
-
-**A9. Document decoration.** The linter reports these as `[D]`:
+**A6. Document decoration.** These are reported by the linter as `[D]`:
 - an emoji before every bullet
 - a bolded chunk in every sentence
 - three headings over what is really one paragraph
-- «جمع‌بندی» or «در پایان» on a short text
+- «جمع‌بندی» on a short text
 
-Test: does the text lose anything if you remove the decoration?
+**A7. Fine once, a tell when repeated.** ✍️ Each of these is normal Persian on its own. Used twice or more in one text, they read as a model's habit. `[indef_yek]` `[we_are_a]` `[lets]` `[not_just]`
+- «یک» as an indefinite article («آکسون یک دستیار هوشمند است»)
+- «ما یک … هستیم» at the start of an about page
+- «بیایید …»
+- «این فقط X نیست، Y است»
 
-## B. Sentence architecture
+## B. Sentence
 
-**B1. Runs of short clipped sentences.** This is what a Persian reader notices first. Three five-word sentences in a row is English web rhythm. Persian stitches related sentences together with «و»، «که»، «تا»، «چون» and commas, and explains. `[staccato]`
+**B1. Short complete sentences in a row.** ✍️ «جملات کوتاه تکه‌تکه‌شده مناسب نیست.» Several short *verb* sentences stacked as body description is English web rhythm. Persian does one of two things instead. It writes a full, connected description, or, for a quick feature summary, a verbless phrase list. `[staccato]`
 ❌ سریع نصب می‌شود. حجمش کم است. آپدیت خودکار دارد.
-✅ (waiting for the copywriter's example)
+✅ ✍️ نصب سریع، حجم کم همراه با آپدیت خودکار.
+❌ قیمت‌ها را با ترب و باسلام هماهنگ می‌کند، توضیحات محصول را از کاتالوگ سازنده می‌نویسد و به سوال مشتری، حتی نصف‌شب، جواب می‌دهد. شما فقط گزارشش را می‌بینید.
+✅ ✍️ قیمت‌های وب‌سایت شما را با توجه به رقبایتان در ترب و باسلام مدیریت می‌کند، اطلاعات محصولات فروشگاهتان را از کاتالوگ سازنده استخراج می‌کند و در وب‌سایت شما اعمال می‌کند و به‌صورت شبانه‌روزی پاسخگوی مشتریان شما است. در نهایت برای تمام کارهای انجام‌شده، گزارشی را به شما ارائه می‌دهد.
 
-**B2. Verbless fragments in body copy.** A noun phrase punctuated like a sentence. Headlines, taglines, captions, labels and card titles are verbless in Persian too and shouldn't get a forced verb. What's wrong even in a headline is a string of one-word fragments with periods («سریع. امن. ساده.»).
-❌ سریع. امن. بدون دردسر.
-✅ (waiting for the copywriter's approval)
+**B2. Implied nouns.** ✍️ «در فارسی ما بیشتر توضیح می‌دهیم.» A model drops the noun that the previous sentence made "obvious". Persian names it.
+❌ برای همین مشخصات دقیق است. ✅ ✍️ برای همین مشخصات محصول دقیق است.
+❌ سفارشتان با همین ثبت می‌شود. ✅ ✍️ سفارشتان با همین موارد ثبت می‌شود.
+❌ تا با هم انتخاب کنیم. ✅ ✍️ تا کمکتان کنیم.
 
-**B3. Colon + list of noun phrases** in body copy ("X: a, b, and c"). Say it as a full sentence. `[colon_list]`
-❌ سه مزیت دارد: سرعت بالا، نصب آسان و پشتیبانی ۲۴ ساعته.
-✅ سریع است، راحت نصب می‌شود و پشتیبانی‌اش هم شبانه‌روزی است.
+**B3. Vague verb.** ✍️ A verb that only roughly says what happens.
+❌ توضیحات محصول را از کاتالوگ سازنده می‌نویسد. ✅ ✍️ اطلاعات محصولات را از کاتالوگ سازنده استخراج می‌کند و در وب‌سایت شما اعمال می‌کند.
+❌ عبارت‌های ترجمه‌ای را جمع می‌کند. ✅ ✍️ عبارت‌های ترجمه‌ای را جمع‌آوری می‌کند. (or «حذف می‌کند», depending on the meaning)
+❌ قیمت را بالا و پایین می‌برد. ✅ ✍️ قیمت را بالا یا پایین می‌برد.
 
-**B4. English-style indefinite «یک».** Translating "a/an" as «یک». Persian more often uses the «ی» suffix, or nothing. `[indef_yek]`
-❌ آکسون یک دستیار هوشمند است که قیمت‌ها را به‌روز نگه می‌دارد.
-✅ آکسون دستیار هوشمندی است که قیمت‌ها را به‌روز نگه می‌دارد.
-
-**B5. Passive with «توسط».** The subject is known, so make the sentence active. A subjectless passive («لینک فرستاده شد») is natural. `[tavassot]`
-❌ این گزارش توسط تیم پشتیبانی بررسی می‌شود.
-✅ تیم پشتیبانی این گزارش را بررسی می‌کند.
-
-**B6. Nominalization.** «انجام X»، «اقدام به X»، «مورد X قرار گرفتن» instead of a plain verb. `[nominal]`
-❌ برای انجام ثبت‌نام، اقدام به وارد کردن شماره تلفن کنید.
-✅ برای ثبت‌نام، شماره تلفنتان را وارد کنید.
-
-**B7. «به شما اجازه می‌دهد تا» and «کمک می‌کند تا».** Make the user the subject, or bring the tool in with «با». `[allows_you]`
+**B4. «به شما اجازه می‌دهد تا».** `[allows_you]`
 ❌ این ابزار به شما اجازه می‌دهد تا گزارش‌ها را دانلود کنید.
-✅ با این ابزار می‌توانید گزارش‌ها را دانلود کنید.
+✅ ✍️ با این ابزار می‌توانید گزارش‌ها را دانلود کنید.
 
-**B8. Redundant pronouns.** «شما»، «خود»، «آن» where Persian drops the pronoun or uses an attached one. `[pronoun_khod]`
+**B5. Pronoun spraying.** «شما … خود … خود» in one sentence. A possessive «شما» after a noun («مشتریان شما») is normal. `[pronoun_khod]`
 ❌ شما می‌توانید تنظیمات خود را در پنل کاربری خود تغییر دهید.
-✅ تنظیمات حسابتان را از پنل کاربری می‌توانید تغییر دهید.
+✅ ✍️ تنظیمات را از پنل کاربری تغییر دهید.
 
-**B9. «نه تنها … بلکه» and «این فقط X نیست، Y است».** Persian says «هم … هم», or just says what the thing is. `[not_only]` `[not_just]`
-❌ نه تنها سریع است، بلکه امن نیز هست. / این فقط یک ابزار نیست، یک دستیار واقعی است.
-✅ هم سریع است، هم امن.
+**B6. «اقدام به» and «انجام» nominalization.** «امکان X وجود دارد» is fine (D). `[nominal]`
+❌ برای انجام ثبت‌نام، اقدام به وارد کردن شماره تلفن کنید.
+✅ ✍️ برای ثبت‌نام، شماره تلفنتان را وارد کنید.
 
-**B10. Cleft «این … است که».** Calque of "It's you who …". `[cleft]`
+**B7. Cleft «این … است که».** ✍️ Calque of "It's you who …". `[cleft]`
 ❌ این شما هستید که تصمیم نهایی را می‌گیرید.
-✅ تصمیم نهایی با خودتان است.
+✅ ✍️ در نهایت، خودتان تصمیم نهایی را می‌گیرید.
 
-**B11. Discourse marker opening consecutive sentences.** «همچنین،»، «علاوه بر این،»، «در نتیجه،»، «به عبارت دیگر،» (Moreover, Additionally). Join the sentence to the previous one, or drop the marker. `[discourse_marker]`
-
-**B12. «اینجاست که…» and «این یعنی…».** Calques of "This is where … comes in" and "This means". `[this_is_where]` `[this_means]`
-
-**B13. Sentence opening with «با استفاده از».** Calque of "Using …". Usually «با X» is enough. `[with_using]`
-
-**B14. Ezafe chain.** Three ezafes in a row instead of a predicate or a preposition.
+**B8. Ezafe chain.**
 ❌ عبارت‌های ترجمه‌ای متن‌های هوش مصنوعی را جمع می‌کند.
-✅ عبارت‌های ترجمه‌ای را از متن‌های هوش مصنوعی جمع می‌کند.
+✅ ✍️ عبارت‌های ترجمه‌ای را از متن‌های هوش مصنوعی جمع‌آوری می‌کند.
 
-**B15. Parenthetical em dash «—».** Use a comma, «که», or a separate sentence. `[em_dash]`
+**B9. Em dash «—».** An appositive between two commas is fine. `[em_dash]`
 ❌ رصدبان — ابزار پایش قیمت رقبا — رایگان شد.
-✅ رصدبان که قیمت رقبا را پایش می‌کند، رایگان شد.
+✅ ✍️ رصدبان، ابزار پایش قیمت رقبا، رایگان شد.
 
-**B16. Adverb wedged between two commas.** «به سوال مشتری، حتی نصف‌شب، جواب می‌دهد» splits the sentence in the middle. Put the adverb at the start or next to the verb. `[parenthetical_adverb]`
+**B10. Adverb wedged between two commas.** ✍️ Used in Persian, but very rarely. `[parenthetical_adverb]`
 ❌ به سوال مشتری، حتی نصف‌شب، جواب می‌دهد.
-✅ حتی نصف‌شب هم جواب مشتری را می‌دهد.
+✅ ✍️ حتی نصف‌شب هم جواب مشتری را می‌دهد.
 
-**B17. «در حال … هستید».** `[dar_hal_hastid]`
-❌ شما در حال مشاهدهٔ نسخهٔ آزمایشی هستید.
-✅ این نسخهٔ آزمایشی است.
+**B11. Comma before «و» or «که».** ✍️ Never. A few exceptions may be added later. `[comma_before_va]`
+❌ سفارش‌ها را همان روز بسته‌بندی می‌کنیم، و اگر تا ظهر ثبت شده باشند همان روز ارسال می‌شوند.
 
 ## C. Words and phrases
 
-**C1. Intensifiers.** واقعاً، به‌سادگی، به‌راحتی، به‌طور یکپارچه، به‌طور کامل، کاملاً، در واقع، بی‌نظیر. Drop most of them. `[intensifier]`
+**C1. Intensifiers.** واقعاً، به‌سادگی، به‌راحتی، به‌طور یکپارچه، به‌طور کامل، بی‌نظیر. Drop most of them. `[intensifier]`
 ❌ به‌سادگی می‌توانید به‌طور یکپارچه با ابزارهای خود ادغام شوید.
-✅ به ابزارهایی که همین حالا با آن‌ها کار می‌کنید وصل می‌شود.
+✅ ✍️ به ابزارهایی که همین حالا با آن‌ها کار می‌کنید وصل می‌شود.
 
-**C2. Translated collocations.** A verb and noun that go together in English but not in Persian. `[calque]`
+**C2. Translated collocations.** ✍️ Each row was confirmed by the copywriter, with their replacement. `[calque]`
 
-| Translated | Source | Write instead |
+| Translated | Source | Write instead ✍️ |
 |---|---|---|
-| معنی می‌دهد | makes sense | منطقی است / به کار می‌آید |
-| تفاوت ایجاد کنید | make a difference | say the concrete result |
-| زمانتان را ذخیره کنید | save time | وقتتان کمتر هدر می‌رود |
-| به سطح بعدی ببرید | next level | say the concrete result |
-| X را تجربه کنید | experience X | use a concrete verb |
-| در قلب X | at the heart of | drop it, or say what's central |
+| تفاوت ایجاد کنید | make a difference | با آکسون، فروش فروشگاهتان را متفاوت کنید. |
+| زمانتان را ذخیره کنید | save time | در زمان صرفه‌جویی کنید |
+| به سطح بعدی ببرید | next level | ارتقا دهید |
 | با ذهنی آسوده | peace of mind | با خیال راحت |
-| مطمئن شوید که | make sure | حتماً … / دقت کنید که |
-| هیجان‌زده‌ایم که | we're excited to | خوشحالیم / just give the news |
-| یک کلیک و … | one click and … | با یک کلیک … |
-| ما هستیم | we're here | به پشتیبانی بگویید |
-| بیایید … | let's … | drop it; say it directly |
-| ۲۴/۷ | 24/7 | شبانه‌روزی |
+| مطمئن شوید که … | make sure | از صحت آدرس واردشده مطمئن شوید. / آدرس واردشده صحیح نیست. |
+| هیجان‌زده‌ایم که … | we're excited to | مفتخریم که … |
+| ۲۴/۷ | 24/7 | ۲۴ ساعته / شبانه‌روزی |
+| یک کلیک و حسابتان فعال می‌شود | one click and … | حسابتان بلافاصله فعال می‌شود. (only when the reader might expect a wait) |
+| اگر باز هم مشکلی بود، ما هستیم. | we're here | fine in friendly and casual tone. In semi-formal and formal: اگر باز هم مشکلی داشتید، می‌توانید با ما در ارتباط باشید. |
 
-**C3. English marketing vocabulary.** «راه‌حل‌ها» (solutions)، «قدرتمند» (powerful)، «اکوسیستم»، «توانمندسازی». Say exactly what it does.
+**C3. Translated marketing imagery.** ✍️ «کرمای طلایی» is never used. Avoid English product-copy imagery («فوم مخملی»، «طعمی فراموش‌نشدنی») and say what the product does.
 
-**C4. Calqued boilerplate.** Replace these unconditionally:
+**C4. Calqued boilerplate.** Usually replace these. ✍️ The rows marked "drop it" may be needed, depending on what the sentence means.
 
 | Calque | Write instead |
 |---|---|
-| خوش برگشتید! | خوش آمدید / (drop it) |
+| خوش برگشتید! | خوش آمدید |
 | چیزی اشتباه پیش رفت | مشکلی پیش آمد |
 | ما اینجا هستیم تا کمک کنیم | اگر مشکلی بود، به ما بگویید |
 | موفقیت! (alone) | انجام شد / ذخیره شد |
 | چیزی برای نمایش وجود ندارد | هنوز چیزی ثبت نشده |
 | به جامعهٔ ما بپیوندید | عضو … شوید |
-| در پایان روز | در نهایت / آخرش |
+| در پایان روز | در نهایت |
 | قدرت‌گرفته از X | بر پایهٔ X / با فناوری X |
-| سفر شما با X | (drop it; say what actually happens) |
-| تجربهٔ کاربری بی‌نظیر | (drop it) |
+| سفر شما با X | (usually drop it) |
+| تجربهٔ کاربری بی‌نظیر | (usually drop it) |
 | هرگونه سؤال | سؤالی |
-| به نظر می‌رسد که | (drop it) |
+| به نظر می‌رسد که | (usually drop it) |
 | بدون هیچ‌گونه | بدون |
-| ما معتقدیم که / ما باور داریم که | (drop it; state the claim) |
+| ما معتقدیم که | (usually drop it) |
 
-**C5. Coined word instead of an established loanword.** «برنامهٔ وب»، «خوراک»، «پاورقی سایت»، «تصویر صفحه» where everyone says «وب‌اپلیکیشن»، «فید»، «فوتر»، «اسکرین‌شات». The reverse is also wrong: don't turn «ایمیل» into «رایانامه». Lists in `terms.md` and `terms/`.
+**C5. Coined word instead of an established loanword.** ✍️ «برنامهٔ وب»، «خوراک»، «پاورقی سایت»، «تصویر صفحه» where everyone says «وب‌اپلیکیشن»، «فید»، «فوتر»، «اسکرین‌شات». Don't turn «ایمیل» into «رایانامه». Lists in `terms.md` and `terms/`.
 
-**C6. Mixed register.** A bureaucratic word next to a colloquial verb («جهت ثبت سفارش روی دکمه بزنید»), or «محصولات» and «محصول‌ها» in the same text. Pick one register.
+## D. Not tells: don't "fix" these
+
+✍️ The copywriter rejected each of these as a rule. They are normal Persian. Don't rewrite a sentence because it contains one of them, and don't report them in editing mode.
+
+- Passive with «توسط» («این گزارش توسط تیم پشتیبانی بررسی می‌شود»).
+- «نه تنها … بلکه … نیز».
+- Rhetorical questions and lead-ins («آیا تا به حال…؟»، «عجله دارید؟»).
+- «در حال … هستید».
+- Essay openings («در دنیای امروز …»).
+- Colon + list («سه مزیت اصلی شامل: سرعت بالا، نصب آسان و پشتیبانی ۲۴ ساعته.»).
+- Verbless fragments, in headlines and in product copy («سریع. امن. بدون دردسر.»، «اسپرسوساز مدل ES-20 خانگی.»).
+- A comma between two related clauses («قیمت رقبا در ترب و باسلام هر روز تغییر می‌کنند، آکسون قیمت محصول‌هایتان را پابه‌پای آن‌ها بالا یا پایین می‌برد.» ✍️).
+- «؛» used sparingly in formal and semi-formal tone.
+- A three-part list of verb clauses, as long as each clause is complete and specific (B1 ✅).
+- Sentence-initial «همچنین،»، «علاوه بر این،»، «این یعنی…»، «اینجاست که…»، «با استفاده از…».
+- «معنی می‌دهد»، «X را تجربه کنید»، «در قلب X»، «راه‌حل‌ها»، «قدرتمند».
+- A bureaucratic word beside a plain verb («جهت ثبت سفارش روی دکمه بزنید»).
+- «امکان لغو سفارش وجود دارد».
+- «سهم شما فقط مرور یک گزارش است» after a full lead-in (A3 ✅).
+- «چرا باید X را انتخاب کنید؟» and «مشتریان دربارهٔ ما چه می‌گویند» as headings.
+- Taglines such as «فروش آنلاین، بدون شب‌بیداری» or «سئو، بدون کارشناس سئو». (But «همیشه رقابتی، هرگز زیر کف» ✍️ reads as translated.)

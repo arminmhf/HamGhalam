@@ -2,10 +2,11 @@
 
 ## Structure
 
-- Open with the reader's problem or the claim itself, not «در دنیای امروز» or «در این مقاله به بررسی … می‌پردازیم» (`patterns.md` A4).
-- Subheadings say what the section says. Don't repeat the "X: the complete guide" or "Benefits of using X" templates.
-- Paragraphs shouldn't all be the same length (`patterns.md` A8). Add a conclusion only when the text is long and hasn't stated its point yet.
+- An opening such as «در دنیای امروز …» is acceptable ✍️ (`patterns.md` D), but starting with the reader's problem is usually stronger.
+- Subheadings say what the section says.
+- Paragraphs shouldn't all be the same length (`patterns.md` A5). Add a conclusion only when the text is long and hasn't stated its point yet.
+- Name things in full and keep the register written (`patterns.md` A1, B2).
 
 ## Copywriter examples ✍️
 
-(pending)
+(none yet)

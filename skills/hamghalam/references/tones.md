@@ -5,27 +5,27 @@ Pick a tone once and hold it for the whole text. Tones differ in three things: v
 | | Formal | Semi-formal | Friendly | Casual |
 |---|---|---|---|---|
 | Where | bank, insurance, government, legal text, official notice | most sites and apps, documentation | startup, education, consumer product | social media, SMS, youth brand |
-| Verb | full, plural (فرمایید، بفرمایید allowed) | full, plural | full, plural, sometimes «تو» | colloquial («می‌تونید», «بزن بریم») |
+| Verb | full, plural (فرمایید، بفرمایید allowed) | full, plural, **written** verbs («اطلاع می‌دهیم»، «ارسال می‌شود») ✍️ | full, plural, sometimes «تو»; spoken idioms allowed | colloquial («می‌تونید», «بزن بریم») |
 | Address | «شما», «کاربر گرامی» | «شما» | «شما» or «تو», carefully | «تو», attached pronoun («حسابت») |
-| Exclamation mark | no | no | a little | free |
-| Semicolon «؛» | allowed, sparingly | no | no | no |
+| Exclamation mark | no | no | in one or two messages, not all ✍️ | free |
+| Semicolon «؛» | allowed, sparingly | allowed, sparingly ✍️ | no | no |
 | Subjectless passive | natural («ثبت گردید» no; «ثبت شد» yes) | natural | rare | no |
 | Jokes | no | no | mild | free |
 
 ## One message, four tones
 
-Message: a confirmation link was emailed and they need to click it.
+Message: a confirmation link was emailed and they need to click it. ✍️ All eight lines below were approved or rewritten by the copywriter.
 
 - **Formal:** لینک تأیید به نشانی ایمیل شما ارسال شد. برای فعال‌سازی حساب، روی آن کلیک کنید.
 - **Semi-formal:** لینک تأیید را به ایمیلتان فرستادیم. روی آن کلیک کنید تا حسابتان فعال شود.
-- **Friendly:** لینک تأیید ایمیل شد. یک کلیک و حسابتان فعال می‌شود.
+- **Friendly:** لینک تأیید ایمیل شد. روی لینک کلیک کنید تا حسابتان فعال شود.
 - **Casual:** لینک تأیید رو فرستادیم به ایمیلت. روش بزن تا حسابت فعال شه.
 
 Message: payment failed, ask them to try again.
 
 - **Formal:** پرداخت انجام نشد. لطفاً دوباره تلاش کنید یا با پشتیبانی تماس بگیرید.
-- **Semi-formal:** پرداخت انجام نشد. دوباره امتحان کنید و اگر باز هم نشد، به پشتیبانی بگویید.
-- **Friendly:** پرداخت انجام نشد. یک بار دیگر امتحان کنید و اگر باز گیر کرد ما هستیم.
+- **Semi-formal:** پرداخت انجام نشد. دوباره امتحان کنید و درصورت بروز خطای مجدد، با پشتیبانی در تماس باشید.
+- **Friendly:** پرداخت انجام نشد. یک بار دیگر امتحان کنید و اگر باز هم مشکلی بود، ما هستیم.
 - **Casual:** پرداخت نشد. یه بار دیگه بزن، نشد به ما بگو.
 
 ## Semi-formal → friendly: what actually changes
@@ -57,5 +57,7 @@ These do NOT make a tone friendly, and are mistakes:
 - Formal ≠ bureaucratic. Formal tone keeps the same clear, connected sentences as semi-formal; it just skips jokes and colloquial contractions.
 - Casual ≠ sloppy. ZWNJ and punctuation still apply in casual tone («می‌تونید», not «میتونید»).
 - Don't jump from formal to friendly on the same page, not even between a button and an error message.
-- No comma before «و», in any tone.
-- «؛» only in formal tone. In every other tone, end the sentence with a period or continue with «و».
+- No comma before «و» or «که», in any tone ✍️.
+- «؛» sparingly in formal and semi-formal tone ✍️, never in every paragraph. Not in friendly or casual tone.
+- Spoken idioms in semi-formal copy ✍️: «خبرتان می‌کنیم»، «جلویتان می‌گذارد»، «حواسش هست»، «درست‌وحسابی». Semi-formal web Persian is written Persian: «اطلاع می‌دهیم»، «شما را در جریان قرار می‌دهد»، «مراقب … است». Making semi-formal copy sound "natural" by borrowing spoken phrases is the most common way this skill used to go wrong (`patterns.md` A1).
+- «ما هستیم» ✍️ is fine in friendly and casual tone only.

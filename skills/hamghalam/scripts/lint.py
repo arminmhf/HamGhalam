@@ -38,6 +38,10 @@ NA = f"(?![{PERSIAN}])"    # not followed by a Persian letter (word end)
 SENT = r"(?:^|[.!؟?»:]\s*|\n)"  # sentence start
 
 # (id, severity, hook, regex, message)
+# Every rule here was checked against a Persian copywriter's review (2026-10-01).
+# Rules the copywriter rejected (توسط، نه تنها … بلکه، rhetorical questions, colon lists,
+# «در حال … هستید»، essay openers, discourse markers, verbless fragments) were removed:
+# flagging normal Persian pushes the model into over-correcting.
 MECH = [
     # ---- mechanical ----
     ("arabic_yeh_kaf", "E", True, re.compile(r"[يك]"),
@@ -55,113 +59,100 @@ MECH = [
     ("latin_digits", "W", False, re.compile(rf"(?<![A-Za-z0-9_./:=\"'-])(?<![:=] )[0-9]+(?![A-Za-z0-9_./:-])(?=[^\n]*{PW})"),
      "Latin digits in Persian prose; use Persian digits (unless code/ID)."),
     ("slash_247", "E", True, re.compile(r"(?:۲۴|24)\s*/\s*(?:۷|7)"),
-     "«۲۴/۷» is a calque of 24/7; write «شبانه‌روزی» (patterns C2)."),
-
-    # ---- sentence architecture ----
-    ("tavassot", "E", True, re.compile(rf"{NB}توسط {PW}"),
-     "Passive with «توسط»; make the sentence active (patterns B5)."),
-    ("nominal", "W", True, re.compile(r"(اقدام به|انجام (?:دادن|شود|دهید)|مورد \S+ قرار|قابلیت \S+سازی|امکان‌پذیر می‌سازد)"),
-     "Nominalization; use a plain verb (patterns B6)."),
-    ("allows_you", "E", True, re.compile(r"(به شما (?:اجازه|امکان) می‌دهد|می‌تواند به شما کمک کند|کمک می‌کند تا)"),
-     "Calque of \"allows you to\" / \"helps you\" (patterns B7)."),
-    ("not_only", "E", True, re.compile(r"نه[ ‌]تنها .{2,60}بلکه"),
-     "Calque of \"not only … but also\" (patterns B9)."),
-    ("not_just", "E", True, re.compile(r"فقط یک [^.،؛\n]{1,40} نیست"),
-     "Calque of \"it's not just X, it's Y\"; say what it is (patterns B9)."),
-    ("lets", "E", True, re.compile(rf"{NB}بیایید{NA}"),
-     "«بیایید…» is a calque of \"Let's\" (patterns C2)."),
-    ("cleft", "W", True, re.compile(r"این (?:شما|ما|او|آن‌ها|شمایید) (?:هستید|هستیم|است|هستند) که"),
-     "Cleft «این … است که» (\"It's you who …\"); say it plainly (patterns B10)."),
-    ("this_is_where", "E", True, re.compile(r"(?:اینجا|این‌جا)ست که"),
-     "Calque of \"This is where … comes in\" (patterns B12)."),
-    ("this_means", "W", True, re.compile(rf"{SENT}این یعنی"),
-     "Sentence opening with «این یعنی» (\"This means\"); put the result in the sentence itself (patterns B12)."),
-    ("indef_yek", "W", True, re.compile(rf"{NB}یک {PW}+(?: {PW}+)? (?:است|هستیم|هستید|هستند){NA}"),
-     "English-style indefinite «یک» (a/an); «…ی است» is usually more natural (دستیار هوشمندی است) (patterns B4)."),
-    ("we_are_a", "W", True, re.compile(rf"{SENT}ما یک [^.\n]{{1,50}} هستیم"),
-     "«ما یک … هستیم» (\"We are a …\"); open with the work itself (patterns A5)."),
-    ("with_using", "W", True, re.compile(rf"{SENT}با استفاده از"),
-     "Sentence opening with «با استفاده از» (\"Using …\"); «با X» is usually enough (patterns B13)."),
-    ("discourse_marker", "W", True, re.compile(rf"{SENT}(همچنین|علاوه بر این|به عبارت دیگر|در نتیجه|در واقع)،"),
-     "English-style discourse marker opening the sentence (Moreover/Additionally); join it to the previous sentence or drop the marker (patterns B11)."),
-    ("intensifier", "W", False, re.compile(r"(واقعاً|به‌سادگی|به سادگی|به‌راحتی|به راحتی|به‌طور یکپارچه|به طور یکپارچه|به‌طور کامل|به طور کامل|به‌طور مؤثر|بی‌نظیر|در واقع)"),
-     "Translated intensifier; probably droppable (patterns C1)."),
-    ("comma_before_va", "W", True, re.compile(r"[،,]\s*(?:و|یا)\s"),
-     "Comma before «و»/«یا»; in a list it's the Oxford comma calque (mechanics 7)."),
-    ("imperative_comma_reason", "W", False, re.compile(rf"{NB}(?:کنید|ببینید|بروید|بزنید|بگیرید|کن|ببین|برو|بزن)، \S+"),
-     "Imperative + comma-attached reason; stating the result directly may read more naturally."),
-    ("parenthetical_adverb", "W", True, re.compile(r"، (?:حتی|مثلاً|البته|گاهی|همیشه|هر روز|هر شب|نصف‌شب|نیمه‌شب|شب و روز|در صورت نیاز|به‌سرعت)[^،|«\n]{0,25}، "),
-     "Adverb wedged between two commas; put it at the start or next to the verb (patterns B16)."),
-    ("you_just", "E", True, re.compile(r"(?:^|[.!؟?>]\s*|\sو\s)شما فقط \S+"),
-     "Closing \"you just …\" punchline (patterns A2)."),
-    ("punchline_only", "W", True, re.compile(r"(?:سهم|کار) شما فقط"),
-     "The same closing punchline in other words; the device itself is English, not the wording (patterns A2)."),
-    ("tricolon", "W", True, re.compile(r"(?:می‌\S+|\S+د)، [^،.\n]{3,60}(?:می‌\S+|\S+د) و [^.\n]{3,80}(?:می‌\S+|\S+د)\."),
-     "Three parallel subjectless verb clauses; English ad-copy tricolon (patterns A3)."),
+     "«۲۴/۷» is a calque of 24/7; write «۲۴ ساعته» or «شبانه‌روزی» (patterns C2)."),
+    ("comma_before_va", "E", True, re.compile(r"[،,]\s*(?:و|که)\s"),
+     "Comma before «و» or «که»; never in Persian (mechanics 6)."),
+    ("comma_before_ya", "W", False, re.compile(r"[،,]\s*یا\s"),
+     "Comma before «یا»; in a list it's the Oxford comma calque."),
     ("semicolon", "W", False, re.compile(r"؛"),
-     "«؛» is rare in web copy; one in every paragraph reads as machine-written (mechanics 6)."),
+     "«؛» only sparingly, and not in friendly or casual tone (mechanics 8)."),
     ("em_dash", "W", True, re.compile(r"—"),
-     "Em dash as a parenthetical; use a comma or «که» (patterns B15)."),
-    ("colon_list", "W", True, re.compile(rf":\s*{PW}[^.\n]*،[^.\n]*(?:،| و ){PW}"),
-     "Colon + list; write a full sentence (patterns B3)."),
-    ("dar_hal_hastid", "W", True, re.compile(r"در حال \S+ هستید"),
-     "\"You are currently …ing\" calque; use a plain sentence (patterns B17)."),
-    ("rhetorical_q", "W", True, re.compile(r"(آیا تا به حال|آماده‌اید\?|آماده‌اید؟|تصور کنید)"),
-     "Rhetorical or throat-clearing question (patterns A6)."),
-    ("pronoun_khod", "W", True, re.compile(r"\bشما می‌توانید .{0,40}خود "),
-     "«شما … خود»; redundant pronoun (patterns B8)."),
-    ("bare_cta", "W", False, re.compile(r"^(?:\s*)(شروع کنید|بیشتر بدانید|اکنون \S+ کنید)(?:\s*)$"),
-     "Imperative CTA copied from an English button; check frames.md."),
-    ("essay_opener", "E", True, re.compile(r"(در دنیای امروز|در عصر دیجیتال|در این (?:مقاله|متن|پست) به بررسی)"),
-     "Clichéd essay-style opening; start with the claim (patterns A4)."),
-    ("cliche_heading", "W", True, re.compile(r"^\s*(?:#+\s*)?(چرا باید \S+ را انتخاب کنید|مزایای استفاده از \S+)[؟?]?\s*$"),
-     "Translated marketing/how-to heading; check frames.md (patterns A1)."),
-    ("formal_future", "W", False, re.compile(r"\S+ خواهد (?:شد|کرد|گرفت|بود)"),
-     "Formal future «خواهد …»; outside formal tone use the present (tones.md)."),
-]
+     "Em dash as a parenthetical; use commas (an appositive) or «که» (patterns B9)."),
 
-# fixed calques: (phrase, fix, severity)
+    # ---- register ----
+    ("spoken_register", "W", True, re.compile(r"(خبرتان می‌کنیم|خبرت می‌کنیم|جلویتان می‌گذار|حواسش به|حواسمان به|درست‌وحسابی|درست و حسابی|گیر کردید|گیر کرد)"),
+     "Spoken idiom; fine in friendly/casual, but semi-formal and formal copy use written verbs (اطلاع می‌دهیم، مراقب … است) (patterns A1)."),
+    ("formal_future", "W", False, re.compile(r"\S+ خواهد (?:شد|کرد|گرفت|بود)"),
+     "Formal future «خواهد …»; heavy outside formal tone, use the present (tones.md)."),
+
+    # ---- frames and closing ----
+    ("bad_frame", "W", True, re.compile(r"(چه کار(?:ی|هایی) برایتان انجام می‌دهد|چه باری از دوشتان|آماده‌اید شروع کنید|با \S+ چه کارهایی می‌توانید بکنید)"),
+     "Translated section frame; use frames.md (patterns A2)."),
+    ("bad_frame_heading", "W", True, re.compile(r"^\s*(?:#+\s*)?(مأموریت ما|با ما در تماس باشید|در خبرنامهٔ ما مشترک شوید|روش کار|ویژگی‌ها|قابلیت‌ها)\s*[؟?]?\s*$"),
+     "Heading the copywriter didn't pick; see frames.md (patterns A2)."),
+    ("bare_cta", "W", True, re.compile(r"(?:^\s*|[\"'>]\s*)(شروع کنید|همین حالا شروع کنید|بیشتر بدانید|رایگان امتحان کنید|امتحان رایگان)(?:\s*$|\s*[\"'<])"),
+     "Button text the copywriter rejected; use «شروع»، «ثبت‌نام رایگان»، «اطلاعات بیشتر» (frames.md)."),
+    ("you_just", "E", True, re.compile(r"(?:^|[.!؟?>]\s*|\sو\s)شما فقط \S+"),
+     "Terse closing line with the reader as subject («شما فقط … می‌بینید»); end with a full sentence (patterns A3)."),
+
+    # ---- sentence ----
+    ("allows_you", "E", True, re.compile(r"(به شما (?:اجازه|امکان) می‌دهد تا|می‌تواند به شما کمک کند تا|کمک می‌کند تا)"),
+     "Calque of \"allows you to\" / \"helps you\" (patterns B4)."),
+    ("pronoun_khod", "W", True, re.compile(r"\bشما می‌توانید .{0,40}خود "),
+     "«شما … خود»; pronoun spraying (patterns B5)."),
+    ("nominal", "W", True, re.compile(r"(اقدام به|انجام (?:دادن|شود|دهید))"),
+     "«اقدام به» / «انجام …» nominalization; use the plain verb (patterns B6)."),
+    ("cleft", "E", True, re.compile(r"این (?:شما|ما|او|آن‌ها|شمایید) (?:هستید|هستیم|است|هستند) که"),
+     "Cleft «این … است که» (\"It's you who …\"); say it plainly (patterns B7)."),
+    ("parenthetical_adverb", "W", True, re.compile(r"، (?:حتی|مثلاً|البته|گاهی|همیشه|هر روز|هر شب|نصف‌شب|نیمه‌شب|شب و روز|در صورت نیاز|به‌سرعت)[^،|«\n]{0,25}، "),
+     "Adverb wedged between two commas; rare in Persian, put it at the start or next to the verb (patterns B10)."),
+    ("intensifier", "W", False, re.compile(r"(واقعاً|به‌سادگی|به سادگی|به‌راحتی|به راحتی|به‌طور یکپارچه|به طور یکپارچه|به‌طور کامل|به طور کامل|به‌طور مؤثر|بی‌نظیر)"),
+     "Translated intensifier; probably droppable (patterns C1)."),
+    ("imperative_comma_reason", "W", False, re.compile(rf"{NB}(?:ببینید|بروید|بزنید|کن|ببین|برو|بزن)، \S+"),
+     "Imperative + comma-attached reason; stating the result may read better («لینک تأیید ایمیل شد.»)."),
+
+    # ---- fine once, a tell when repeated (reported only at 2+ per text; patterns A7) ----
+    ("indef_yek", "W", True, re.compile(rf"{NB}یک {PW}+(?: {PW}+)? (?:است|هستیم|هستید|هستند){NA}"),
+     "«یک» as an indefinite article, more than once; «…ی است» is often more natural (patterns A7)."),
+    ("we_are_a", "W", True, re.compile(rf"{SENT}ما یک [^.\n]{{1,50}} هستیم"),
+     "«ما یک … هستیم», more than once (patterns A7)."),
+    ("lets", "W", True, re.compile(rf"{NB}بیایید{NA}"),
+     "«بیایید…», more than once (patterns A7)."),
+    ("not_just", "W", True, re.compile(r"فقط یک [^.،؛\n]{1,40} نیست"),
+     "«این فقط X نیست، Y است», more than once (patterns A7)."),
+]
+REPEAT_ONLY = {"indef_yek", "we_are_a", "lets", "not_just"}
+
+# fixed calques: (phrase, fix, severity). The fixes are the copywriter's (patterns C2, C4).
 CALQUES = [
-    ("خوش برگشتید", "خوش آمدید / drop it", "E"),
+    ("خوش برگشتید", "خوش آمدید", "E"),
     ("چیزی اشتباه پیش رفت", "مشکلی پیش آمد", "E"),
     ("ما اینجا هستیم تا کمک کنیم", "اگر مشکلی بود، به ما بگویید", "E"),
-    ("موفقیت!", "انجام شد", "E"),
-    ("چیزی برای نمایش وجود ندارد", "هنوز چیزی ثبت نشده", "E"),
+    ("موفقیت!", "انجام شد / ذخیره شد", "E"),
+    ("چیزی برای نمایش وجود ندارد", "هنوز چیزی ثبت نشده / لیست … خالی است", "E"),
     ("به جامعهٔ ما بپیوندید", "عضو … شوید", "E"),
-    ("در پایان روز", "در نهایت / آخرش", "E"),
+    ("در پایان روز", "در نهایت", "E"),
     ("قدرت‌گرفته از", "بر پایهٔ / با فناوری", "E"),
-    ("سفر شما", "drop it; say it directly", "E"),
-    ("تجربهٔ کاربری بی‌نظیر", "drop it", "E"),
     ("هرگونه سؤال", "سؤالی", "E"),
-    ("به نظر می‌رسد که", "drop it", "E"),
     ("بدون هیچ‌گونه", "بدون", "E"),
     ("به سیستم وارد شوید", "وارد شوید", "E"),
-    ("ما معتقدیم که", "drop it; state the claim", "E"),
-    ("ما باور داریم که", "drop it; state the claim", "E"),
+    ("سفر شما", "usually drop it", "W"),
+    ("تجربهٔ کاربری بی‌نظیر", "usually drop it", "W"),
+    ("به نظر می‌رسد که", "usually drop it", "W"),
+    ("ما معتقدیم که", "usually drop it", "W"),
+    ("ما باور داریم که", "usually drop it", "W"),
     # collocation calques
-    ("معنی می‌دهد", "منطقی است / به کار می‌آید", "E"),
-    ("معنا می‌دهد", "منطقی است / به کار می‌آید", "E"),
-    ("تفاوت ایجاد کنید", "say the concrete result (make a difference)", "E"),
-    ("زمانتان را ذخیره", "وقتتان کمتر هدر می‌رود (save time)", "E"),
-    ("زمان شما را ذخیره", "وقتتان کمتر هدر می‌رود (save time)", "E"),
-    ("به سطح بعدی", "say the concrete result (next level)", "E"),
-    ("در قلب", "drop it if figurative (at the heart of)", "W"),
-    ("ذهنی آسوده", "با خیال راحت", "E"),
-    ("ذهن آسوده", "با خیال راحت", "E"),
-    ("مطمئن شوید که", "حتماً … / دقت کنید که", "W"),
-    ("هیجان‌زده‌ایم", "خوشحالیم / just give the news", "E"),
-    ("یک کلیک و", "با یک کلیک … (one click and)", "E"),
-    ("ما هستیم.", "به پشتیبانی بگویید (we're here)", "W"),
-    ("راه‌حل‌های", "say exactly what it does (solutions)", "W"),
-    ("قدرتمند", "say exactly what it does (powerful)", "W"),
-    ("را تجربه کنید", "use a concrete verb (experience X)", "W"),
+    ("تفاوت ایجاد کنید", "«… را متفاوت کنید»", "E"),
+    ("زمانتان را ذخیره", "«در زمان صرفه‌جویی کنید»", "E"),
+    ("زمان شما را ذخیره", "«در زمان صرفه‌جویی کنید»", "E"),
+    ("به سطح بعدی", "«ارتقا دهید»", "E"),
+    ("ذهنی آسوده", "«با خیال راحت»", "E"),
+    ("ذهن آسوده", "«با خیال راحت»", "E"),
+    ("مطمئن شوید که", "«از صحت … مطمئن شوید» or state the problem («آدرس واردشده صحیح نیست»)", "E"),
+    ("هیجان‌زده‌ایم", "«مفتخریم که …»", "E"),
+    ("یک کلیک و", "«… بلافاصله فعال می‌شود»", "E"),
+    ("کرمای طلایی", "translated product imagery; say what it does (patterns C3)", "E"),
+    ("تا با هم انتخاب کنیم", "«تا کمکتان کنیم»", "E"),
 ]
+# «ما هستیم» is fine in friendly/casual only; checked separately so --tone can silence it
+WE_ARE_HERE = re.compile(r"(?:،|\s)ما هستیم[.!]")
 
 # document-level heuristics: they look at the whole text, not per line
 EMOJI_BULLET = re.compile(r"^\s*[\U0001F300-\U0001FAFF☀-➿]\s*\S", re.MULTILINE)
 BOLD_SPAN = re.compile(r"\*\*[^*\n]+\*\*")
 CLICHE_CLOSING = re.compile(r"^\s*#*\s*(در پایان|جمع‌بندی)[:：]?\s*$", re.MULTILINE)
 SENT_SPLIT = re.compile(r"[.!؟?]\s+")
+VERB_END = re.compile(r"(?:است|اند|ایم|اید|ند|یم|ید|د|شد)$")
 CONNECTORS = {"برای همین": "برای همین", "به همین دلیل": "به همین دلیل", "بنابراین": "بنابراین", "در نتیجه": "در نتیجه", "پس": "پس(?! از)"}
 
 
@@ -197,8 +188,11 @@ def lint_document_level(text, fname="-"):
         sents = [s for s in SENT_SPLIT.split(para.strip()) if re.search(PW, s)]
         run = 0
         for s in sents:
-            words = len(re.findall(rf"{PW}+", s))
-            run = run + 1 if 0 < words <= 7 else 0
+            words = re.findall(rf"{PW}+", s)
+            # only short sentences that end in a verb count; verbless phrases
+            # («نصب سریع، حجم کم») are a normal Persian short form
+            verb_end = bool(words) and VERB_END.search(words[-1])
+            run = run + 1 if 0 < len(words) <= 7 and verb_end else 0
             if run >= 3:
                 hits.append(dict(file=fname, line=0, sev="D", rule="staccato", hook=True,
                                  match=para.strip()[:80] + "…",
@@ -269,19 +263,28 @@ def lint_text(text, corpus, fname="-", line_offset=0):
             if norm(calque) in nline:
                 hits.append(dict(file=fname, line=ln, sev=sev, rule="calque", hook=True,
                                  match=calque, msg=f"Calque; write: {fix} (patterns C2/C4)."))
+        for m in WE_ARE_HERE.finditer(line):
+            hits.append(dict(file=fname, line=ln, sev="W", rule="we_are_here", hook=True,
+                             match=m.group(0).strip(" ،"),
+                             msg="«ما هستیم» is fine in friendly/casual tone only; in semi-formal write «می‌توانید با ما در ارتباط باشید» (patterns C2)."))
         for e in corpus:
             if norm(e["phrase"]) in nline:
                 hits.append(dict(file=fname, line=ln, sev="W", rule="terms", hook=False,
                                  match=e["phrase"],
                                  msg=f"glossary ({e['source']}): → «{e['equivalent']}». If it means something else in this sentence, ignore it."))
-    return hits
+    # fine once, a tell when repeated: drop these unless they occur at least twice in this text
+    counts = {}
+    for h in hits:
+        if h["rule"] in REPEAT_ONLY:
+            counts[h["rule"]] = counts.get(h["rule"], 0) + 1
+    return [h for h in hits if h["rule"] not in REPEAT_ONLY or counts[h["rule"]] >= 2]
 
 
 TONE_OFF = {
     "formal": {"semicolon", "formal_future"},
-    "semi_formal": set(),
-    "friendly": set(),
-    "casual": set(),
+    "semi_formal": {"semicolon"},
+    "friendly": {"spoken_register", "we_are_here"},
+    "casual": {"spoken_register", "we_are_here"},
 }
 
 
@@ -291,7 +294,7 @@ def main():
     ap.add_argument("--json", action="store_true")
     ap.add_argument("--no-terms", action="store_true")
     ap.add_argument("--tone", choices=["formal", "semi_formal", "friendly", "casual"], default=None,
-                    help="tone of the text; formal silences the «؛» and «خواهد» warnings")
+                    help="tone of the text: formal/semi_formal silence the «؛» warning; friendly/casual allow spoken idioms and «ما هستیم»")
     a = ap.parse_args()
     corpus = [] if a.no_terms else load_corpus()
     all_hits = []

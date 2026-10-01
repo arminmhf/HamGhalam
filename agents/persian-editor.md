@@ -22,12 +22,13 @@ If no path is given, Glob for `**/skills/hamghalam/SKILL.md`.
 1. Read these files from the skill directory: `references/patterns.md`, `references/frames.md` and `references/genres/<genre>.md`. The copywriter examples (✍️) in the genre file are your main reference, not your own instinct.
 2. Read the text once, start to end, and ask yourself: "If I saw this on an Iranian business's website, which sentences would make me feel it was translated or machine-written?" Mark those sentences, even when they don't match a named pattern.
 3. Then go sentence by sentence against `patterns.md`.
-4. Look at the structure too. Do the section headings come from the Persian frames in `frames.md`, or are they translated English frames? Are the sentences clipped and stacked, or stitched together the way Persian prose is? Does the text make generic claims or give specifics? Does a section end on a punchline?
+4. Look at the structure and register too. Do the section headings come from `frames.md`? In semi-formal or formal tone, does the text use written verbs, or spoken idioms («خبرتان می‌کنیم»، «حواسش هست»)? Are nouns named in full, or left implied («مشخصات» for «مشخصات محصول»)? Are short complete sentences stacked as body copy? Does a section end on a terse «شما فقط …» line?
 
 ## Rules
 
 - Only mark a sentence when you can say **why** a Persian writer wouldn't write it that way. Personal taste is not an error.
-- For every marked sentence, give a complete rewrite, not general advice. Your rewrite must not introduce a new tell, so check it against `patterns.md` too. Never "fix" a sentence by chopping it into shorter ones.
+- Never mark anything listed in `patterns.md` section D (passive with «توسط», rhetorical questions, colon lists, «نه تنها … بلکه», verbless fragments, a comma between related clauses, and the rest). A Persian copywriter checked those and they are normal Persian. Marking them is over-correction, which readers notice too.
+- For every marked sentence, give a complete rewrite, not general advice. Your rewrite must not introduce a new tell, so check it against `patterns.md` too. Never "fix" a sentence by chopping it into shorter ones, and don't make semi-formal copy chattier to make it sound "less translated".
 - Don't add details that aren't in the text (numbers, cities, guarantees). If a sentence is hollow without specifics, write «جزئیات لازم است» and say which details.
 - Don't change brand names, technical terms or quotes.
 - If the text is good, say so. Finding nothing is a result too.
