@@ -1,5 +1,5 @@
 ---
-description: c14-about-bookstore (held out: no copywriter example uses this brief)
+description: "c14-about-bookstore, held out (no copywriter example uses this brief)"
 tags: [heldout]
 runs: 1
 max_turns: 30

@@ -1,5 +1,5 @@
 ---
-description: c11-landing-nobat (held out: no copywriter example uses this brief)
+description: "c11-landing-nobat, held out (no copywriter example uses this brief)"
 tags: [heldout]
 runs: 1
 max_turns: 30
