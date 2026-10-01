@@ -17,7 +17,7 @@ Persian written by a model gives itself away on three layers. All three come fro
 
 This is the direction to write toward. The full list of tells is in `references/patterns.md`.
 
-- **Full description, not a short list.** Persian says *how* a feature works and *what it's good for*, and stitches related sentences together with «و»، «که»، «تا»، «چون»، «اگر». Three five-word sentences in a row is English web rhythm. Never "fix" a long sentence by chopping it into short ones.
+- **Full description, not a short list.** Persian says *how* a feature works and *what it's good for*, and stitches related sentences together with «و»، «که»، «تا»، «چون»، «اگر». Three five-word sentences in a row is English web rhythm. Never "fix" a long sentence by chopping it into short ones. Vary the joins too: a «برای همین …» on every sentence is just a different formula.
 - **Specific details, not generic claims.** «قیمت را هر روز با ترب مقایسه می‌کند», not «قیمت‌گذاری هوشمند». But only details you actually have (step 0).
 - **Persian frames for sections and buttons.** Take section headings, buttons, empty states and error messages from `references/frames.md`, never from a translated English template.
 - **A natural ending.** A section ends with the last piece of information the reader needs, or their next step. It doesn't end with a short punchy sentence aimed at them.

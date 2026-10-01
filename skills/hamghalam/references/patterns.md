@@ -29,7 +29,8 @@ These give the text away before any single sentence does, because the reader see
 
 **A7. Generic claims, or invented details.** «کسب‌وکارتان را متحول می‌کند» with no number, time, place or guarantee is hollow. Invented details are worse. Use only details from the brief or the project, and leave placeholders for the rest.
 
-**A8. Uniform symmetry.** Every card or paragraph has the same length and shape (a two-word heading and two equal sentences). Human prose runs longer where there's more to say.
+**A8. Uniform symmetry.** Every card or paragraph has the same length and shape (a two-word heading and two equal sentences). Human prose runs longer where there's more to say. The same goes for joining: hanging a «برای همین …» or «پس …» benefit clause on sentence after sentence is a formula of its own. Vary how clauses join, and let some features stand without a stated benefit. `[connector_repeat]`
+❌ پمپ ۱۵ باری دارد و فشارش کافی است. حدود ۴۰ ثانیه گرم می‌شود، برای همین لازم نیست منتظر بمانید. مخزنش جدا می‌شود، پس لازم نیست دستگاه را جابه‌جا کنید. نازل بخار هم دارد، برای همین لاته هم درست می‌کنید.
 
 **A9. Document decoration.** The linter reports these as `[D]`:
 - an emoji before every bullet

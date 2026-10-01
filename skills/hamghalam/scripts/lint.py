@@ -162,6 +162,7 @@ EMOJI_BULLET = re.compile(r"^\s*[\U0001F300-\U0001FAFF☀-➿]\s*\S", re.MULTILI
 BOLD_SPAN = re.compile(r"\*\*[^*\n]+\*\*")
 CLICHE_CLOSING = re.compile(r"^\s*#*\s*(در پایان|جمع‌بندی)[:：]?\s*$", re.MULTILINE)
 SENT_SPLIT = re.compile(r"[.!؟?]\s+")
+CONNECTORS = {"برای همین": "برای همین", "به همین دلیل": "به همین دلیل", "بنابراین": "بنابراین", "در نتیجه": "در نتیجه", "پس": "پس(?! از)"}
 
 
 def lint_document_level(text, fname="-"):
@@ -203,6 +204,13 @@ def lint_document_level(text, fname="-"):
                                  match=para.strip()[:80] + "…",
                                  msg="Three short sentences in a row: clipped English rhythm. Stitch them together and explain (patterns B1)."))
                 break
+        # the same connector stitched onto sentence after sentence is its own monotone rhythm
+        counts = {c: len(re.findall(rf"{NB}{rx}{NA}", para)) for c, rx in CONNECTORS.items()}
+        top = max(counts, key=counts.get)
+        if counts[top] >= 3 or sum(counts.values()) >= max(3, len(sents) // 2):
+            hits.append(dict(file=fname, line=0, sev="D", rule="connector_repeat", hook=True,
+                             match=f"«{top}» ×{counts[top]}",
+                             msg="The same connector on sentence after sentence (برای همین… پس… برای همین…) is a formula too. Vary how clauses join, and not every feature needs a benefit clause (patterns A8)."))
     return hits
 
 
