@@ -24,6 +24,7 @@ Read section D as carefully as the rest. Over-correcting, i.e. rewriting normal 
 ❌ قیمت‌ها را هماهنگ می‌کند، توضیحات را می‌نویسد و به مشتری جواب می‌دهد. شما فقط گزارشش را می‌بینید.
 ✅ ✍️ در نهایت برای تمام کارهای انجام‌شده، گزارشی را به شما ارائه می‌دهد.
 ✅ ✍️ برای تمام این موارد، سهم شما فقط مرور یک گزارش است.
+These are two ways to close, not a template. Ending every section or every text with «در نهایت، …» is a formula of its own; most sections just end on their last piece of information. `[closing_formula]`
 
 **A4. Generic claims, or invented details.** «کسب‌وکارتان را متحول می‌کند» with no number, time, place or guarantee is hollow. Invented details are worse. Use only details from the brief or the project, and leave placeholders for the rest.
 

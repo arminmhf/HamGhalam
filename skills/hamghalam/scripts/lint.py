@@ -181,6 +181,12 @@ def lint_document_level(text, fname="-"):
                          match=closing.group(0).strip(),
                          msg="Clichéd closing heading on a short text; probably unnecessary (patterns A9)."))
 
+    closings = len(re.findall(rf"{NB}در نهایت،?", text))
+    if closings >= 2:
+        hits.append(dict(file=fname, line=0, sev="D", rule="closing_formula", hook=True,
+                         match=f"«در نهایت» ×{closings}",
+                         msg="«در نهایت …» used as a closing more than once; it's one way to end, not a template (patterns A3)."))
+
     # staccato: a paragraph of 3+ short sentences in a row (the user's main complaint)
     for ln, para in enumerate(text.split("\n\n")):
         if not re.search(PW, para) or SKIP_LINE.match(para):
